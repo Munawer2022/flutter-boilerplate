@@ -1,0 +1,3 @@
+class SettingInitialParams {
+const SettingInitialParams();
+}
