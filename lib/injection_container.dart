@@ -1,4 +1,29 @@
 /*
+************************ NotificationSetting ************************
+*/
+import 'features/notification_setting/notification_setting_cubit.dart';
+import 'features/notification_setting/notification_setting_navigator.dart';
+import 'features/notification_setting/notification_setting_initial_params.dart';
+
+/*
+************************ Notification ************************
+*/
+import 'features/notification/notification_cubit.dart';
+import 'features/notification/notification_navigator.dart';
+import 'features/notification/notification_initial_params.dart';
+import 'data/repositories/notification/notification_repository.dart';
+import 'domain/repositories/notification/notification_base_api_service.dart';
+
+/*
+************************ Profile ************************
+*/
+import 'features/profile/profile_cubit.dart';
+import 'features/profile/profile_navigator.dart';
+import 'features/profile/profile_initial_params.dart';
+import 'data/repositories/profile/profile_repository.dart';
+import 'domain/repositories/profile/profile_base_api_service.dart';
+
+/*
 ************************ Setting ************************
 */
 import 'features/setting/setting_cubit.dart';
@@ -128,11 +153,35 @@ Future<void> init() async {
   // getIt.registerSingleton<SettingBaseApiService>(MockSettingRepository());
   getIt.registerSingleton<SettingNavigator>(SettingNavigator(getIt()));
   getIt.registerFactoryParam<SettingCubit, SettingInitialParams, dynamic>(
-      (params, _) => SettingCubit(params, getIt()
-      , getIt()
-      
-      )
-      ..setting()
-      );
+      (params, _) => SettingCubit(params, getIt(), getIt())..setting());
 
+/*
+************************ Profile ************************
+*/
+  getIt.registerSingleton<ProfileBaseApiService>(ProfileRepository(getIt()));
+  // getIt.registerSingleton<ProfileBaseApiService>(MockProfileRepository());
+  getIt.registerSingleton<ProfileNavigator>(ProfileNavigator(getIt()));
+  getIt.registerFactoryParam<ProfileCubit, ProfileInitialParams, dynamic>(
+      (params, _) => ProfileCubit(params, getIt(), getIt()));
+
+/*
+************************ Notification ************************
+*/
+  getIt.registerSingleton<NotificationBaseApiService>(
+      NotificationRepository(getIt()));
+  // getIt.registerSingleton<NotificationBaseApiService>(MockNotificationRepository());
+  getIt
+      .registerSingleton<NotificationNavigator>(NotificationNavigator(getIt()));
+  getIt.registerFactoryParam<NotificationCubit, NotificationInitialParams,
+      dynamic>((params, _) => NotificationCubit(params, getIt(), getIt())
+    ..notification());
+/*
+************************ NotificationSetting ************************
+*/
+  getIt.registerSingleton<NotificationSettingNavigator>(
+      NotificationSettingNavigator(getIt()));
+  getIt.registerFactoryParam<
+      NotificationSettingCubit,
+      NotificationSettingInitialParams,
+      dynamic>((params, _) => NotificationSettingCubit(params, getIt()));
 }

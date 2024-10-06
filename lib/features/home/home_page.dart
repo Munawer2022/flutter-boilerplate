@@ -35,7 +35,8 @@ class _HomeState extends State<HomePage> {
   final List<Widget> _pages = [
     const Center(child: Text("Home Screen")),
     const Center(child: Text("Search Screen")),
-    // const Center(child: Text("Search Screen")),
+    const SizedBox(),
+    const Center(child: Text("Search Chat")),
     SettingPage(cubit: getIt(param1: const SettingInitialParams()))
   ];
 
@@ -47,8 +48,11 @@ class _HomeState extends State<HomePage> {
         onPressed: () {
           // Action for the hexagon button
         },
-        backgroundColor: Colors.green,
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
         // Set color to match your UI
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -60,18 +64,33 @@ class _HomeState extends State<HomePage> {
             _currentIndex = index; // Update the tab index when clicked
           });
         },
+        selectedIconTheme: const IconThemeData(color: Colors.black),
+        unselectedIconTheme: const IconThemeData(color: Colors.black),
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black,
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.home,
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Add',
+            label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: SizedBox(),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chat',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Setting',
           ),
         ],
       ),

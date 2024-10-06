@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,164 +31,163 @@ class _SettingState extends State<SettingPage> {
     cubit.navigator.context = context;
   }
 
+  bool isDarkModeEnabled = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.white,
       body: ListView(
-        padding: EdgeInsets.all(20.r),
+        padding: EdgeInsets.all(20.0.r),
         children: [
-          50.verticalSpace,
-          Text("Setting",
-              style: Theme.of(context)
-                  .textTheme
-                  .displaySmall
-                  ?.copyWith(fontWeight: FontWeight.bold)),
-          10.verticalSpace,
-          Card(
-            elevation: 0,
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage(
-                    'assets/profile_image.png'), // Replace with your image
-              ),
-              title: Text(
-                'Faisal ALBusaidi',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text('سبحانك ربي ولك الحمد'),
-              trailing: Icon(Icons.qr_code),
-            ),
-          ),
-
-          // Settings List Section 1
-          Card(
-            elevation: 0,
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+          20.verticalSpace,
+          Text('Settings', style: Theme.of(context).appBarTheme.titleTextStyle),
+          30.verticalSpace,
+          const Text('General', style: TextStyle(fontWeight: FontWeight.w600)),
+          const SizedBox(height: 10),
+          Container(
+            padding: EdgeInsets.all(6.r),
+            decoration: BoxDecoration(
+                color: const Color(0xffF7F8FC),
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: const BorderRadius.all(Radius.circular(15))),
             child: Column(
               children: [
-                const SettingsListTile(
-                  icon: Icons.favorite,
-                  title: 'Favorites',
+                listTile(
+                  title: "Profile",
+                  icon: CupertinoIcons.profile_circled,
+                  onTap: () => cubit.goProfilePage(),
                 ),
-                Divider(
-                  color: Colors.grey.shade100,
+                Divider(color: Colors.grey.shade300),
+                listTile(
+                  title: "Notifications",
+                  icon: CupertinoIcons.chat_bubble,
+                  onTap: () => cubit.goNotificationPage(),
                 ),
-                const SettingsListTile(
-                  icon: Icons.speaker_group,
-                  title: 'Broadcast lists',
-                ),
-                Divider(
-                  color: Colors.grey.shade100,
-                ),
-                const SettingsListTile(
-                  icon: Icons.star,
-                  title: 'Starred messages',
-                ),
-                Divider(
-                  color: Colors.grey.shade100,
-                ),
-                const SettingsListTile(
-                  icon: Icons.devices,
-                  title: 'Linked devices',
-                ),
-              ],
-            ),
-          ),
-
-          // Divider between sections
-
-          // Settings List Section 2
-          Card(
-            elevation: 0,
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              children: [
-                const SettingsListTile(
-                  icon: Icons.account_circle,
-                  title: 'Account',
-                ),
-                Divider(
-                  color: Colors.grey.shade100,
-                ),
-                const SettingsListTile(
-                  icon: Icons.lock,
-                  title: 'Privacy',
-                ),
-                Divider(
-                  color: Colors.grey.shade100,
-                ),
-                SettingsListTile(
-                  icon: Icons.chat,
-                  title: 'Chats',
-                  trailing: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Colors.green,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Text(
-                      '1',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                Divider(color: Colors.grey.shade300),
+                listTile(title: "Favorites", icon: CupertinoIcons.heart_fill),
+                Divider(color: Colors.grey.shade300),
+                listTile(title: "Language", icon: Icons.language_rounded),
+                Divider(color: Colors.grey.shade300),
+                ListTile(
+                  title: const Text('Dark mode',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  trailing: Switch(
+                    value: isDarkModeEnabled,
+                    onChanged: (bool value) {
+                      setState(() {
+                        isDarkModeEnabled = value;
+                      });
+                    },
                   ),
-                ),
-                Divider(
-                  color: Colors.grey.shade100,
-                ),
-                const SettingsListTile(
-                  icon: Icons.notifications,
-                  title: 'Notifications',
-                ),
-                Divider(
-                  color: Colors.grey.shade100,
-                ),
-                const SettingsListTile(
-                  icon: Icons.storage,
-                  title: 'Storage and data',
+                  leading: const Icon(CupertinoIcons.moon_stars_fill),
                 ),
               ],
             ),
           ),
+
+          20.verticalSpace,
+          // const Text('General'),
+
+          Container(
+            padding: EdgeInsets.all(6.r),
+            decoration: BoxDecoration(
+                color: const Color(0xffF7F8FC),
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: const BorderRadius.all(Radius.circular(15))),
+            child: Column(
+              children: [
+                listTile(title: "Share the App", icon: CupertinoIcons.share),
+                Divider(color: Colors.grey.shade300),
+                listTile(title: "About Us", icon: CupertinoIcons.group_solid),
+                Divider(color: Colors.grey.shade300),
+                listTile(
+                    title: "Rate Us", icon: CupertinoIcons.star_circle_fill),
+                Divider(color: Colors.grey.shade300),
+                listTile(
+                    title: "Tems and Condition",
+                    icon: Icons.content_paste_go_sharp),
+                Divider(color: Colors.grey.shade300),
+                listTile(title: "Privacy Policy", icon: Icons.policy),
+              ],
+            ),
+          ),
+          20.verticalSpace,
+          // const Text('General'),
+
+          Container(
+            padding: EdgeInsets.all(6.r),
+            decoration: BoxDecoration(
+                color: const Color(0xffF7F8FC),
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: const BorderRadius.all(Radius.circular(15))),
+            child: Column(
+              children: [
+                listTile(title: "Whats New", icon: Icons.announcement_sharp),
+              ],
+            ),
+          ),
+
+          30.verticalSpace,
+
+          // Sign Out Button
+          ElevatedButton(
+            onPressed: () {
+              // Action for sign out
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+            child: const Text('Delete Account',
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+          ),
+          10.verticalSpace,
+          ElevatedButton(
+            onPressed: () {
+              // Action for sign out
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+            child: const Text('Logout',
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+          ),
+          20.verticalSpace
         ],
       ),
     );
   }
 }
 
-// Reusable ListTile Widget for Settings
-class SettingsListTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final Widget? trailing;
-
-  const SettingsListTile({
-    super.key,
-    required this.icon,
-    required this.title,
-    this.trailing,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      minVerticalPadding: 0,
-      minTileHeight: 0,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      leading: Icon(icon, color: Colors.black),
-      title: Text(title),
-      trailing: trailing ?? const Icon(Icons.arrow_forward_ios, size: 16),
+listTile(
+        {required String title,
+        required IconData icon,
+        void Function()? onTap}) =>
+    Column(
+      children: [
+        ListTile(
+            minTileHeight: 0,
+            title: Text(title,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 18,
+            ),
+            leading: Icon(icon),
+            onTap: onTap),
+      ],
     );
-  }
-}

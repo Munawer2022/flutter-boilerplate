@@ -14,7 +14,6 @@ import 'package:device_preview/device_preview.dart';
 import '/features/splash/splash_initial_params.dart';
 import '/features/splash/splash_page.dart';
 
-
 void main() async {
 //  setCustomSystemUIOverlayStyle();
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,28 +29,27 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context)  => ScreenUtilInit(
+  Widget build(BuildContext context) => ScreenUtilInit(
       designSize: const Size(430, 932),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) => BlocBuilder(
-      bloc: getIt<ThemeDataSources>(),
-      builder: (context, state) {
-        state as bool;
-        return MaterialApp(
-          // useInheritedMediaQuery: true,
+          bloc: getIt<ThemeDataSources>(),
+          builder: (context, state) {
+            state as bool;
+            return MaterialApp(
+                // useInheritedMediaQuery: true,
                 locale: DevicePreview.locale(context),
                 builder: DevicePreview.appBuilder,
-          navigatorKey: GlobalConstants.navigatorKey,
-                  scaffoldMessengerKey: GlobalConstants.scaffoldMessengerKey,
-                  navigatorObservers: [CheckerNavigatorObserver()],
-            debugShowCheckedModeBanner: false,
-            theme: state ? darkTheme : lightTheme,
-            // scaffoldMessengerKey: scaffoldMessengerKey,
-        // home: OnboardingPage(cubit: getIt(param1: const OnboardingInitialParams()))
-        
-        home: SplashPage(cubit: getIt(param1: const SplashInitialParams()))
-        
-        );
-            }));
+                navigatorKey: GlobalConstants.navigatorKey,
+                scaffoldMessengerKey: GlobalConstants.scaffoldMessengerKey,
+                navigatorObservers: [CheckerNavigatorObserver()],
+                debugShowCheckedModeBanner: false,
+                theme: state ? darkTheme : lightTheme,
+                // scaffoldMessengerKey: scaffoldMessengerKey,
+                // home: OnboardingPage(cubit: getIt(param1: const OnboardingInitialParams()))
+
+                home: SplashPage(
+                    cubit: getIt(param1: const SplashInitialParams())));
+          }));
 }

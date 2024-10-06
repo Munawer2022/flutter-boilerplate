@@ -1,0 +1,3 @@
+class NotificationsSettingInitialParams {
+const NotificationsSettingInitialParams();
+}

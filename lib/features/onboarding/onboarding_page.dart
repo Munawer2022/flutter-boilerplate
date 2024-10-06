@@ -18,6 +18,8 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingState extends State<OnboardingPage> {
   OnboardingCubit get cubit => widget.cubit;
+  int currentPage = 0;
+  final PageController _pageController = PageController();
 
   @override
   void initState() {
@@ -25,7 +27,29 @@ class _OnboardingState extends State<OnboardingPage> {
     cubit.navigator.context = context;
   }
 
-  int currentPage = 0;
+  void _nextPage() {
+    if (currentPage < demoData.length - 1) {
+      setState(() {
+        currentPage++;
+        _pageController.nextPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+    }
+  }
+
+  void _previousPage() {
+    if (currentPage > 0) {
+      setState(() {
+        currentPage--;
+        _pageController.previousPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +58,22 @@ class _OnboardingState extends State<OnboardingPage> {
       body: SafeArea(
         child: Column(
           children: [
+            // Skip Button
+            Align(
+              alignment: Alignment.topRight,
+              child: TextButton(
+                onPressed: () {
+                  cubit.goHomePage(); // Navigate to Home when Skip is pressed
+                },
+                child: const Text("Skip"),
+              ),
+            ),
             const Spacer(flex: 2),
+            // Onboarding Content
             Expanded(
               flex: 14,
               child: PageView.builder(
+                controller: _pageController,
                 itemCount: demoData.length,
                 onPageChanged: (value) {
                   setState(() {
@@ -52,6 +88,7 @@ class _OnboardingState extends State<OnboardingPage> {
               ),
             ),
             const Spacer(),
+            // Dot Indicators
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -60,19 +97,41 @@ class _OnboardingState extends State<OnboardingPage> {
               ),
             ),
             const Spacer(flex: 2),
+            // Previous, Next Buttons
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ElevatedButton(
-                onPressed: () =>cubit.goHomePage(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF22A45D),
-                  foregroundColor: Colors.white,
-                  minimumSize: const Size(double.infinity, 40),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Previous Button (disable if first page)
+                  ElevatedButton(
+                    onPressed: currentPage == 0 ? null : _previousPage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text("Previous"),
                   ),
-                ),
-                child: Text("Get Started".toUpperCase()),
+                  // Next Button (disable if last page)
+                  ElevatedButton(
+                    onPressed: currentPage == demoData.length - 1
+                        ? () => cubit.goHomePage() // Go to Home on last page
+                        : _nextPage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF22A45D),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      currentPage == demoData.length - 1 ? "Finish" : "Next",
+                    ),
+                  ),
+                ],
               ),
             ),
             const Spacer(),
