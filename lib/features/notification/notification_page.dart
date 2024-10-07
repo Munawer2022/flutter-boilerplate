@@ -33,9 +33,12 @@ class _NotificationState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         elevation: 0,
+        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
         title: const Text(
           'Notifications',
@@ -43,7 +46,9 @@ class _NotificationState extends State<NotificationPage> {
         ),
         titleSpacing: 0,
         actions: [
-          IconButton(onPressed: () =>cubit.goNoticationSettingPage(), icon: const Icon(Icons.settings))
+          IconButton(
+              onPressed: () => cubit.goNoticationSettingPage(),
+              icon: const Icon(Icons.settings))
         ],
       ),
       body: Column(

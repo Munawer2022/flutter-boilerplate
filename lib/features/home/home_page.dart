@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_template/features/no_internet_page.dart';
 import 'package:flutter_template/features/setting/setting_initial_params.dart';
 import 'package:flutter_template/features/setting/setting_page.dart';
 import 'package:flutter_template/injection_container.dart';
@@ -33,8 +34,8 @@ class _HomeState extends State<HomePage> {
 
   // List of pages associated with the tabs
   final List<Widget> _pages = [
-    const Center(child: Text("Home Screen")),
-    const Center(child: Text("Search Screen")),
+    const CarouselExample(),
+    const NoInternetScreen(),
     const SizedBox(),
     const Center(child: Text("Search Chat")),
     SettingPage(cubit: getIt(param1: const SettingInitialParams()))
@@ -93,6 +94,57 @@ class _HomeState extends State<HomePage> {
             label: 'Setting',
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CarouselExample extends StatefulWidget {
+  const CarouselExample({super.key});
+
+  @override
+  State<CarouselExample> createState() => _CarouselExampleState();
+}
+
+class _CarouselExampleState extends State<CarouselExample> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxHeight: 200),
+        child: CarouselView(
+          itemExtent: 330,
+          shrinkExtent: 200,
+          children: List<Widget>.generate(20, (int index) {
+            return UncontainedLayoutCard(index: index, label: 'Item $index');
+          }),
+        ),
+      ),
+    );
+  }
+}
+
+class UncontainedLayoutCard extends StatelessWidget {
+  const UncontainedLayoutCard({
+    super.key,
+    required this.index,
+    required this.label,
+  });
+
+  final int index;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.primaries[index % Colors.primaries.length].withOpacity(0.5),
+      child: Center(
+        child: Text(
+          label,
+          style: const TextStyle(color: Colors.white, fontSize: 20),
+          overflow: TextOverflow.clip,
+          softWrap: false,
+        ),
       ),
     );
   }

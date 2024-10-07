@@ -7,8 +7,6 @@ import '/core/global.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
 class InternetConnectivityCheckerDataSources extends Cubit<bool> {
   final Connectivity _connectivity;
   final Show _show;
@@ -20,8 +18,7 @@ class InternetConnectivityCheckerDataSources extends Cubit<bool> {
     _subscription = _connectivity.onConnectivityChanged.listen((event) => event
                 .first ==
             ConnectivityResult.none
-        ? _show
-            .showNoInternetConnectionMaterialBanner('No Internet Connection')
+        ? _show.showNoInternetConnectionMaterialBanner('No Internet Connection')
         : GlobalConstants.navigatorKey.currentContext != null
             ? ScaffoldMessenger.of(GlobalConstants.navigatorKey.currentContext!)
                 .hideCurrentMaterialBanner()
@@ -34,4 +31,3 @@ class InternetConnectivityCheckerDataSources extends Cubit<bool> {
     return super.close();
   }
 }
-

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_template/config/components/app_bar.dart';
+import 'package:flutter_template/config/components/app_button.dart';
 import 'onboarding_cubit.dart';
 import 'onboarding_state.dart';
 import '/core/status_switcher.dart';
@@ -100,39 +103,45 @@ class _OnboardingState extends State<OnboardingPage> {
             // Previous, Next Buttons
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Previous Button (disable if first page)
-                  ElevatedButton(
-                    onPressed: currentPage == 0 ? null : _previousPage,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+              child: currentPage == demoData.length - 1
+                  ? AppButton.getButton(
+                      color: Colors.green,
+                      child: const Text('Get Start',
+                          style: TextStyle(color: Colors.white)),
+                      onPressed: () => cubit.goHomePage())
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Previous Button (disable if first page)
+                        ElevatedButton(
+                          onPressed: currentPage == 0 ? null : _previousPage,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text("Previous"),
+                        ),
+                        // Next Button (disable if last page)
+                        ElevatedButton(
+                            onPressed: currentPage == demoData.length - 1
+                                ? () => cubit.goHomePage()
+                                : _nextPage,
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15.w, vertical: 14.h),
+                                backgroundColor: Colors.orange,
+                                foregroundColor: Colors.white,
+                                minimumSize: Size.zero,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.r))),
+                            child: const Icon(Icons.arrow_forward)
+                            // currentPage == demoData.length - 1 ? "Finish" : "Next",
+                            ),
+                      ],
                     ),
-                    child: const Text("Previous"),
-                  ),
-                  // Next Button (disable if last page)
-                  ElevatedButton(
-                    onPressed: currentPage == demoData.length - 1
-                        ? () => cubit.goHomePage() // Go to Home on last page
-                        : _nextPage,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF22A45D),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: Text(
-                      currentPage == demoData.length - 1 ? "Finish" : "Next",
-                    ),
-                  ),
-                ],
-              ),
             ),
             const Spacer(),
           ],

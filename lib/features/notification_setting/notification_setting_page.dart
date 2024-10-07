@@ -35,8 +35,10 @@ class _NotificationSettingState extends State<NotificationSettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: true,
         centerTitle: true,
