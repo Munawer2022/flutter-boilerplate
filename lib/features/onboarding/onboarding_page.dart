@@ -113,17 +113,35 @@ class _OnboardingState extends State<OnboardingPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Previous Button (disable if first page)
-                        ElevatedButton(
-                          onPressed: currentPage == 0 ? null : _previousPage,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: const Text("Previous"),
-                        ),
+                        // ElevatedButton(
+                        //   onPressed: currentPage == 0 ? null : _previousPage,
+                        //   style: ElevatedButton.styleFrom(
+                        //     backgroundColor: Colors.grey,
+                        //     foregroundColor: Colors.white,
+                        //     shape: RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.circular(8),
+                        //     ),
+                        //   ),
+                        //   child: const Text("Previous"),
+                        // ),
+                        if (currentPage == 0)
+                          const SizedBox()
+                        else
+                          ElevatedButton(
+                              onPressed: _previousPage,
+                              style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15.w, vertical: 14.h),
+                                  backgroundColor: Colors.orange,
+                                  foregroundColor: Colors.white,
+                                  minimumSize: Size.zero,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(20.r))),
+                              child: const Icon(Icons.arrow_back)
+                              // currentPage == demoData.length - 1 ? "Finish" : "Next",
+                              ) // else
+                        , //   _previousPage,
                         // Next Button (disable if last page)
                         ElevatedButton(
                             onPressed: currentPage == demoData.length - 1

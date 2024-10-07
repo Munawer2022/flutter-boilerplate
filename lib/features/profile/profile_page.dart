@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
 import 'package:flutter_template/features/setting/setting_page.dart';
 import 'profile_cubit.dart';
@@ -110,7 +111,19 @@ class _ProfileState extends State<ProfilePage> {
                   titleText: 'Full Nmae',
                   keyboardType: TextInputType.number,
                   hintText: '+983258923',
-                  color: Colors.transparent)
+                  color: Colors.transparent),
+              30.verticalSpace,
+              AppButton.getButton(
+                  child: const Text('Edit Profile',
+                      style: TextStyle(color: Colors.white)),
+                  onPressed: () {},
+                  color: Colors.blue),
+              10.verticalSpace,
+              AppButton.getButton(
+                  child: const Text('Delete Account',
+                      style: TextStyle(color: Colors.white)),
+                  onPressed: () {},
+                  color: Colors.redAccent.shade200),
             ],
           )
         ],

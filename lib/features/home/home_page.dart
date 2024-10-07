@@ -107,16 +107,32 @@ class CarouselExample extends StatefulWidget {
 }
 
 class _CarouselExampleState extends State<CarouselExample> {
+  // Define a list of image URLs
+  final List<String> imageUrls = [
+    'https://images.pexels.com/photos/28098286/pexels-photo-28098286/free-photo-of-playa-puerto-angelito.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/16097867/pexels-photo-16097867/free-photo-of-scenic-view-of-the-seacoast-at-dusk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/20058472/pexels-photo-20058472/free-photo-of-sea-coast-on-island.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/28098286/pexels-photo-28098286/free-photo-of-playa-puerto-angelito.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/16097867/pexels-photo-16097867/free-photo-of-scenic-view-of-the-seacoast-at-dusk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/20058472/pexels-photo-20058472/free-photo-of-sea-coast-on-island.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/28098286/pexels-photo-28098286/free-photo-of-playa-puerto-angelito.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/16097867/pexels-photo-16097867/free-photo-of-scenic-view-of-the-seacoast-at-dusk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/20058472/pexels-photo-20058472/free-photo-of-sea-coast-on-island.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    
+    // Add more image URLs as needed
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SafeArea(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 200),
         child: CarouselView(
           itemExtent: 330,
           shrinkExtent: 200,
-          children: List<Widget>.generate(20, (int index) {
-            return UncontainedLayoutCard(index: index, label: 'Item $index');
+          children: List<Widget>.generate(imageUrls.length, (int index) {
+            return UncontainedLayoutCard(
+                index: index, imageUrl: imageUrls[index]);
           }),
         ),
       ),
@@ -128,22 +144,23 @@ class UncontainedLayoutCard extends StatelessWidget {
   const UncontainedLayoutCard({
     super.key,
     required this.index,
-    required this.label,
+    required this.imageUrl,
   });
 
   final int index;
-  final String label;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Colors.primaries[index % Colors.primaries.length].withOpacity(0.5),
-      child: Center(
-        child: Text(
-          label,
-          style: const TextStyle(color: Colors.white, fontSize: 20),
-          overflow: TextOverflow.clip,
-          softWrap: false,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0), // Add rounded corners
+      child: ColoredBox(
+        color:
+            Colors.primaries[index % Colors.primaries.length].withOpacity(0.5),
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+          width: double.infinity, // Make image cover the entire card
         ),
       ),
     );

@@ -50,17 +50,15 @@ class _SettingState extends State<SettingPage> {
           listTile(
             title: "Ahmed Ali",
             subtitle: const Text("A professionally Doctor"),
-            leading: const CircleAvatar(),
-            onTap: () {},
+            leading: const CircleAvatar(
+              backgroundImage: NetworkImage(
+                  "https://images.pexels.com/photos/28098286/pexels-photo-28098286/free-photo-of-playa-puerto-angelito.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
+            ),
+            onTap: () => cubit.goProfilePage(),
           ),
           10.verticalSpace,
           Column(
             children: [
-              listTile(
-                title: "Profile",
-                icon: CupertinoIcons.profile_circled,
-                onTap: () => cubit.goProfilePage(),
-              ),
               listTile(
                 title: "Notifications",
                 icon: CupertinoIcons.chat_bubble,
@@ -68,9 +66,13 @@ class _SettingState extends State<SettingPage> {
               ),
               listTile(title: "Favorites", icon: CupertinoIcons.heart_fill),
               listTile(title: "Language", icon: Icons.language_rounded),
-              Card(
-                elevation: 0,
-                color: Colors.white,
+              Container(
+                // margin: EdgeInsets.zero
+                // shape: Border.all(),
+                margin: const EdgeInsets.only(bottom: 4),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(8))),
                 child: ListTile(
                   title: const Text('Dark mode'),
                   trailing: Switch(
@@ -113,12 +115,7 @@ class _SettingState extends State<SettingPage> {
           30.verticalSpace,
 
           // Sign Out Button
-          AppButton.getButton(
-              child: const Text('Delete Account',
-                  style: TextStyle(color: Colors.white)),
-              onPressed: () {},
-              color: Colors.redAccent.shade200),
-          10.verticalSpace,
+
           AppButton.getButton(
               child:
                   const Text('Logout', style: TextStyle(color: Colors.white)),
@@ -137,9 +134,13 @@ listTile(
         Widget? leading,
         Widget? subtitle,
         void Function()? onTap}) =>
-    Card(
-      elevation: 0,
-      color: Colors.white,
+    Container(
+      // margin: EdgeInsets.zero
+      // shape: Border.all(),
+      margin: const EdgeInsets.only(bottom: 4),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(8))),
       child: ListTile(
           minTileHeight: 0,
           title: Text(title),
