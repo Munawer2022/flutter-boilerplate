@@ -39,13 +39,19 @@ class _SplashState extends State<SplashPage> {
             Image.asset(AppImages.logo, fit: BoxFit.cover, color: Colors.black),
             Align(
                 alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                    height: 20.h,
-                    width: 20.w,
-                    child: const CircularProgressIndicator.adaptive(
-                        backgroundColor: Colors.black,
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(Colors.white70)))),
+                child: Column(
+                  children: [
+                    SizedBox(
+                        height: 20.h,
+                        width: 20.w,
+                        child: const CircularProgressIndicator.adaptive(
+                            backgroundColor: Colors.black,
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white70))),
+                    40.verticalSpace,
+                    const Text('Crafted with ❤ by Ramz')
+                  ],
+                )),
           ],
         ),
       ),

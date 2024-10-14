@@ -1,14 +1,9 @@
-
-
-
- 
 import 'onboarding_initial_params.dart';
 
 class OnboardingState {
-
   OnboardingState();
-  factory OnboardingState.initial({required OnboardingInitialParams initialParams}) =>
+  factory OnboardingState.initial(
+          {required OnboardingInitialParams initialParams}) =>
       OnboardingState();
-  OnboardingState copyWith() =>
-      OnboardingState();
+  OnboardingState copyWith() => OnboardingState();
 }
