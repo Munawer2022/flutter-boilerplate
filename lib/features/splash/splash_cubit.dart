@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/config/response/api_response.dart';
-import 'package:flutter_template/domain/repositories/splash/splash_base_api_service.dart';
+import 'package:flutter_template/domain/usecases/splash/splash_use_cases.dart';
 import 'package:flutter_template/features/home/home_initial_params.dart';
 import '/features/onboarding/onboarding_initial_params.dart';
 import '/features/splash/splash_navigator.dart';
@@ -11,18 +11,14 @@ import 'splash_initial_params.dart';
 import 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
-  final SplashBaseApiService baseApiServices;
+  final SplashUseCases useCases;
   final SplashInitialParams initialParams;
   final SplashNavigator navigator;
   final CheckForExistingUserUseCase checkForExistingUserUseCase;
   final GetThemeUseCase getThemeUseCase;
 
-  SplashCubit(
-      this.initialParams,
-      this.navigator,
-      this.checkForExistingUserUseCase,
-      this.getThemeUseCase,
-      this.baseApiServices)
+  SplashCubit(this.initialParams, this.navigator,
+      this.checkForExistingUserUseCase, this.getThemeUseCase, this.useCases)
       : super(SplashState.initial(initialParams: initialParams));
 
   checkUser() {
@@ -46,8 +42,12 @@ class SplashCubit extends Cubit<SplashState> {
 
   Future<void> splash() async {
     emit(state.copyWith(response: ApiResponse.loading()));
-    final home = await baseApiServices.splash();
-    home.fold((l) => emit(state.copyWith(response: ApiResponse.error(l.error))),
-        ((r) => emit(state.copyWith(response: ApiResponse.completed(r)))));
+    final splash = await useCases.execute();
+    splash
+        .fold((l) => emit(state.copyWith(response: ApiResponse.error(l.error))),
+            ((r) {
+      emit(state.copyWith(response: ApiResponse.completed(r)));
+      return Future.delayed(const Duration(seconds: 3), () => checkUser());
+    }));
   }
 }

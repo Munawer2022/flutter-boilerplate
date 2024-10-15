@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
+import 'package:flutter_template/data/datasources/splash/splash_data_sources.dart';
 import 'package:flutter_template/features/onboarding/widget/dot_indicator.dart';
 import 'package:flutter_template/features/onboarding/widget/onboard_content.dart';
 import 'onboarding_cubit.dart';
 
-import 'widget/demo_data.dart';
-
 class OnboardingPage extends StatefulWidget {
   final OnboardingCubit cubit;
+  final SplashDataSources dataSources;
 
   const OnboardingPage({
     super.key,
     required this.cubit,
+    required this.dataSources,
   });
 
   @override
@@ -30,80 +31,99 @@ class _OnboardingState extends State<OnboardingPage> {
     cubit.navigator.context = context;
   }
 
-  void _nextPage() {
-    if (currentPage < demoData.length - 1) {
-      setState(() {
-        currentPage++;
-        _pageController.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      });
-    }
-  }
-
-  void _previousPage() {
-    if (currentPage > 0) {
-      setState(() {
-        currentPage--;
-        _pageController.previousPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final info = widget.dataSources.state.data;
+    List<Map<String, dynamic>> demoData = [
+      {
+        "illustration": "https://i.postimg.cc/L43CKddq/Illustrations.png",
+        "title": info.appOnboardingTitle1,
+        "text": info.appOnboardingSubtitle1,
+      },
+      {
+        "illustration": "https://i.postimg.cc/xTjs9sY6/Illustrations-1.png",
+        "title": info.appOnboardingTitle2,
+        "text": info.appOnboardingSubtitle2,
+      },
+      {
+        "illustration": "https://i.postimg.cc/6qcYdZVV/Illustrations-2.png",
+        "title": info.appOnboardingTitle3,
+        "text": info.appOnboardingSubtitle3,
+      },
+    ];
+
+    void nextPage() {
+      if (currentPage < demoData.length - 1) {
+        setState(() {
+          currentPage++;
+          _pageController.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        });
+      }
+    }
+
+    void previousPage() {
+      if (currentPage > 0) {
+        setState(() {
+          currentPage--;
+          _pageController.previousPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        });
+      }
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        actions: [
+          TextButton(
+            onPressed: () {
+              cubit.goHomePage(); // Navigate to Home when Skip is pressed
+            },
+            child: const Text("Skip"),
+          ),
+        ],
+      ),
       body: SafeArea(
-        child: Column(
-          children: [
-            // Skip Button
-            Align(
-              alignment: Alignment.topRight,
-              child: TextButton(
-                onPressed: () {
-                  cubit.goHomePage(); // Navigate to Home when Skip is pressed
-                },
-                child: const Text("Skip"),
-              ),
-            ),
-            const Spacer(flex: 2),
-            // Onboarding Content
-            Expanded(
-              flex: 14,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: demoData.length,
-                onPageChanged: (value) {
-                  setState(() {
-                    currentPage = value;
-                  });
-                },
-                itemBuilder: (context, index) => OnboardContent(
-                  illustration: demoData[index]["illustration"],
-                  title: demoData[index]["title"],
-                  text: demoData[index]["text"],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 40.w),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 14,
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: demoData.length,
+                  onPageChanged: (value) {
+                    setState(() {
+                      currentPage = value;
+                    });
+                  },
+                  itemBuilder: (context, index) => OnboardContent(
+                    illustration: demoData[index]["illustration"],
+                    title: demoData[index]["title"],
+                    text: demoData[index]["text"],
+                  ),
                 ),
               ),
-            ),
-            const Spacer(),
-            // Dot Indicators
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                demoData.length,
-                (index) => DotIndicator(isActive: index == currentPage),
+              const Spacer(),
+              // Dot Indicators
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  demoData.length,
+                  (index) => DotIndicator(isActive: index == currentPage),
+                ),
               ),
-            ),
-            const Spacer(flex: 2),
-            // Previous, Next Buttons
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: currentPage == demoData.length - 1
+              const Spacer(flex: 2),
+              // Previous, Next Buttons
+              currentPage == demoData.length - 1
                   ? AppButton.getButton(
                       color: Colors.green,
                       child: const Text('Get Start',
@@ -116,7 +136,7 @@ class _OnboardingState extends State<OnboardingPage> {
                           const SizedBox()
                         else
                           ElevatedButton(
-                              onPressed: _previousPage,
+                              onPressed: previousPage,
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 15.w, vertical: 14.h),
@@ -134,7 +154,7 @@ class _OnboardingState extends State<OnboardingPage> {
                         ElevatedButton(
                             onPressed: currentPage == demoData.length - 1
                                 ? () => cubit.goHomePage()
-                                : _nextPage,
+                                : nextPage,
                             style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 15.w, vertical: 14.h),
@@ -148,9 +168,9 @@ class _OnboardingState extends State<OnboardingPage> {
                             ),
                       ],
                     ),
-            ),
-            const Spacer(),
-          ],
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );

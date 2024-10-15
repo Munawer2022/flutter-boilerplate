@@ -17,7 +17,8 @@ mixin OnboardingRoute {
   openOnboarding(OnboardingInitialParams initialParams) {
     navigator.push(
         context: context,
-        routeName: OnboardingPage(cubit: getIt(param1: initialParams)));
+        routeName: OnboardingPage(
+            cubit: getIt(param1: initialParams), dataSources: getIt()));
   }
 
   AppNavigator get navigator;

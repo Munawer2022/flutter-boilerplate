@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/config/components/app_bar.dart';
 import 'package:flutter_template/core/app_images.dart';
+import 'package:flutter_template/core/shimmer.dart';
+import 'package:flutter_template/core/status_switcher.dart';
+import 'package:flutter_template/domain/entities/setting/mock_setting_model.dart';
+import 'package:flutter_template/domain/entities/splash/mock_splash_model.dart';
+import 'package:flutter_template/features/splash/splash_state.dart';
 import 'splash_cubit.dart';
 
 class SplashPage extends StatefulWidget {
@@ -23,20 +28,32 @@ class _SplashState extends State<SplashPage> {
   void initState() {
     super.initState();
     cubit.navigator.context = context;
-    Future.delayed(const Duration(seconds: 2), () => cubit.checkUser());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.all(80.0.r),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(),
-            Image.asset(AppImages.logo, fit: BoxFit.cover, color: Colors.black),
+            BlocBuilder(
+                bloc: cubit,
+                builder: (context, state) {
+                  state as SplashState;
+
+                  return StatusSwitcher<MockSplashModel>(
+                      response: state.response,
+                      onLoading: (BuildContext context) =>
+                          shimmer(child: CircleAvatar(radius: 80.r)),
+                      onCompleted: (BuildContext context, data) {
+                        return Image.network(data.data.appSplashScreenLogo,
+                            fit: BoxFit.cover);
+                      });
+                }),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Column(

@@ -1,6 +1,9 @@
 /*
 ************************ NotificationSetting ************************
 */
+import 'package:flutter_template/data/datasources/splash/splash_data_sources.dart';
+import 'package:flutter_template/domain/usecases/splash/splash_use_cases.dart';
+
 import 'features/notification_setting/notification_setting_cubit.dart';
 import 'features/notification_setting/notification_setting_navigator.dart';
 import 'features/notification_setting/notification_setting_initial_params.dart';
@@ -90,6 +93,7 @@ Future<void> init() async {
   getIt.registerSingleton<AppNavigator>(AppNavigator());
 
   getIt.registerSingleton<LoginDataSources>(LoginDataSources());
+  getIt.registerSingleton<SplashDataSources>(SplashDataSources());
 
   getIt.registerSingleton<NetworkBaseApiService>(
       HttpsNetworkRepository(getIt()));
@@ -113,9 +117,11 @@ Future<void> init() async {
 */
   getIt.registerSingleton<SplashBaseApiService>(SplashRepository(getIt()));
   // getIt.registerSingleton<SplashBaseApiService>(MockSplashRepository());
+  getIt.registerSingleton<SplashUseCases>(SplashUseCases(getIt(), getIt()));
   getIt.registerSingleton<SplashNavigator>(SplashNavigator(getIt()));
   getIt.registerFactoryParam<SplashCubit, SplashInitialParams, dynamic>(
-      (params, _) => SplashCubit(params, getIt(), getIt(), getIt(), getIt()));
+      (params, _) =>
+          SplashCubit(params, getIt(), getIt(), getIt(), getIt())..splash());
 /*
 ************************ login ************************
 */
