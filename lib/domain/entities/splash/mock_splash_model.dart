@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class MockSplashModel  {
+class MockSplashModel {
   final String status;
   final MockData data;
 
@@ -27,7 +27,7 @@ class MockSplashModel  {
   // List<Object?> get props => throw UnimplementedError();
 }
 
-class MockData  {
+class MockData {
   final String siteName;
   final String address;
   final String phone;
@@ -91,6 +91,9 @@ class MockData  {
   final String appOnboardingSubtitle2;
   final String appOnboardingTitle3;
   final String appOnboardingSubtitle3;
+  final String appOnboardingImage1;
+  final String appOnboardingImage2;
+  final String appOnboardingImage3;
 
   const MockData({
     required this.siteName,
@@ -156,6 +159,9 @@ class MockData  {
     required this.appOnboardingSubtitle2,
     required this.appOnboardingTitle3,
     required this.appOnboardingSubtitle3,
+    required this.appOnboardingImage1,
+    required this.appOnboardingImage2,
+    required this.appOnboardingImage3,
   });
   const MockData.empty()
       : siteName = '',
@@ -220,7 +226,10 @@ class MockData  {
         appOnboardingTitle2 = '',
         appOnboardingSubtitle2 = '',
         appOnboardingTitle3 = '',
-        appOnboardingSubtitle3 = '';
+        appOnboardingSubtitle3 = '',
+        appOnboardingImage1 = '',
+        appOnboardingImage2 = '',
+        appOnboardingImage3 = '';
   MockData copyWith({
     String? siteName,
     String? address,
@@ -285,6 +294,9 @@ class MockData  {
     String? appOnboardingSubtitle2,
     String? appOnboardingTitle3,
     String? appOnboardingSubtitle3,
+    String? appOnboardingImage1,
+    String? appOnboardingImage2,
+    String? appOnboardingImage3,
   }) {
     return MockData(
       siteName: siteName ?? this.siteName,
@@ -356,6 +368,9 @@ class MockData  {
       appOnboardingTitle3: appOnboardingTitle3 ?? this.appOnboardingTitle3,
       appOnboardingSubtitle3:
           appOnboardingSubtitle3 ?? this.appOnboardingSubtitle3,
+      appOnboardingImage1: appOnboardingImage1 ?? this.appOnboardingImage1,
+      appOnboardingImage2: appOnboardingImage2 ?? this.appOnboardingImage2,
+      appOnboardingImage3: appOnboardingImage3 ?? this.appOnboardingImage3,
     );
   }
 

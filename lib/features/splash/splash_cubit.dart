@@ -47,6 +47,16 @@ class SplashCubit extends Cubit<SplashState> {
         .fold((l) => emit(state.copyWith(response: ApiResponse.error(l.error))),
             ((r) {
       emit(state.copyWith(response: ApiResponse.completed(r)));
+      return languageTranslations();
+    }));
+  }
+
+  Future<void> languageTranslations() async {
+    emit(state.copyWith(response: ApiResponse.loading()));
+    final splash = await useCases.executeLanguageTranslations();
+    splash
+        .fold((l) => emit(state.copyWith(response: ApiResponse.error(l.error))),
+            ((r) {
       return Future.delayed(const Duration(seconds: 3), () => checkUser());
     }));
   }

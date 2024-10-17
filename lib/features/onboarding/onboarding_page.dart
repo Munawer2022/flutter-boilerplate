@@ -36,17 +36,17 @@ class _OnboardingState extends State<OnboardingPage> {
     final info = widget.dataSources.state.data;
     List<Map<String, dynamic>> demoData = [
       {
-        "illustration": "https://i.postimg.cc/L43CKddq/Illustrations.png",
+        "illustration": info.appOnboardingImage1,
         "title": info.appOnboardingTitle1,
         "text": info.appOnboardingSubtitle1,
       },
       {
-        "illustration": "https://i.postimg.cc/xTjs9sY6/Illustrations-1.png",
+        "illustration": info.appOnboardingImage2,
         "title": info.appOnboardingTitle2,
         "text": info.appOnboardingSubtitle2,
       },
       {
-        "illustration": "https://i.postimg.cc/6qcYdZVV/Illustrations-2.png",
+        "illustration": info.appOnboardingImage3,
         "title": info.appOnboardingTitle3,
         "text": info.appOnboardingSubtitle3,
       },

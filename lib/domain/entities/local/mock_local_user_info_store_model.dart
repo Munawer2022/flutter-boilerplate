@@ -19,4 +19,8 @@ class MockLocalUserInfoStoreModel extends Equatable {
 
   @override
   List<Object?> get props => [token];
+
+  get accessToken => null;
+
+  get refreshToken => null;
 }

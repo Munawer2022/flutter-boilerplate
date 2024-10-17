@@ -1,6 +1,7 @@
 /*
 ************************ NotificationSetting ************************
 */
+import 'package:flutter_template/data/datasources/splash/language_translations_data_sources.dart';
 import 'package:flutter_template/data/datasources/splash/splash_data_sources.dart';
 import 'package:flutter_template/domain/usecases/splash/splash_use_cases.dart';
 
@@ -94,9 +95,9 @@ Future<void> init() async {
 
   getIt.registerSingleton<LoginDataSources>(LoginDataSources());
   getIt.registerSingleton<SplashDataSources>(SplashDataSources());
+  getIt.registerSingleton<LanguageTranslationsDataSources>(
+      LanguageTranslationsDataSources());
 
-  getIt.registerSingleton<NetworkBaseApiService>(
-      HttpsNetworkRepository(getIt()));
 /*
 ************************ Theme ************************
 */
@@ -112,16 +113,18 @@ Future<void> init() async {
   getIt.registerSingleton<InternetConnectivityCheckerDataSources>(
       InternetConnectivityCheckerDataSources(getIt(), getIt()));
 
+  getIt.registerSingleton<NetworkBaseApiService>(
+      HttpsNetworkRepository(getIt(), getIt()));
 /*
 ************************ Splash ************************
 */
   getIt.registerSingleton<SplashBaseApiService>(SplashRepository(getIt()));
   // getIt.registerSingleton<SplashBaseApiService>(MockSplashRepository());
-  getIt.registerSingleton<SplashUseCases>(SplashUseCases(getIt(), getIt()));
+  getIt.registerSingleton<SplashUseCases>(
+      SplashUseCases(getIt(), getIt(), getIt(), getIt()));
   getIt.registerSingleton<SplashNavigator>(SplashNavigator(getIt()));
   getIt.registerFactoryParam<SplashCubit, SplashInitialParams, dynamic>(
-      (params, _) =>
-          SplashCubit(params, getIt(), getIt(), getIt(), getIt())..splash());
+      (params, _) => SplashCubit(params, getIt(), getIt(), getIt(), getIt()));
 /*
 ************************ login ************************
 */

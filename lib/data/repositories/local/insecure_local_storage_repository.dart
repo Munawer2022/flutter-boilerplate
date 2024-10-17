@@ -1,3 +1,4 @@
+import 'package:flutter_template/domain/entities/local/mock_local_selected_language_store_model.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,15 +8,14 @@ import '/domain/entities/local/mock_local_user_info_store_model.dart';
 import 'dart:convert';
 import '/domain/failures/local/remove_local_storage_failure.dart';
 
-
 import '/domain/failures/local/get_local_storage_failure.dart';
 import '/domain/failures/local/set_local_storage_failure.dart';
 
 class InsecureLocalStorageRepository implements LocalStorageRepository {
-  
   @override
   Future<Either<SetLocalStorageFailure, bool>> setUserData(
-      {required MockLocalUserInfoStoreModel mockLocalUserInfoStoreModel}) async {
+      {required MockLocalUserInfoStoreModel
+          mockLocalUserInfoStoreModel}) async {
     try {
       final SharedPreferences sp = await SharedPreferences.getInstance();
       String userJson = jsonEncode(mockLocalUserInfoStoreModel.toJson());
@@ -77,6 +77,53 @@ class InsecureLocalStorageRepository implements LocalStorageRepository {
       return right(true);
     } catch (ex) {
       return left(SetLocalStorageFailure(error: ex.toString()));
+    }
+  }
+
+  //
+
+  @override
+  Future<Either<SetLocalStorageFailure, bool>> setSelectedLanguage() async {
+    try {
+      final SharedPreferences sp = await SharedPreferences.getInstance();
+      // String userJson =
+      //     jsonEncode(mockLocalSelectedLanguageStoreModel.toJson());
+      await sp.setString('selectedLanguage', "selectedLanguage");
+      // await prefs.setString("token", mockLoginSuccessModel.token);
+      return right(true);
+    } catch (ex) {
+      return left(SetLocalStorageFailure(error: ex.toString()));
+    }
+  }
+
+  @override
+  Future<Either<GetLocalStorageFailure, MockLocalSelectedLanguageStoreModel>>
+      getSelectedLanguage() async {
+    try {
+      final SharedPreferences sp = await SharedPreferences.getInstance();
+      String? userJson = sp.getString('selectedLanguage');
+      if (userJson == null) {
+        return right(MockLocalSelectedLanguageStoreModel.empty().copyWith());
+      }
+
+      String userMap = jsonDecode(userJson);
+      return right(MockLocalSelectedLanguageStoreModel.fromJson(userMap));
+      // return right(MockLoginSuccessModel.empty()
+      //     .copyWith(token: prefs.getString("token")));
+    } catch (ex) {
+      return left(GetLocalStorageFailure(error: ex.toString()));
+    }
+  }
+
+  @override
+  Future<Either<RemoveLocalStorageFailure, bool>>
+      removeSelectedLanguage() async {
+    try {
+      final SharedPreferences sp = await SharedPreferences.getInstance();
+      await sp.remove("selectedLanguage");
+      return right(true);
+    } catch (ex) {
+      return left(RemoveLocalStorageFailure(error: ex.toString()));
     }
   }
 }
