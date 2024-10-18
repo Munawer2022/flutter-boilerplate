@@ -51,6 +51,11 @@ class SplashCubit extends Cubit<SplashState> {
     }));
   }
 
+  final List<Map<String, String>> languages = [
+    {'code': 'en', 'name': 'English'},
+    {'code': 'ar', 'name': 'Arabic'},
+  ];
+
   Future<void> languageTranslations() async {
     emit(state.copyWith(response: ApiResponse.loading()));
     final splash = await useCases.executeLanguageTranslations();

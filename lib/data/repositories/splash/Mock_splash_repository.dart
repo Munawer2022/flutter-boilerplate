@@ -14,7 +14,7 @@ class MockSplashRepository implements SplashBaseApiService {
 
   @override
   Future<Either<SplashFailure, MockLanguageTranslationsModel>>
-      languageTranslations() async {
+      languageTranslations({Map<String, String>? queryParams}) async {
     await GlobalConstants.mockRepoTime;
     return right(MockLanguageTranslationsModel.empty().copyWith());
   }

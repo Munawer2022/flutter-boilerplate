@@ -27,10 +27,9 @@ class SplashUseCases {
 
   Future<Either<SplashFailure, MockLanguageTranslationsModel>>
       executeLanguageTranslations() async => await baseApiService
-          .languageTranslations()
-          .then((value) => value.fold(
+          .languageTranslations(queryParams: {}).then((value) => value.fold(
               (l) => left(l),
-              (r) => _localStorageRepository.setSelectedLanguage().then(
+              (r) => _localStorageRepository.setSelectedLanguage(lang: '').then(
                   (value) => value
                           .fold((l) => left(SplashFailure(error: l.error)),
                               (selectedLanguageRight) {

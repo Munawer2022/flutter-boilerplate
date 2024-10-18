@@ -78,58 +78,62 @@ class _OnboardingState extends State<OnboardingPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        actions: [
-          TextButton(
-            onPressed: () {
-              cubit.goHomePage(); // Navigate to Home when Skip is pressed
-            },
-            child: const Text("Skip"),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   backgroundColor: Colors.white,
+      //   actions: [
+      //     TextButton(
+      //       onPressed: () {
+      //         cubit.goHomePage(); // Navigate to Home when Skip is pressed
+      //       },
+      //       child: const Text("Skip"),
+      //     ),
+      //   ],
+      // ),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40.w),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 14,
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: demoData.length,
-                  onPageChanged: (value) {
-                    setState(() {
-                      currentPage = value;
-                    });
-                  },
-                  itemBuilder: (context, index) => OnboardContent(
-                    illustration: demoData[index]["illustration"],
-                    title: demoData[index]["title"],
-                    text: demoData[index]["text"],
-                  ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 14,
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: demoData.length,
+                onPageChanged: (value) {
+                  setState(() {
+                    currentPage = value;
+                  });
+                },
+                itemBuilder: (context, index) => OnboardContent(
+                  illustration: demoData[index]["illustration"],
+                  title: demoData[index]["title"],
+                  text: demoData[index]["text"],
+                  cubit: cubit,
                 ),
               ),
-              const Spacer(),
-              // Dot Indicators
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  demoData.length,
-                  (index) => DotIndicator(isActive: index == currentPage),
-                ),
+            ),
+            const Spacer(),
+            // Dot Indicators
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                demoData.length,
+                (index) => DotIndicator(isActive: index == currentPage),
               ),
-              const Spacer(flex: 2),
-              // Previous, Next Buttons
-              currentPage == demoData.length - 1
-                  ? AppButton.getButton(
-                      color: Colors.green,
-                      child: const Text('Get Start',
-                          style: TextStyle(color: Colors.white)),
-                      onPressed: () => cubit.goHomePage())
-                  : Row(
+            ),
+            const Spacer(flex: 2),
+            // Previous, Next Buttons
+            currentPage == demoData.length - 1
+                ? Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40.w),
+                    child: AppButton.getButton(
+                        color: Colors.green,
+                        child: const Text('Get Start',
+                            style: TextStyle(color: Colors.white)),
+                        onPressed: () => cubit.goHomePage()),
+                  )
+                : Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40.w),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         if (currentPage == 0)
@@ -168,9 +172,9 @@ class _OnboardingState extends State<OnboardingPage> {
                             ),
                       ],
                     ),
-              const Spacer(),
-            ],
-          ),
+                  ),
+            const Spacer(),
+          ],
         ),
       ),
     );

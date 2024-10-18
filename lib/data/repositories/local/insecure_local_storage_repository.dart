@@ -83,12 +83,13 @@ class InsecureLocalStorageRepository implements LocalStorageRepository {
   //
 
   @override
-  Future<Either<SetLocalStorageFailure, bool>> setSelectedLanguage() async {
+  Future<Either<SetLocalStorageFailure, bool>> setSelectedLanguage(
+      {required String lang}) async {
     try {
       final SharedPreferences sp = await SharedPreferences.getInstance();
       // String userJson =
       //     jsonEncode(mockLocalSelectedLanguageStoreModel.toJson());
-      await sp.setString('selectedLanguage', "selectedLanguage");
+      await sp.setString('selectedLanguage', lang);
       // await prefs.setString("token", mockLoginSuccessModel.token);
       return right(true);
     } catch (ex) {
@@ -97,17 +98,14 @@ class InsecureLocalStorageRepository implements LocalStorageRepository {
   }
 
   @override
-  Future<Either<GetLocalStorageFailure, MockLocalSelectedLanguageStoreModel>>
-      getSelectedLanguage() async {
+  Future<Either<GetLocalStorageFailure, String>> getSelectedLanguage() async {
     try {
       final SharedPreferences sp = await SharedPreferences.getInstance();
-      String? userJson = sp.getString('selectedLanguage');
-      if (userJson == null) {
-        return right(MockLocalSelectedLanguageStoreModel.empty().copyWith());
-      }
+      String? userJson = sp.getString('selectedLanguage') ?? 'en';
 
-      String userMap = jsonDecode(userJson);
-      return right(MockLocalSelectedLanguageStoreModel.fromJson(userMap));
+      // String userMap = jsonDecode(userJson);
+      // return right(MockLocalSelectedLanguageStoreModel.fromJson(userMap));
+      return right(userJson);
       // return right(MockLoginSuccessModel.empty()
       //     .copyWith(token: prefs.getString("token")));
     } catch (ex) {

@@ -45,11 +45,11 @@ class _NotificationState extends State<NotificationPage> {
           style: TextStyle(color: Colors.black87, fontSize: 18),
         ),
         titleSpacing: 0,
-        actions: [
-          IconButton(
-              onPressed: () => cubit.goNoticationSettingPage(),
-              icon: const Icon(Icons.settings))
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () => cubit.goNoticationSettingPage(),
+        //       icon: const Icon(Icons.settings))
+        // ],
       ),
       body: Column(
         children: [
@@ -108,14 +108,14 @@ class _NotificationState extends State<NotificationPage> {
                   title:
                       "Successful purchase enjoy unforgettable Adventures with Super Mario movies",
                   subtitle: "10:50 AM",
-                  icon: Icons.check_circle,
-                  color: Colors.green,
+                  icon: Icons.local_offer,
+                  color: Colors.red,
                 ),
                 _buildNotificationItem(
                   title: "Yo, Your account got spotted on a new device",
                   subtitle: "11:25 AM",
-                  icon: Icons.warning,
-                  color: Colors.orange,
+                  icon: Icons.local_offer,
+                  color: Colors.red,
                 ),
                 16.verticalSpace,
                 _buildSectionHeader('Yesterday'),
@@ -156,15 +156,15 @@ class _NotificationState extends State<NotificationPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          TextButton(
-            onPressed: () {
-              // Handle Mark all as read
-            },
-            child: const Text(
-              "Mark all read",
-              style: TextStyle(color: Colors.red),
-            ),
-          ),
+          // TextButton(
+          //   onPressed: () {
+          //     // Handle Mark all as read
+          //   },
+          //   child: const Text(
+          //     "Mark all read",
+          //     style: TextStyle(color: Colors.red),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -181,17 +181,17 @@ class _NotificationState extends State<NotificationPage> {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
-          if (dotWant)
-            Row(
-              children: [
-                CircleAvatar(
-                    backgroundColor: Colors.red.shade100,
-                    radius: 5,
-                    child: CircleAvatar(
-                        backgroundColor: Colors.red.shade400, radius: 3)),
-                15.horizontalSpace,
-              ],
-            ),
+          // if (dotWant)
+          //   Row(
+          //     children: [
+          //       CircleAvatar(
+          //           backgroundColor: Colors.red.shade100,
+          //           radius: 5,
+          //           child: CircleAvatar(
+          //               backgroundColor: Colors.red.shade400, radius: 3)),
+          //       15.horizontalSpace,
+          //     ],
+          //   ),
           Container(
               padding: EdgeInsets.all(8.r),
               decoration: BoxDecoration(

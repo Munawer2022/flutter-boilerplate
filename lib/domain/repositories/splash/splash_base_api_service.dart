@@ -6,5 +6,5 @@ import '/domain/failures/splash/splash_failure.dart';
 abstract class SplashBaseApiService {
   Future<Either<SplashFailure, MockSplashModel>> splash();
   Future<Either<SplashFailure, MockLanguageTranslationsModel>>
-      languageTranslations();
+      languageTranslations({Map<String, String>? queryParams});
 }

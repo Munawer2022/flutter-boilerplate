@@ -6,15 +6,24 @@ import 'splash_initial_params.dart';
 class SplashState {
   final ApiResponse<MockSplashModel> response;
   final bool isloading;
+  final String currentLang;
 
-  SplashState({required this.isloading, required this.response});
+  SplashState(
+      {required this.isloading,
+      required this.response,
+      required this.currentLang});
   factory SplashState.initial({required SplashInitialParams initialParams}) =>
       SplashState(
           isloading: false,
-          response: ApiResponse.initial(MockSplashModel.empty().copyWith()));
+          response:
+              ApiResponse.initial(const MockSplashModel.empty().copyWith()),
+          currentLang: 'en');
   SplashState copyWith(
-          {bool? isloading, ApiResponse<MockSplashModel>? response}) =>
+          {bool? isloading,
+          ApiResponse<MockSplashModel>? response,
+          String? currentLang}) =>
       SplashState(
           isloading: isloading ?? this.isloading,
-          response: response ?? this.response);
+          response: response ?? this.response,
+          currentLang: currentLang ?? this.currentLang);
 }
