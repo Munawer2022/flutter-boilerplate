@@ -25,7 +25,6 @@ abstract class LocalStorageRepository {
   Future<Either<SetLocalStorageFailure, bool>> setSelectedLanguage(
       {required String lang});
 
-  Future<Either<GetLocalStorageFailure, String>>
-      getSelectedLanguage();
+  Future<Either<GetLocalStorageFailure, String>> getSelectedLanguage();
   Future<Either<RemoveLocalStorageFailure, bool>> removeSelectedLanguage();
 }

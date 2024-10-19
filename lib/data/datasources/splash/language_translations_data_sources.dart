@@ -3,6 +3,8 @@ import 'package:flutter_template/domain/entities/splash/mock_language_translatio
 
 class LanguageTranslationsDataSources
     extends Cubit<MockLanguageTranslationsModel> {
+  String currentLang = 'en';
+
   LanguageTranslationsDataSources()
       : super(MockLanguageTranslationsModel.empty().copyWith());
   setLanguageTranslationsDataSources(

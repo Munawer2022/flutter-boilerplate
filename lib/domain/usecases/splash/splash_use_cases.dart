@@ -5,6 +5,7 @@ import 'package:flutter_template/domain/entities/splash/mock_language_translatio
 import 'package:flutter_template/domain/repositories/local/local_storage_base_api_service.dart';
 import 'package:flutter_template/domain/repositories/splash/splash_base_api_service.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:http_interceptor/http_interceptor.dart';
 
 import '/domain/entities/splash/mock_splash_model.dart';
 import '/domain/failures/splash/splash_failure.dart';
@@ -26,13 +27,17 @@ class SplashUseCases {
               }));
 
   Future<Either<SplashFailure, MockLanguageTranslationsModel>>
-      executeLanguageTranslations() async => await baseApiService
-          .languageTranslations(queryParams: {}).then((value) => value.fold(
+      executeLanguageTranslations({required String lang}) async =>
+          await baseApiService.languageTranslations(queryParams: {
+            "lang": lang
+          }).then((value) => value.fold(
               (l) => left(l),
-              (r) => _localStorageRepository.setSelectedLanguage(lang: '').then(
-                  (value) => value
+              (r) => _localStorageRepository
+                  .setSelectedLanguage(lang: lang)
+                  .then((value) => value
                           .fold((l) => left(SplashFailure(error: l.error)),
                               (selectedLanguageRight) {
+                        languageTranslationsDataSources.currentLang = lang;
                         languageTranslationsDataSources
                             .setLanguageTranslationsDataSources(
                                 mockLanguageTranslationsModel: r);

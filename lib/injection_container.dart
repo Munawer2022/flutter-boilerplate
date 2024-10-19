@@ -1,4 +1,17 @@
 /*
+************************ Faq ************************
+*/
+import 'features/faq/faq_cubit.dart';
+import 'features/faq/faq_navigator.dart';
+import 'features/faq/faq_initial_params.dart';
+import 'data/repositories/faq/faq_repository.dart';
+import 'domain/repositories/faq/faq_base_api_service.dart';
+
+/*
+************************ Fqs ************************
+*/
+
+/*
 ************************ NotificationSetting ************************
 */
 import 'package:flutter_template/data/datasources/splash/language_translations_data_sources.dart';
@@ -131,7 +144,7 @@ Future<void> init() async {
   getIt.registerSingleton<LoginBaseApiService>(LoginRepository(getIt()));
 //   getIt.registerSingleton<LoginBaseApiService>(MockLoginRepository());
   getIt.registerSingleton<CheckForExistingUserUseCase>(
-      CheckForExistingUserUseCase(getIt(), getIt()));
+      CheckForExistingUserUseCase(getIt(), getIt(), getIt()));
   getIt.registerSingleton<LoginUseCases>(
       LoginUseCases(getIt(), getIt(), getIt()));
   getIt.registerSingleton<LoginNavigator>(LoginNavigator(getIt()));
@@ -162,7 +175,9 @@ Future<void> init() async {
   // getIt.registerSingleton<SettingBaseApiService>(MockSettingRepository());
   getIt.registerSingleton<SettingNavigator>(SettingNavigator(getIt()));
   getIt.registerFactoryParam<SettingCubit, SettingInitialParams, dynamic>(
-      (params, _) => SettingCubit(params, getIt(), getIt())..setting());
+      (params, _) => SettingCubit(params, getIt(), getIt())
+      // ..setting()
+      );
 
 /*
 ************************ Profile ************************
@@ -193,4 +208,21 @@ Future<void> init() async {
       NotificationSettingCubit,
       NotificationSettingInitialParams,
       dynamic>((params, _) => NotificationSettingCubit(params, getIt()));
+/*
+************************ Fqs ************************
+*/
+/*
+************************ Faq ************************
+*/
+  getIt.registerSingleton<FaqBaseApiService>(FaqRepository(getIt()));
+  // getIt.registerSingleton<FaqBaseApiService>(MockFaqRepository());
+  getIt.registerSingleton<FaqNavigator>(FaqNavigator(getIt()));
+  getIt.registerFactoryParam<FaqCubit, FaqInitialParams, dynamic>(
+      (params, _) => FaqCubit(params, getIt()
+      , getIt()
+      
+      )
+      ..faq()
+      );
+
 }

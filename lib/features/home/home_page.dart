@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/features/no_internet_page.dart';
 import 'package:flutter_template/features/setting/setting_initial_params.dart';
 import 'package:flutter_template/features/setting/setting_page.dart';
+import 'package:flutter_template/features/splash/splash_initial_params.dart';
 import 'package:flutter_template/injection_container.dart';
 import 'home_cubit.dart';
 import 'home_state.dart';
@@ -38,7 +39,10 @@ class _HomeState extends State<HomePage> {
     const NoInternetScreen(),
     const SizedBox(),
     const Center(child: Text("Search Chat")),
-    SettingPage(cubit: getIt(param1: const SettingInitialParams()))
+    SettingPage(
+        cubit: getIt(param1: const SettingInitialParams()),
+        dataSources: getIt(),
+        splashCubit: getIt(param1: const SplashInitialParams()))
   ];
 
   @override
@@ -118,7 +122,7 @@ class _CarouselExampleState extends State<CarouselExample> {
     'https://images.pexels.com/photos/28098286/pexels-photo-28098286/free-photo-of-playa-puerto-angelito.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     'https://images.pexels.com/photos/16097867/pexels-photo-16097867/free-photo-of-scenic-view-of-the-seacoast-at-dusk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     'https://images.pexels.com/photos/20058472/pexels-photo-20058472/free-photo-of-sea-coast-on-island.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    
+
     // Add more image URLs as needed
   ];
 

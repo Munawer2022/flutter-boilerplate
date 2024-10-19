@@ -14,7 +14,7 @@ abstract class AppButton {
       ElevatedButton(
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(radius?.r ?? 10.0.r)),
+                  borderRadius: BorderRadius.circular(radius?.r ?? 50.0.r)),
               padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
               backgroundColor: color ?? Colors.blue,
               minimumSize:

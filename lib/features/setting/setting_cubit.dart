@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_template/features/faq/faq_initial_params.dart';
 import 'package:flutter_template/features/notification/notification_initial_params.dart';
 import 'package:flutter_template/features/profile/profile_initial_params.dart';
 import 'setting_initial_params.dart';
@@ -28,4 +29,6 @@ class SettingCubit extends Cubit<SettingState> {
 
   goNotificationPage() =>
       navigator.openNotification(const NotificationInitialParams());
+
+  goFaqPage() => navigator.openFaq(const FaqInitialParams());
 }

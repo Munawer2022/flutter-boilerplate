@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/theme/theme_data.dart';
 import 'package:flutter_template/core/show/show/show_material_banner.dart';
+import 'package:flutter_template/data/datasources/splash/language_translations_data_sources.dart';
+import 'package:flutter_template/features/splash/splash_cubit.dart';
+import 'package:flutter_template/features/splash/splash_state.dart';
 import 'setting_cubit.dart';
 import 'setting_state.dart';
 import 'setting_state.dart';
@@ -14,10 +17,14 @@ import '/domain/entities/setting/mock_setting_model.dart';
 
 class SettingPage extends StatefulWidget {
   final SettingCubit cubit;
+  final LanguageTranslationsDataSources dataSources;
+  final SplashCubit splashCubit;
 
   const SettingPage({
     super.key,
     required this.cubit,
+    required this.dataSources,
+    required this.splashCubit,
   });
 
   @override
@@ -42,7 +49,8 @@ class _SettingState extends State<SettingPage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-          title: const Text("Settings"),
+          title: Text(widget.dataSources.state.data!.fileName!.hello ?? ''),
+          // title: const Text("Settings"),
           surfaceTintColor: Colors.grey.shade100,
           backgroundColor: Colors.grey.shade100,
           centerTitle: true,
@@ -120,23 +128,34 @@ class _SettingState extends State<SettingPage> {
                   title: const Text('Language'),
                   trailing: SizedBox(
                     // width: 120,
-                    child: DropdownButton<String>(
-                      value: selectedValue,
-                      hint: const Text('English'),
-                      icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                      underline: const SizedBox(),
-                      items: options.map((String option) {
-                        return DropdownMenuItem<String>(
-                          value: option,
-                          child: Text(option),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedValue = newValue;
-                        });
-                      },
-                    ),
+                    child: BlocBuilder(
+                        bloc: widget.splashCubit,
+                        builder: (context, state) {
+                          state as SplashState;
+
+                          return DropdownButton<String>(
+                            value: widget.dataSources.currentLang,
+                            // value: selectedValue,
+                            // hint: const Text('English'),
+                            icon:
+                                const Icon(Icons.keyboard_arrow_down_outlined),
+                            underline: const SizedBox(),
+                            items: widget.splashCubit.languages
+                                .map<DropdownMenuItem<String>>((lang) {
+                              return DropdownMenuItem<String>(
+                                value: lang['code'],
+                                child: Text(
+                                    lang['name']!), // Display language name
+                              );
+                            }).toList(),
+                            onChanged: (String? newLang) {
+                              if (newLang != null) {
+                                widget.splashCubit
+                                    .languageTranslations(newLang);
+                              }
+                            },
+                          );
+                        }),
                   ),
                   leading: const Icon(Icons.language_rounded),
                 ),
@@ -183,7 +202,11 @@ class _SettingState extends State<SettingPage> {
               children: [
                 listTile(title: "About Us", icon: CupertinoIcons.group),
                 Divider(color: Colors.grey.shade100),
-                listTile(title: "FAQs", icon: CupertinoIcons.question_square),
+                listTile(
+                  title: "FAQs",
+                  icon: CupertinoIcons.question_square,
+                  onTap: () => cubit.goFaqPage(),
+                ),
                 Divider(color: Colors.grey.shade100),
                 listTile(
                     title: "Tems and Service",

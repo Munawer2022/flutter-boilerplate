@@ -23,7 +23,11 @@ class SplashCubit extends Cubit<SplashState> {
 
   checkUser() {
     getThemeUseCase.execute();
-
+    checkForExistingUserUseCase.execute2().then(
+          (value) => value.fold((l) {}, (r) {
+            return languageTranslations(r);
+          }),
+        );
     emit(state.copyWith(isloading: true));
     checkForExistingUserUseCase.execute().then(
           (value) => value.fold(
@@ -47,7 +51,7 @@ class SplashCubit extends Cubit<SplashState> {
         .fold((l) => emit(state.copyWith(response: ApiResponse.error(l.error))),
             ((r) {
       emit(state.copyWith(response: ApiResponse.completed(r)));
-      return languageTranslations();
+      return Future.delayed(const Duration(seconds: 3), () => checkUser());
     }));
   }
 
@@ -56,13 +60,11 @@ class SplashCubit extends Cubit<SplashState> {
     {'code': 'ar', 'name': 'Arabic'},
   ];
 
-  Future<void> languageTranslations() async {
+  Future<void> languageTranslations(String lang) async {
     emit(state.copyWith(response: ApiResponse.loading()));
-    final splash = await useCases.executeLanguageTranslations();
-    splash
-        .fold((l) => emit(state.copyWith(response: ApiResponse.error(l.error))),
-            ((r) {
-      return Future.delayed(const Duration(seconds: 3), () => checkUser());
-    }));
+    final splash = await useCases.executeLanguageTranslations(lang: lang);
+    splash.fold(
+        (l) => emit(state.copyWith(response: ApiResponse.error(l.error))),
+        ((r) {}));
   }
 }

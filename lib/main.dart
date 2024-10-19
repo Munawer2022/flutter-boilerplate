@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_template/data/datasources/splash/language_translations_data_sources.dart';
 import '/features/onboarding/onboarding_page.dart';
 import '/features/onboarding/onboarding_initial_params.dart';
 import '/config/theme/theme_data.dart';
@@ -13,6 +14,7 @@ import 'package:device_preview/device_preview.dart';
 
 import '/features/splash/splash_initial_params.dart';
 import '/features/splash/splash_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
 //  setCustomSystemUIOverlayStyle();
@@ -21,12 +23,14 @@ void main() async {
   runApp(DevicePreview(
       enabled: false,
       builder: (context) {
-        return const MyApp();
+        return MyApp(dataSources: getIt());
       }));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final LanguageTranslationsDataSources dataSources;
+
+  const MyApp({super.key, required this.dataSources});
 
   @override
   Widget build(BuildContext context) => ScreenUtilInit(
@@ -38,8 +42,27 @@ class MyApp extends StatelessWidget {
           builder: (context, state) {
             state as bool;
             return MaterialApp(
+                locale: Locale(dataSources.currentLang),
+                supportedLocales: const [
+                  Locale('en', ''), // English
+                  Locale('ar', ''), // Arabic
+                ],
+                localizationsDelegates: const [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations
+                      .delegate, // Cupertino localizations
+                ],
+                localeResolutionCallback: (locale, supportedLocales) {
+                  for (var supportedLocale in supportedLocales) {
+                    if (supportedLocale.languageCode == locale?.languageCode) {
+                      return supportedLocale;
+                    }
+                  }
+                  return supportedLocales.first;
+                },
                 // useInheritedMediaQuery: true,
-                locale: DevicePreview.locale(context),
+                // locale: DevicePreview.locale(context),
                 builder: DevicePreview.appBuilder,
                 navigatorKey: GlobalConstants.navigatorKey,
                 scaffoldMessengerKey: GlobalConstants.scaffoldMessengerKey,
