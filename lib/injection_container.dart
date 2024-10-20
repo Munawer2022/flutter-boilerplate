@@ -175,7 +175,7 @@ Future<void> init() async {
   // getIt.registerSingleton<SettingBaseApiService>(MockSettingRepository());
   getIt.registerSingleton<SettingNavigator>(SettingNavigator(getIt()));
   getIt.registerFactoryParam<SettingCubit, SettingInitialParams, dynamic>(
-      (params, _) => SettingCubit(params, getIt(), getIt())
+      (params, _) => SettingCubit(params, getIt(), getIt(), getIt(), getIt())
       // ..setting()
       );
 
@@ -218,11 +218,5 @@ Future<void> init() async {
   // getIt.registerSingleton<FaqBaseApiService>(MockFaqRepository());
   getIt.registerSingleton<FaqNavigator>(FaqNavigator(getIt()));
   getIt.registerFactoryParam<FaqCubit, FaqInitialParams, dynamic>(
-      (params, _) => FaqCubit(params, getIt()
-      , getIt()
-      
-      )
-      ..faq()
-      );
-
+      (params, _) => FaqCubit(params, getIt(), getIt())..faq());
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_template/config/components/app_bar.dart';
 import 'package:flutter_template/features/no_internet_page.dart';
 import 'package:flutter_template/features/setting/setting_initial_params.dart';
 import 'package:flutter_template/features/setting/setting_page.dart';
@@ -129,16 +131,57 @@ class _CarouselExampleState extends State<CarouselExample> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxHeight: 200),
-        child: CarouselView(
-          itemExtent: 330,
-          shrinkExtent: 200,
-          children: List<Widget>.generate(imageUrls.length, (int index) {
-            return UncontainedLayoutCard(
-                index: index, imageUrl: imageUrls[index]);
-          }),
-        ),
+      child: Column(
+        children: [
+          AppBar(
+            automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    // do something
+                  },
+                  icon: const Badge(
+                    isLabelVisible: true,
+                    label: Text("5"),
+                    backgroundColor: Colors.red,
+                    child: Icon(
+                      Icons.notifications,
+                      size: 25,
+                    ),
+                  )),
+            ],
+            title: const ListTile(
+              leading: CircleAvatar(),
+              title: Text(
+                'Hi , Noha!',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text('Discover Our Services !'),
+            ),
+          ),
+          10.verticalSpace,
+          Container(
+            height: 158.h,
+            margin: EdgeInsets.symmetric(horizontal: 28.w),
+            width: double.infinity.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40.r),
+              color: Colors.grey.shade300,
+            ),
+          ),
+          10.verticalSpace,
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 200),
+            child: CarouselView(
+              itemExtent: 330,
+              shrinkExtent: 200,
+              children: List<Widget>.generate(imageUrls.length, (int index) {
+                return UncontainedLayoutCard(
+                    index: index, imageUrl: imageUrls[index]);
+              }),
+            ),
+          ),
+        ],
       ),
     );
   }

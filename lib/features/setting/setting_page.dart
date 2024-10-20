@@ -33,11 +33,13 @@ class SettingPage extends StatefulWidget {
 
 class _SettingState extends State<SettingPage> {
   SettingCubit get cubit => widget.cubit;
+  SplashCubit get splashCubit => widget.splashCubit;
 
   @override
   void initState() {
     super.initState();
     cubit.navigator.context = context;
+    splashCubit.navigator.context = context;
   }
 
   bool isDarkModeEnabled = false;
@@ -46,10 +48,17 @@ class _SettingState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.dataSources.state.data!.fileName!.hello);
+    print(widget.dataSources.currentLang);
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-          title: Text(widget.dataSources.state.data!.fileName!.hello ?? ''),
+          title: BlocBuilder(
+              bloc: widget.dataSources,
+              builder: (context, state) {
+                return Text(
+                    widget.dataSources.state.data!.fileName!.hello ?? '');
+              }),
           // title: const Text("Settings"),
           surfaceTintColor: Colors.grey.shade100,
           backgroundColor: Colors.grey.shade100,
@@ -127,36 +136,30 @@ class _SettingState extends State<SettingPage> {
                 ListTile(
                   title: const Text('Language'),
                   trailing: SizedBox(
-                    // width: 120,
-                    child: BlocBuilder(
-                        bloc: widget.splashCubit,
-                        builder: (context, state) {
-                          state as SplashState;
-
-                          return DropdownButton<String>(
-                            value: widget.dataSources.currentLang,
-                            // value: selectedValue,
-                            // hint: const Text('English'),
-                            icon:
-                                const Icon(Icons.keyboard_arrow_down_outlined),
-                            underline: const SizedBox(),
-                            items: widget.splashCubit.languages
-                                .map<DropdownMenuItem<String>>((lang) {
-                              return DropdownMenuItem<String>(
-                                value: lang['code'],
-                                child: Text(
-                                    lang['name']!), // Display language name
-                              );
-                            }).toList(),
-                            onChanged: (String? newLang) {
-                              if (newLang != null) {
-                                widget.splashCubit
-                                    .languageTranslations(newLang);
-                              }
-                            },
-                          );
-                        }),
-                  ),
+                      // width: 120,
+                      child: DropdownButton<String>(
+                    value: widget.dataSources.currentLang,
+                    // value: selectedValue,
+                    // hint: const Text('English'),
+                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                    underline: const SizedBox(),
+                    items: widget.splashCubit.languages
+                        .map<DropdownMenuItem<String>>((lang) {
+                      return DropdownMenuItem<String>(
+                        value: lang['code'],
+                        child: Text(lang['name']!), // Display language name
+                      );
+                    }).toList(),
+                    onChanged: (String? newLang) {
+                      if (newLang != null) {
+                        widget.splashCubit.languageTranslations(newLang);
+                        setState(() {
+                          widget.dataSources.currentLang =
+                              newLang; // Update the local state immediately
+                        });
+                      }
+                    },
+                  )),
                   leading: const Icon(Icons.language_rounded),
                 ),
                 Divider(color: Colors.grey.shade100),
@@ -170,14 +173,15 @@ class _SettingState extends State<SettingPage> {
                 Divider(color: Colors.grey.shade100),
                 ListTile(
                   title: const Text('Dark Mode'),
-                  trailing: Switch(
-                    value: isDarkModeEnabled,
-                    onChanged: (bool value) {
-                      setState(() {
-                        isDarkModeEnabled = value;
-                      });
-                    },
-                  ),
+                  trailing: BlocBuilder(
+                      bloc: cubit,
+                      builder: (context, state) {
+                        state as SettingState;
+                        return Switch(
+                            // inactiveTrackColor: Colors.red,
+                            value: state.isDarkTheme,
+                            onChanged: cubit.onThemeChanged);
+                      }),
                   leading: const Icon(CupertinoIcons.moon_stars),
                 ),
               ],

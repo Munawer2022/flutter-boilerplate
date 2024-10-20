@@ -33,46 +33,54 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.dataSources});
 
   @override
-  Widget build(BuildContext context) => ScreenUtilInit(
-      designSize: const Size(430, 932),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, child) => BlocBuilder(
-          bloc: getIt<ThemeDataSources>(),
-          builder: (context, state) {
-            state as bool;
-            return MaterialApp(
-                locale: Locale(dataSources.currentLang),
-                supportedLocales: const [
-                  Locale('en', ''), // English
-                  Locale('ar', ''), // Arabic
-                ],
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations
-                      .delegate, // Cupertino localizations
-                ],
-                localeResolutionCallback: (locale, supportedLocales) {
-                  for (var supportedLocale in supportedLocales) {
-                    if (supportedLocale.languageCode == locale?.languageCode) {
-                      return supportedLocale;
-                    }
-                  }
-                  return supportedLocales.first;
-                },
-                // useInheritedMediaQuery: true,
-                // locale: DevicePreview.locale(context),
-                builder: DevicePreview.appBuilder,
-                navigatorKey: GlobalConstants.navigatorKey,
-                scaffoldMessengerKey: GlobalConstants.scaffoldMessengerKey,
-                navigatorObservers: [CheckerNavigatorObserver()],
-                debugShowCheckedModeBanner: false,
-                theme: state ? darkTheme : lightTheme,
-                // scaffoldMessengerKey: scaffoldMessengerKey,
-                // home: OnboardingPage(cubit: getIt(param1: const OnboardingInitialParams()))
+  Widget build(BuildContext context) {
+    return ScreenUtilInit(
+        designSize: const Size(430, 932),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (_, child) => BlocBuilder(
+            bloc: dataSources,
+            builder: (context, state) {
+              return BlocBuilder(
+                  bloc: getIt<ThemeDataSources>(),
+                  builder: (context, state) {
+                    state as bool;
+                    return MaterialApp(
+                        locale: Locale(dataSources.currentLang),
+                        supportedLocales: const [
+                          Locale('en', ''), // English
+                          Locale('ar', ''), // Arabic
+                        ],
+                        localizationsDelegates: const [
+                          GlobalMaterialLocalizations.delegate,
+                          GlobalWidgetsLocalizations.delegate,
+                          GlobalCupertinoLocalizations
+                              .delegate, // Cupertino localizations
+                        ],
+                        localeResolutionCallback: (locale, supportedLocales) {
+                          for (var supportedLocale in supportedLocales) {
+                            if (supportedLocale.languageCode ==
+                                locale?.languageCode) {
+                              return supportedLocale;
+                            }
+                          }
+                          return supportedLocales.first;
+                        },
+                        // useInheritedMediaQuery: true,
+                        // locale: DevicePreview.locale(context),
+                        builder: DevicePreview.appBuilder,
+                        navigatorKey: GlobalConstants.navigatorKey,
+                        scaffoldMessengerKey:
+                            GlobalConstants.scaffoldMessengerKey,
+                        navigatorObservers: [CheckerNavigatorObserver()],
+                        debugShowCheckedModeBanner: false,
+                        theme: state ? darkTheme : lightTheme,
+                        // scaffoldMessengerKey: scaffoldMessengerKey,
+                        // home: OnboardingPage(cubit: getIt(param1: const OnboardingInitialParams()))
 
-                home: SplashPage(
-                    cubit: getIt(param1: const SplashInitialParams())));
-          }));
+                        home: SplashPage(
+                            cubit: getIt(param1: const SplashInitialParams())));
+                  });
+            }));
+  }
 }

@@ -12,6 +12,6 @@ ThemeData get lightTheme => ThemeData(
 
 ThemeData get darkTheme => ThemeData(
     useMaterial3: true,
-    brightness: Brightness.light,
+    // brightness: Brightness.dark,
     colorScheme: ColorScheme.fromSwatch().copyWith());
 TextTheme textTheme = const TextTheme();
