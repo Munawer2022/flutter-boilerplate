@@ -13,5 +13,12 @@ ThemeData get lightTheme => ThemeData(
 ThemeData get darkTheme => ThemeData(
     useMaterial3: true,
     // brightness: Brightness.dark,
-    colorScheme: ColorScheme.fromSwatch().copyWith());
+    textTheme: textTheme,
+    // appBarTheme: const AppBarTheme(
+    //     titleTextStyle: TextStyle(
+    //         color: Colors.black87, fontWeight: FontWeight.w900, fontSize: 30)),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.blue,
+      brightness: Brightness.dark,
+    ));
 TextTheme textTheme = const TextTheme();

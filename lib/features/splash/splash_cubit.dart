@@ -23,6 +23,7 @@ class SplashCubit extends Cubit<SplashState> {
 
   checkUser() {
     getThemeUseCase.execute();
+    useCases.executePages();
     checkForExistingUserUseCase.execute2().then(
           (value) => value.fold((l) {}, (r) {
             return languageTranslations(r);
@@ -61,10 +62,13 @@ class SplashCubit extends Cubit<SplashState> {
   ];
 
   Future<void> languageTranslations(String lang) async {
-    emit(state.copyWith(response: ApiResponse.loading()));
+    emit(state.copyWith(
+        response: ApiResponse.loading(), isloadingLanguageChange: true));
     final splash = await useCases.executeLanguageTranslations(lang: lang);
     splash.fold(
-        (l) => emit(state.copyWith(response: ApiResponse.error(l.error))),
-        ((r) {}));
+        (l) => emit(state.copyWith(
+            response: ApiResponse.error(l.error),
+            isloadingLanguageChange: false)),
+        ((r) => emit(state.copyWith(isloadingLanguageChange: false))));
   }
 }

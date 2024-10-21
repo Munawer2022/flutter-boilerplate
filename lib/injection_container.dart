@@ -1,6 +1,17 @@
 /*
+************************ PagesWebView ************************
+*/
+import 'features/pages/pages_web_view_cubit.dart';
+import 'features/pages/pages_web_view_navigator.dart';
+import 'features/pages/pages_web_view_initial_params.dart';
+import 'data/repositories/pages/pages_web_view_repository.dart';
+import 'domain/repositories/pages/pages_web_view_base_api_service.dart';
+
+/*
 ************************ Faq ************************
 */
+import 'package:flutter_template/data/datasources/splash/pages_data_sources.dart';
+
 import 'features/faq/faq_cubit.dart';
 import 'features/faq/faq_navigator.dart';
 import 'features/faq/faq_initial_params.dart';
@@ -107,6 +118,7 @@ Future<void> init() async {
   getIt.registerSingleton<AppNavigator>(AppNavigator());
 
   getIt.registerSingleton<LoginDataSources>(LoginDataSources());
+  getIt.registerSingleton<PagesDataSources>(PagesDataSources());
   getIt.registerSingleton<SplashDataSources>(SplashDataSources());
   getIt.registerSingleton<LanguageTranslationsDataSources>(
       LanguageTranslationsDataSources());
@@ -134,7 +146,7 @@ Future<void> init() async {
   getIt.registerSingleton<SplashBaseApiService>(SplashRepository(getIt()));
   // getIt.registerSingleton<SplashBaseApiService>(MockSplashRepository());
   getIt.registerSingleton<SplashUseCases>(
-      SplashUseCases(getIt(), getIt(), getIt(), getIt()));
+      SplashUseCases(getIt(), getIt(), getIt(), getIt(), getIt()));
   getIt.registerSingleton<SplashNavigator>(SplashNavigator(getIt()));
   getIt.registerFactoryParam<SplashCubit, SplashInitialParams, dynamic>(
       (params, _) => SplashCubit(params, getIt(), getIt(), getIt(), getIt()));
@@ -219,4 +231,14 @@ Future<void> init() async {
   getIt.registerSingleton<FaqNavigator>(FaqNavigator(getIt()));
   getIt.registerFactoryParam<FaqCubit, FaqInitialParams, dynamic>(
       (params, _) => FaqCubit(params, getIt(), getIt())..faq());
+/*
+************************ PagesWebView ************************
+*/
+  getIt.registerSingleton<PagesWebViewBaseApiService>(
+      PagesWebViewRepository(getIt()));
+  // getIt.registerSingleton<PagesWebViewBaseApiService>(MockPagesWebViewRepository());
+  getIt
+      .registerSingleton<PagesWebViewNavigator>(PagesWebViewNavigator(getIt()));
+  getIt.registerFactoryParam<PagesWebViewCubit, PagesWebViewInitialParams,
+      dynamic>((params, _) => PagesWebViewCubit(params, getIt()));
 }

@@ -47,6 +47,7 @@ dependencies:
   lottie: ^3.1.2
   flutter_localizations:
     sdk: flutter
+  webview_flutter: ^4.10.0
 
 dev_dependencies:
   flutter_test:

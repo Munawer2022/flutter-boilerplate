@@ -6,6 +6,7 @@ import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/theme/theme_data.dart';
 import 'package:flutter_template/core/show/show/show_material_banner.dart';
 import 'package:flutter_template/data/datasources/splash/language_translations_data_sources.dart';
+import 'package:flutter_template/data/datasources/splash/pages_data_sources.dart';
 import 'package:flutter_template/features/splash/splash_cubit.dart';
 import 'package:flutter_template/features/splash/splash_state.dart';
 import 'setting_cubit.dart';
@@ -19,12 +20,14 @@ class SettingPage extends StatefulWidget {
   final SettingCubit cubit;
   final LanguageTranslationsDataSources dataSources;
   final SplashCubit splashCubit;
+  final PagesDataSources pagesDataSources;
 
   const SettingPage({
     super.key,
     required this.cubit,
     required this.dataSources,
     required this.splashCubit,
+    required this.pagesDataSources,
   });
 
   @override
@@ -40,6 +43,7 @@ class _SettingState extends State<SettingPage> {
     super.initState();
     cubit.navigator.context = context;
     splashCubit.navigator.context = context;
+    cubit.onInitLoginDataSources();
   }
 
   bool isDarkModeEnabled = false;
@@ -67,6 +71,14 @@ class _SettingState extends State<SettingPage> {
       body: ListView(
         padding: EdgeInsets.all(20.0.r),
         children: [
+          BlocBuilder(
+              bloc: splashCubit,
+              builder: (context, state) {
+                state as SplashState;
+                return state.isloadingLanguageChange
+                    ? const LinearProgressIndicator()
+                    : const SizedBox();
+              }),
           Container(
             // margin: EdgeInsets.zero
             // shape: Border.all(),
@@ -212,12 +224,35 @@ class _SettingState extends State<SettingPage> {
                   onTap: () => cubit.goFaqPage(),
                 ),
                 Divider(color: Colors.grey.shade100),
-                listTile(
-                    title: "Tems and Service",
-                    icon: Icons.content_paste_go_sharp),
-                Divider(color: Colors.grey.shade100),
-                listTile(title: "Privacy Policy", icon: Icons.policy_outlined),
-                Divider(color: Colors.grey.shade100),
+                // listTile(
+                //     title: "Tems and Service",
+                //     icon: Icons.content_paste_go_sharp),
+                // Divider(color: Colors.grey.shade100),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: widget.pagesDataSources.state.data.length,
+                  itemBuilder: (context, index) {
+                    final icons = [
+                      Icons.whatshot_rounded,
+                      Icons.policy_outlined,
+                      Icons.content_paste_go_sharp
+                    ];
+                    final info = widget.pagesDataSources.state.data[index];
+                    return Column(
+                      children: [
+                        listTile(
+                            title: info.name,
+                            onTap: () => widget.cubit.goPagesWebViewPage(
+                                url:
+                                    "${info.link}?lang=${widget.dataSources.currentLang}",
+                                title: info.name),
+                            icon: icons[index]),
+                        Divider(color: Colors.grey.shade100),
+                      ],
+                    );
+                  },
+                ),
                 listTile(title: "Rate Us", icon: Icons.rate_review_outlined),
                 Divider(color: Colors.grey.shade100),
                 listTile(title: "Invite Friends", icon: Icons.share_outlined),

@@ -3,6 +3,7 @@ abstract class AppUrl {
 
   static var languageTranslations = '$baseUrl/translations-and-languages';
 
+  static var pages = '$baseUrl/pages';
   static var splash = '$baseUrl/system-settings';
   static var login = '$baseUrl/login';
   static var signUp = '$baseUrl/signUp';
@@ -14,5 +15,6 @@ abstract class AppUrl {
   static var profile = 'baseUrl/profile';
   static var notification = 'baseUrl/notification';
   static var refreshToken = baseUrl;
-static var faq = 'baseUrl/faq';
+  static var faq = 'baseUrl/faq';
+
 }

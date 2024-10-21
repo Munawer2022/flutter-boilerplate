@@ -44,7 +44,8 @@ class _HomeState extends State<HomePage> {
     SettingPage(
         cubit: getIt(param1: const SettingInitialParams()),
         dataSources: getIt(),
-        splashCubit: getIt(param1: const SplashInitialParams()))
+        splashCubit: getIt(param1: const SplashInitialParams()),
+        pagesDataSources: getIt())
   ];
 
   @override
