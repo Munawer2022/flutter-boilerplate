@@ -8,6 +8,7 @@ import 'package:flutter_template/domain/entities/setting/mock_setting_model.dart
 import 'package:flutter_template/domain/entities/splash/mock_splash_model.dart';
 import 'package:flutter_template/features/splash/splash_state.dart';
 import 'splash_cubit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SplashPage extends StatefulWidget {
   final SplashCubit cubit;
@@ -51,8 +52,15 @@ class _SplashState extends State<SplashPage> {
                       onLoading: (BuildContext context) =>
                           shimmer(child: CircleAvatar(radius: 80.r)),
                       onCompleted: (BuildContext context, data) {
-                        return Image.network(data.data.appSplashScreenLogo,
-                            fit: BoxFit.cover);
+                        return CachedNetworkImage(
+                          imageUrl: data.data.appSplashScreenLogo,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => shimmer(
+                              child: CircleAvatar(
+                                  radius: 80.r)), // Placeholder while loading
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error), // Handle error
+                        );
                       });
                 }),
             Align(

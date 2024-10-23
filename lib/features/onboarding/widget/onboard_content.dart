@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/features/onboarding/onboarding_cubit.dart';
@@ -34,7 +35,8 @@ class OnboardContent extends StatelessWidget {
               height: 500.h,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(illustration!), fit: BoxFit.cover)),
+                      image: CachedNetworkImageProvider(illustration!),
+                      fit: BoxFit.cover)),
             ),
             Align(
               alignment: Alignment.topRight,
