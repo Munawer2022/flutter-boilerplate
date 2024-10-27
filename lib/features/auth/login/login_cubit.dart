@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/features/onboarding/onboarding_initial_params.dart';
+import '../onboarding/onboarding_initial_params.dart';
 import 'login_initial_params.dart';
 import 'login_navigator.dart';
 import 'login_state.dart';

@@ -10,7 +10,7 @@ import '/domain/repositories/local/local_storage_base_api_service.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:http/http.dart' as http;
-import '/data/datasources/auth/login_data_sources.dart';
+import '../../datasources/auth/login/login_data_sources.dart';
 
 class CustomInterceptor implements InterceptorContract {
   final LoginDataSources dataSources;

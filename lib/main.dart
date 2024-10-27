@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/data/datasources/splash/language_translations_data_sources.dart';
-import '/features/onboarding/onboarding_page.dart';
-import '/features/onboarding/onboarding_initial_params.dart';
+import 'package:flutter_template/data/datasources/auth/splash/language_translations_data_sources.dart';
+import 'features/auth/onboarding/onboarding_page.dart';
+import 'features/auth/onboarding/onboarding_initial_params.dart';
 import '/config/theme/theme_data.dart';
 import '/injection_container.dart' as di;
 import '/injection_container.dart';
@@ -12,8 +12,8 @@ import '/core/global.dart';
 import '/core/show/checker_navigator_observer.dart';
 import 'package:device_preview/device_preview.dart';
 
-import '/features/splash/splash_initial_params.dart';
-import '/features/splash/splash_page.dart';
+import 'features/auth/splash/splash_initial_params.dart';
+import 'features/auth/splash/splash_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {

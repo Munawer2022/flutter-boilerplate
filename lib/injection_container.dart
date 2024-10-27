@@ -1,22 +1,22 @@
 /*
 ************************ PagesWebView ************************
 */
-import 'features/pages/pages_web_view_cubit.dart';
-import 'features/pages/pages_web_view_navigator.dart';
-import 'features/pages/pages_web_view_initial_params.dart';
-import 'data/repositories/pages/pages_web_view_repository.dart';
-import 'domain/repositories/pages/pages_web_view_base_api_service.dart';
+import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_cubit.dart';
+import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_navigator.dart';
+import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_initial_params.dart';
+import 'data/repositories/bottom_nav/setting/setting_tabs/pages/pages_web_view_repository.dart';
+import 'domain/repositories/bottom_nav/setting/setting_tabs/pages/pages_web_view_base_api_service.dart';
 
 /*
 ************************ Faq ************************
 */
-import 'package:flutter_template/data/datasources/splash/pages_data_sources.dart';
+import 'package:flutter_template/data/datasources/auth/splash/pages_data_sources.dart';
 
-import 'features/faq/faq_cubit.dart';
-import 'features/faq/faq_navigator.dart';
-import 'features/faq/faq_initial_params.dart';
-import 'data/repositories/faq/faq_repository.dart';
-import 'domain/repositories/faq/faq_base_api_service.dart';
+import 'features/bottom_nav/setting/setting_tabs/faq/faq_cubit.dart';
+import 'features/bottom_nav/setting/setting_tabs/faq/faq_navigator.dart';
+import 'features/bottom_nav/setting/setting_tabs/faq/faq_initial_params.dart';
+import 'data/repositories/bottom_nav/setting/setting_tabs/faq/faq_repository.dart';
+import 'domain/repositories/bottom_nav/setting/setting_tabs/faq/faq_base_api_service.dart';
 
 /*
 ************************ Fqs ************************
@@ -25,52 +25,52 @@ import 'domain/repositories/faq/faq_base_api_service.dart';
 /*
 ************************ NotificationSetting ************************
 */
-import 'package:flutter_template/data/datasources/splash/language_translations_data_sources.dart';
-import 'package:flutter_template/data/datasources/splash/splash_data_sources.dart';
-import 'package:flutter_template/domain/usecases/splash/splash_use_cases.dart';
+import 'package:flutter_template/data/datasources/auth/splash/language_translations_data_sources.dart';
+import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/domain/usecases/auth/splash/splash_use_cases.dart';
 
-import 'features/notification_setting/notification_setting_cubit.dart';
-import 'features/notification_setting/notification_setting_navigator.dart';
-import 'features/notification_setting/notification_setting_initial_params.dart';
+import 'features/bottom_nav/setting/setting_tabs/notification/notification_setting/notification_setting_cubit.dart';
+import 'features/bottom_nav/setting/setting_tabs/notification/notification_setting/notification_setting_navigator.dart';
+import 'features/bottom_nav/setting/setting_tabs/notification/notification_setting/notification_setting_initial_params.dart';
 
 /*
 ************************ Notification ************************
 */
-import 'features/notification/notification_cubit.dart';
-import 'features/notification/notification_navigator.dart';
-import 'features/notification/notification_initial_params.dart';
-import 'data/repositories/notification/notification_repository.dart';
-import 'domain/repositories/notification/notification_base_api_service.dart';
+import 'features/bottom_nav/setting/setting_tabs/notification/notification/notification_cubit.dart';
+import 'features/bottom_nav/setting/setting_tabs/notification/notification/notification_navigator.dart';
+import 'features/bottom_nav/setting/setting_tabs/notification/notification/notification_initial_params.dart';
+import 'data/repositories/bottom_nav/setting/setting_tabs/notification/notification_repository.dart';
+import 'domain/repositories/bottom_nav/setting/setting_tabs/notification/notification_base_api_service.dart';
 
 /*
 ************************ Profile ************************
 */
-import 'features/profile/profile_cubit.dart';
-import 'features/profile/profile_navigator.dart';
-import 'features/profile/profile_initial_params.dart';
-import 'data/repositories/profile/profile_repository.dart';
-import 'domain/repositories/profile/profile_base_api_service.dart';
+import 'features/bottom_nav/setting/setting_tabs/profile/profile_cubit.dart';
+import 'features/bottom_nav/setting/setting_tabs/profile/profile_navigator.dart';
+import 'features/bottom_nav/setting/setting_tabs/profile/profile_initial_params.dart';
+import 'data/repositories/bottom_nav/setting/setting_tabs/profile/profile_repository.dart';
+import 'domain/repositories/bottom_nav/setting/setting_tabs/profile/profile_base_api_service.dart';
 
 /*
 ************************ Setting ************************
 */
-import 'features/setting/setting_cubit.dart';
-import 'features/setting/setting_navigator.dart';
-import 'features/setting/setting_initial_params.dart';
-import 'data/repositories/setting/setting_repository.dart';
-import 'domain/repositories/setting/setting_base_api_service.dart';
+import 'features/bottom_nav/setting/setting/setting_cubit.dart';
+import 'features/bottom_nav/setting/setting/setting_navigator.dart';
+import 'features/bottom_nav/setting/setting/setting_initial_params.dart';
+import 'data/repositories/bottom_nav/setting/setting/setting_repository.dart';
+import 'domain/repositories/bottom_nav/setting/setting/setting_base_api_service.dart';
 
 /*
 ************************ Home ************************
 */
-import 'package:flutter_template/data/repositories/splash/splash_repository.dart';
-import 'package:flutter_template/domain/repositories/splash/splash_base_api_service.dart';
+import 'package:flutter_template/data/repositories/auth/splash/splash_repository.dart';
+import 'package:flutter_template/domain/repositories/auth/splash/splash_base_api_service.dart';
 
-import 'features/home/home_cubit.dart';
-import 'features/home/home_navigator.dart';
-import 'features/home/home_initial_params.dart';
-import 'data/repositories/home/home_repository.dart';
-import 'domain/repositories/home/home_base_api_service.dart';
+import 'features/bottom_nav/home/home_cubit.dart';
+import 'features/bottom_nav/home/home_navigator.dart';
+import 'features/bottom_nav/home/home_initial_params.dart';
+import 'data/repositories/bottom_nav/home/home_repository.dart';
+import 'domain/repositories/bottom_nav/home/home_base_api_service.dart';
 
 import 'package:get_it/get_it.dart';
 import '/domain/repositories/network/network_base_api_service.dart';
@@ -88,13 +88,13 @@ import '/data/datasources/internet_connectivity/internet_connectivity_checker_da
 /*
  ************************ Splash ************************
 */
-import 'features/splash/splash_cubit.dart';
-import 'features/splash/splash_initial_params.dart';
-import 'features/splash/splash_navigator.dart';
+import 'features/auth/splash/splash_cubit.dart';
+import 'features/auth/splash/splash_initial_params.dart';
+import 'features/auth/splash/splash_navigator.dart';
 /*
  ************************ login ************************
 */
-import 'data/datasources/auth/login_data_sources.dart';
+import 'data/datasources/auth/login/login_data_sources.dart';
 import 'domain/usecases/auth/login/login_use_cases.dart';
 import 'domain/repositories/auth/login/login_base_api_service.dart';
 import 'data/repositories/auth/login/login_repository.dart';
@@ -106,11 +106,11 @@ import '/domain/usecases/local/check_for_existing_user_use_case.dart';
 /*
 ************************ Onboarding ************************
 */
-import 'domain/repositories/onboarding/onboarding_base_api_service.dart';
-import 'data/repositories/onboarding/onboarding_repository.dart';
-import 'features/onboarding/onboarding_navigator.dart';
-import 'features/onboarding/onboarding_cubit.dart';
-import 'features/onboarding/onboarding_initial_params.dart';
+import 'domain/repositories/auth/onboarding/onboarding_base_api_service.dart';
+import 'data/repositories/auth/onboarding/onboarding_repository.dart';
+import 'features/auth/onboarding/onboarding_navigator.dart';
+import 'features/auth/onboarding/onboarding_cubit.dart';
+import 'features/auth/onboarding/onboarding_initial_params.dart';
 
 final getIt = GetIt.instance;
 

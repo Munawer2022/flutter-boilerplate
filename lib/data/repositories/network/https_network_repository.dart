@@ -9,7 +9,7 @@ import 'package:http_interceptor/http_interceptor.dart';
 import '/domain/failures/network/network_failure.dart';
 import 'package:http/http.dart' as http;
 
-import '/data/datasources/auth/login_data_sources.dart';
+import '../../datasources/auth/login/login_data_sources.dart';
 
 import '/domain/repositories/network/network_base_api_service.dart';
 import 'interceptor.dart';
