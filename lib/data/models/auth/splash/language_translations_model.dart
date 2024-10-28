@@ -1,5 +1,3 @@
-import 'package:flutter_template/domain/entities/splash/mock_language_translations_model.dart';
-
 class LanguageTranslationsModel {
   LanguageTranslationsModel({
     required this.error,
@@ -18,8 +16,13 @@ class LanguageTranslationsModel {
       data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
   }
-  MockLanguageTranslationsModel toDomain() => MockLanguageTranslationsModel(
-      error: error, message: message, data: data?.toDomain());
+  factory LanguageTranslationsModel.empty() {
+    return LanguageTranslationsModel(
+      error: false,
+      message: "",
+      data: Data.empty(),
+    );
+  }
 }
 
 class Data {
@@ -45,8 +48,14 @@ class Data {
           : FileName.fromJson(json["file_name"]),
     );
   }
-  MockData toDomain() =>
-      MockData(id: id, name: name, code: code, fileName: fileName?.toDomain());
+  factory Data.empty() {
+    return Data(
+      id: 0,
+      name: "",
+      code: "",
+      fileName: FileName.empty(),
+    );
+  }
 }
 
 class FileName {
@@ -61,5 +70,9 @@ class FileName {
       hello: json["hello"] ?? "",
     );
   }
-  MockFileName toDomain() => MockFileName(hello: hello);
+  factory FileName.empty() {
+    return FileName(
+      hello: "",
+    );
+  }
 }

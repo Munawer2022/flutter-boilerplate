@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/domain/entities/splash/mock_pages_model.dart';
+import 'package:flutter_template/data/models/auth/splash/pages_model.dart';
 
-class PagesDataSources extends Cubit<MockPagesModel> {
-  PagesDataSources() : super(MockPagesModel.empty().copyWith());
-  setPagesDataSources({required MockPagesModel mockPagesModel}) =>
-      emit(mockPagesModel);
+class PagesDataSources extends Cubit<PagesModel> {
+  PagesDataSources() : super(PagesModel.empty());
+  setPagesDataSources({required PagesModel pagesModel}) => emit(pagesModel);
 }

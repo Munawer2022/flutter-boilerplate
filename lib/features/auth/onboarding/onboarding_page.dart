@@ -33,23 +33,33 @@ class _OnboardingState extends State<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final info = widget.dataSources.state.data;
+    final info = widget.dataSources.state['data'];
     List<Map<String, dynamic>> demoData = [
       {
-        "illustration": info.appOnboardingImage1,
-        "title": info.appOnboardingTitle1,
-        "text": info.appOnboardingSubtitle1,
+        "illustration": info['app_onboarding_image_1'],
+        "title": info['app_onboarding_title_1'],
+        "text": info['app_onboarding_subtitle_1'],
       },
       {
-        "illustration": info.appOnboardingImage2,
-        "title": info.appOnboardingTitle2,
-        "text": info.appOnboardingSubtitle2,
+        "illustration": info['app_onboarding_image_2'],
+        "title": info['app_onboarding_title_2'],
+        "text": info['app_onboarding_subtitle_2'],
       },
       {
-        "illustration": info.appOnboardingImage3,
-        "title": info.appOnboardingTitle3,
-        "text": info.appOnboardingSubtitle3,
+        "illustration": info['app_onboarding_image_3'],
+        "title": info['app_onboarding_title_3'],
+        "text": info['app_onboarding_subtitle_3'],
       },
+      // {
+      //   "illustration": info.appOnboardingImage2,
+      //   "title": info.appOnboardingTitle2,
+      //   "text": info.appOnboardingSubtitle2,
+      // },
+      // {
+      //   "illustration": info.appOnboardingImage3,
+      //   "title": info.appOnboardingTitle3,
+      //   "text": info.appOnboardingSubtitle3,
+      // },
     ];
 
     void nextPage() {

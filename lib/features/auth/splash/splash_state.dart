@@ -1,10 +1,10 @@
 import 'package:flutter_template/config/response/api_response.dart';
-import 'package:flutter_template/domain/entities/splash/mock_splash_model.dart';
+import 'package:flutter_template/data/models/auth/splash/splash_model.dart';
 
 import 'splash_initial_params.dart';
 
 class SplashState {
-  final ApiResponse<MockSplashModel> response;
+  final ApiResponse<Map<String, dynamic>> response;
   final bool isloading;
   final bool isloadingLanguageChange;
 
@@ -16,12 +16,12 @@ class SplashState {
   factory SplashState.initial({required SplashInitialParams initialParams}) =>
       SplashState(
         isloading: false,
-        response: ApiResponse.initial(const MockSplashModel.empty().copyWith()),
+        response: ApiResponse.initial({}),
         isloadingLanguageChange: false,
       );
   SplashState copyWith({
     bool? isloading,
-    ApiResponse<MockSplashModel>? response,
+    ApiResponse<Map<String, dynamic>>? response,
     String? currentLang,
     bool? isloadingLanguageChange,
   }) =>

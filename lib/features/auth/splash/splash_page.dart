@@ -4,8 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/core/app_images.dart';
 import 'package:flutter_template/core/shimmer.dart';
 import 'package:flutter_template/core/status_switcher.dart';
-import 'package:flutter_template/domain/entities/setting/mock_setting_model.dart';
-import 'package:flutter_template/domain/entities/splash/mock_splash_model.dart';
+import 'package:flutter_template/data/models/auth/splash/splash_model.dart';
 import 'package:flutter_template/features/auth/splash/splash_state.dart';
 import 'splash_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -47,13 +46,13 @@ class _SplashState extends State<SplashPage> {
                 builder: (context, state) {
                   state as SplashState;
 
-                  return StatusSwitcher<MockSplashModel>(
+                  return StatusSwitcher<Map<String, dynamic>>(
                       response: state.response,
                       onLoading: (BuildContext context) =>
                           shimmer(child: CircleAvatar(radius: 80.r)),
                       onCompleted: (BuildContext context, data) {
                         return CachedNetworkImage(
-                          imageUrl: data.data.appSplashScreenLogo,
+                          imageUrl: data['data']['app_logo'],
                           fit: BoxFit.cover,
                           placeholder: (context, url) => shimmer(
                               child: CircleAvatar(

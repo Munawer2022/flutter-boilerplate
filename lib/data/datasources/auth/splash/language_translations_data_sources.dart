@@ -1,14 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/domain/entities/splash/mock_language_translations_model.dart';
+import 'package:flutter_template/data/models/auth/splash/language_translations_model.dart';
 
-class LanguageTranslationsDataSources
-    extends Cubit<MockLanguageTranslationsModel> {
+class LanguageTranslationsDataSources extends Cubit<LanguageTranslationsModel> {
   String currentLang = 'en';
 
-  LanguageTranslationsDataSources()
-      : super(MockLanguageTranslationsModel.empty().copyWith());
+  LanguageTranslationsDataSources() : super(LanguageTranslationsModel.empty());
   setLanguageTranslationsDataSources(
-          {required MockLanguageTranslationsModel
-              mockLanguageTranslationsModel}) =>
-      emit(mockLanguageTranslationsModel);
+          {required LanguageTranslationsModel languageTranslationsModel}) =>
+      emit(languageTranslationsModel);
 }

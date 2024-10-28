@@ -1,12 +1,12 @@
-import 'package:flutter_template/domain/entities/splash/mock_language_translations_model.dart';
-import 'package:flutter_template/domain/entities/splash/mock_pages_model.dart';
+import 'package:flutter_template/data/models/auth/splash/language_translations_model.dart';
+import 'package:flutter_template/data/models/auth/splash/pages_model.dart';
+import 'package:flutter_template/data/models/auth/splash/splash_model.dart';
 import 'package:fpdart/fpdart.dart';
-import '/domain/entities/splash/mock_splash_model.dart';
 import '../../../failures/auth/splash/splash_failure.dart';
 
 abstract class SplashBaseApiService {
-  Future<Either<SplashFailure, MockSplashModel>> splash();
-  Future<Either<SplashFailure, MockPagesModel>> pages();
-  Future<Either<SplashFailure, MockLanguageTranslationsModel>>
-      languageTranslations({Map<String, String>? queryParams});
+  Future<Either<SplashFailure, Map<String, dynamic>>> splash();
+  Future<Either<SplashFailure, PagesModel>> pages();
+  Future<Either<SplashFailure, LanguageTranslationsModel>> languageTranslations(
+      {Map<String, String>? queryParams});
 }

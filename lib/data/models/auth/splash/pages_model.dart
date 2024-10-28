@@ -1,5 +1,3 @@
-import 'package:flutter_template/domain/entities/splash/mock_pages_model.dart';
-
 class PagesModel {
   PagesModel({
     required this.status,
@@ -17,10 +15,9 @@ class PagesModel {
           : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
     );
   }
-  MockPagesModel toDomain() => MockPagesModel(
-        status: status,
-        data: data.map((datum) => datum.toDomain()).toList(),
-      );
+  factory PagesModel.empty() {
+    return PagesModel(status: "", data: []);
+  }
 }
 
 class Datum {
@@ -53,12 +50,15 @@ class Datum {
       link: json["link"] ?? "",
     );
   }
-  MockDatum toDomain() => MockDatum(
-      id: id,
-      name: name,
-      slug: slug,
-      content: content,
-      nameAr: nameAr,
-      contentAr: contentAr,
-      link: link);
+  factory Datum.empty() {
+    return Datum(
+      id: 0,
+      name: "",
+      slug: "",
+      content: "",
+      nameAr: "",
+      contentAr: "",
+      link: "",
+    );
+  }
 }
