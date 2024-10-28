@@ -4,7 +4,6 @@ import 'dart:developer';
 
 import '/core/app_url.dart';
 import '/data/models/local/local_user_info_store_model.dart';
-import '/domain/entities/local/mock_local_user_info_store_model.dart';
 import '/domain/failures/network/network_failure.dart';
 import '/domain/repositories/local/local_storage_base_api_service.dart';
 import 'package:fpdart/fpdart.dart';
@@ -41,7 +40,8 @@ class CustomInterceptor implements InterceptorContract {
         final Map<String, dynamic> responses = jsonDecode(response.body);
         NetworkFailure(error: responses['message']);
       }
-      final refreshToken = dataSources.state.refreshToken;
+      final refreshToken = dataSources.state.token;
+      // final refreshToken = dataSources.state.refreshToken;
       if (refreshToken.isNotEmpty) {
         final refreshResponse = await http.post(Uri.parse(AppUrl.refreshToken),
             body: jsonEncode({'refreshToken': refreshToken}),
@@ -56,22 +56,22 @@ class CustomInterceptor implements InterceptorContract {
           log('----- Response -----');
           log('Code: $newTokensJson');
 
-          final MockLocalUserInfoStoreModel mockLocalUserInfoStoreModel =
-              LocalUserInfoStoreModel.fromJson(newTokensJson).toDomain();
+          final LocalUserInfoStoreModel mockLocalUserInfoStoreModel =
+              LocalUserInfoStoreModel.fromJson(newTokensJson);
 
           await localStorageRepository
-              .setUserData(
-                  mockLocalUserInfoStoreModel: mockLocalUserInfoStoreModel)
+              .setUserData(localUserInfoStoreModel: mockLocalUserInfoStoreModel)
               .then((value) => value
                       .fold((l) => left(NetworkFailure(error: l.error)),
                           (tokenRight) {
                     dataSources.setLoginDataSources(
-                        mockLoginSuccessModel: mockLocalUserInfoStoreModel);
+                        loginSuccessModel: mockLocalUserInfoStoreModel);
                     return right(mockLocalUserInfoStoreModel);
                   }));
 
           // Retry the original request with the new token
-          final newAccessToken = dataSources.state.accessToken;
+          final newAccessToken = dataSources.state.token;
+          // final newAccessToken = dataSources.state.accessToken;
           if (newAccessToken.isNotEmpty) {
             final originalRequest = response.request;
 

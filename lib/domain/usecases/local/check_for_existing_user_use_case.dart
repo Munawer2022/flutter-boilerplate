@@ -1,8 +1,8 @@
 import 'package:flutter_template/data/datasources/auth/splash/language_translations_data_sources.dart';
+import 'package:flutter_template/data/models/local/local_user_info_store_model.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../data/datasources/auth/login/login_data_sources.dart';
 import '/domain/repositories/local/local_storage_base_api_service.dart';
-import '/domain/entities/local/mock_local_user_info_store_model.dart';
 import '/domain/failures/local/existing_user_failure.dart';
 
 class CheckForExistingUserUseCase {
@@ -12,13 +12,13 @@ class CheckForExistingUserUseCase {
   CheckForExistingUserUseCase(
       this._loginDataSources, this._localStorageRepository, this.dataSources);
 
-  Future<Either<ExistingUserFailure, MockLocalUserInfoStoreModel>> execute() {
+  Future<Either<ExistingUserFailure, LocalUserInfoStoreModel>> execute() {
     return _localStorageRepository.getUserData().then((value) => value
             .fold((l) => left(ExistingUserFailure(error: l.error)),
                 (mockLocalUserInfoStoreModel) {
           if (mockLocalUserInfoStoreModel.token.isNotEmpty) {
             _loginDataSources.setLoginDataSources(
-                mockLoginSuccessModel: mockLocalUserInfoStoreModel);
+                loginSuccessModel: mockLocalUserInfoStoreModel);
             return right(mockLocalUserInfoStoreModel);
           }
           return left(ExistingUserFailure(error: 'User doesn\'t exist '));

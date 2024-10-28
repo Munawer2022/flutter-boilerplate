@@ -34,7 +34,7 @@ class HttpsNetworkRepository implements NetworkBaseApiService {
       var uri = Uri.parse(url).replace(queryParameters: queryParams);
 
       var response = await _client.get(uri, headers: {
-        'Authorization': 'Bearer ${_loginDataSources.state.accessToken}'
+        // 'Authorization': 'Bearer ${_loginDataSources.state.accessToken}'
       })
           // .timeout(const Duration(seconds: 10))
           ;
@@ -94,8 +94,8 @@ class HttpsNetworkRepository implements NetworkBaseApiService {
               body: jsonEncode(body),
               headers: headers ??
                   {
-                    'Authorization':
-                        'Bearer ${_loginDataSources.state.accessToken}'
+                    // 'Authorization':
+                    //     'Bearer ${_loginDataSources.state.accessToken}'
                   })
           .timeout(const Duration(seconds: 10));
       final failure = _handleStatusCode(response);
@@ -164,7 +164,7 @@ class HttpsNetworkRepository implements NetworkBaseApiService {
 
         request.headers.addAll(headers ??
             {
-              'Authorization': 'Bearer ${_loginDataSources.state.accessToken}',
+              // 'Authorization': 'Bearer ${_loginDataSources.state.accessToken}',
               'Content-Type': 'multipart/form-data'
             });
 
@@ -188,8 +188,8 @@ class HttpsNetworkRepository implements NetworkBaseApiService {
                 body: jsonEncode(body),
                 headers: headers ??
                     {
-                      'Authorization':
-                          'Bearer ${_loginDataSources.state.accessToken}',
+                      // 'Authorization':
+                      //     'Bearer ${_loginDataSources.state.accessToken}',
                       'Content-Type': 'application/json'
                     })
             .timeout(const Duration(seconds: 10));
@@ -224,8 +224,8 @@ class HttpsNetworkRepository implements NetworkBaseApiService {
               body: jsonEncode(body),
               headers: headers ??
                   {
-                    'Authorization':
-                        'Bearer ${_loginDataSources.state.accessToken}'
+                    // 'Authorization':
+                    //     'Bearer ${_loginDataSources.state.accessToken}'
                   })
           .timeout(const Duration(seconds: 10));
 

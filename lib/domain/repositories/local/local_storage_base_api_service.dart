@@ -1,7 +1,6 @@
-import 'package:flutter_template/domain/entities/local/mock_local_selected_language_store_model.dart';
+import 'package:flutter_template/data/models/local/local_user_info_store_model.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '/domain/entities/local/mock_local_user_info_store_model.dart';
 import '/domain/failures/local/remove_local_storage_failure.dart';
 
 import '/domain/failures/local/get_local_storage_failure.dart';
@@ -9,10 +8,9 @@ import '/domain/failures/local/set_local_storage_failure.dart';
 
 abstract class LocalStorageRepository {
   Future<Either<SetLocalStorageFailure, bool>> setUserData(
-      {required MockLocalUserInfoStoreModel mockLocalUserInfoStoreModel});
+      {required LocalUserInfoStoreModel localUserInfoStoreModel});
 
-  Future<Either<GetLocalStorageFailure, MockLocalUserInfoStoreModel>>
-      getUserData();
+  Future<Either<GetLocalStorageFailure, LocalUserInfoStoreModel>> getUserData();
   Future<Either<RemoveLocalStorageFailure, bool>> removeUserData();
 
   Future<Either<SetLocalStorageFailure, bool>> setBool(

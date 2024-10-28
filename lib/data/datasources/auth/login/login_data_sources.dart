@@ -1,10 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_template/data/models/local/local_user_info_store_model.dart';
 
-import '/domain/entities/local/mock_local_user_info_store_model.dart';
-
-class LoginDataSources extends Cubit<MockLocalUserInfoStoreModel> {
-  LoginDataSources() : super(MockLocalUserInfoStoreModel.empty().copyWith());
-  setLoginDataSources(
-          {required MockLocalUserInfoStoreModel mockLoginSuccessModel}) =>
-      emit(mockLoginSuccessModel);
+class LoginDataSources extends Cubit<LocalUserInfoStoreModel> {
+  LoginDataSources() : super(LocalUserInfoStoreModel.empty());
+  setLoginDataSources({required LocalUserInfoStoreModel loginSuccessModel}) =>
+      emit(loginSuccessModel);
 }
