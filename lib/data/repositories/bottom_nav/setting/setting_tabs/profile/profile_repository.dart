@@ -1,5 +1,4 @@
 import 'package:fpdart/fpdart.dart';
-import '/domain/entities/profile/mock_profile_success_model.dart';
 import '../../../../../models/bottom_nav/setting/setting_tabs/profile/profile_success_model.dart';
 import '/core/app_url.dart';
 
@@ -13,9 +12,11 @@ class ProfileRepository implements ProfileBaseApiService {
   ProfileRepository(this._networkRepository);
 
   @override
-  Future<Either<ProfileFailure, MockProfileSuccessModel>> profile(
-     {required Map<String, dynamic> body}) =>
-      _networkRepository.post<Map<String, dynamic>>(url:AppUrl.profile,body:body).then(
-            (value) => value.fold((l) => left(ProfileFailure(error: l.error)),
-              (r) => right(ProfileSuccessModel.fromJson(r).toDomain())));
+  Future<Either<ProfileFailure, ProfileSuccessModel>> profile(
+          {required Map<String, dynamic> body}) =>
+      _networkRepository
+          .post<Map<String, dynamic>>(url: AppUrl.profile, body: body)
+          .then((value) => value.fold(
+              (l) => left(ProfileFailure(error: l.error)),
+              (r) => right(ProfileSuccessModel.fromJson(r))));
 }

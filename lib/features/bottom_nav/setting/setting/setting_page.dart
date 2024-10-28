@@ -14,8 +14,6 @@ import 'setting_state.dart';
 import 'setting_state.dart';
 import '/core/status_switcher.dart';
 
-import '/domain/entities/setting/mock_setting_model.dart';
-
 class SettingPage extends StatefulWidget {
   final SettingCubit cubit;
   final LanguageTranslationsDataSources dataSources;

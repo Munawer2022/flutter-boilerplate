@@ -1,7 +1,7 @@
+import 'package:flutter_template/data/models/bottom_nav/home/home_model.dart';
 import 'package:fpdart/fpdart.dart';
-import '/domain/entities/home/mock_home_model.dart';
 import '../../../failures/bottom_nav/home/home_failure.dart';
 
 abstract class HomeBaseApiService {
-  Future<Either<HomeFailure, MockHomeModel>> home();
+  Future<Either<HomeFailure, HomeModel>> home();
 }

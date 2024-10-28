@@ -7,8 +7,6 @@ import 'notification_state.dart';
 import 'notification_state.dart';
 import '/core/status_switcher.dart';
 
-import '/domain/entities/notification/mock_notification_model.dart';
-
 class NotificationPage extends StatefulWidget {
   final NotificationCubit cubit;
 

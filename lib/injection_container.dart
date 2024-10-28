@@ -4,8 +4,6 @@
 import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_cubit.dart';
 import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_navigator.dart';
 import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_initial_params.dart';
-import 'data/repositories/bottom_nav/setting/setting_tabs/pages/pages_web_view_repository.dart';
-import 'domain/repositories/bottom_nav/setting/setting_tabs/pages/pages_web_view_base_api_service.dart';
 
 /*
 ************************ Faq ************************
@@ -57,8 +55,6 @@ import 'domain/repositories/bottom_nav/setting/setting_tabs/profile/profile_base
 import 'features/bottom_nav/setting/setting/setting_cubit.dart';
 import 'features/bottom_nav/setting/setting/setting_navigator.dart';
 import 'features/bottom_nav/setting/setting/setting_initial_params.dart';
-import 'data/repositories/bottom_nav/setting/setting/setting_repository.dart';
-import 'domain/repositories/bottom_nav/setting/setting/setting_base_api_service.dart';
 
 /*
 ************************ Home ************************
@@ -106,8 +102,7 @@ import '/domain/usecases/local/check_for_existing_user_use_case.dart';
 /*
 ************************ Onboarding ************************
 */
-import 'domain/repositories/auth/onboarding/onboarding_base_api_service.dart';
-import 'data/repositories/auth/onboarding/onboarding_repository.dart';
+
 import 'features/auth/onboarding/onboarding_navigator.dart';
 import 'features/auth/onboarding/onboarding_cubit.dart';
 import 'features/auth/onboarding/onboarding_initial_params.dart';
@@ -166,8 +161,7 @@ Future<void> init() async {
 /*
 ************************ Onboarding ************************
 */
-  getIt.registerSingleton<OnboardingBaseApiService>(
-      OnboardingRepository(getIt()));
+
   // getIt.registerSingleton<OnboardingBaseApiService>(MockOnboardingRepository());
   getIt.registerSingleton<OnboardingNavigator>(OnboardingNavigator(getIt()));
   getIt.registerFactoryParam<OnboardingCubit, OnboardingInitialParams, dynamic>(
@@ -183,11 +177,9 @@ Future<void> init() async {
 /*
 ************************ Setting ************************
 */
-  getIt.registerSingleton<SettingBaseApiService>(SettingRepository(getIt()));
-  // getIt.registerSingleton<SettingBaseApiService>(MockSettingRepository());
   getIt.registerSingleton<SettingNavigator>(SettingNavigator(getIt()));
   getIt.registerFactoryParam<SettingCubit, SettingInitialParams, dynamic>(
-      (params, _) => SettingCubit(params, getIt(), getIt(), getIt(), getIt())
+      (params, _) => SettingCubit(params, getIt(), getIt(), getIt())
       // ..setting()
       );
 
@@ -220,9 +212,7 @@ Future<void> init() async {
       NotificationSettingCubit,
       NotificationSettingInitialParams,
       dynamic>((params, _) => NotificationSettingCubit(params, getIt()));
-/*
-************************ Fqs ************************
-*/
+
 /*
 ************************ Faq ************************
 */
@@ -234,8 +224,7 @@ Future<void> init() async {
 /*
 ************************ PagesWebView ************************
 */
-  getIt.registerSingleton<PagesWebViewBaseApiService>(
-      PagesWebViewRepository(getIt()));
+
   // getIt.registerSingleton<PagesWebViewBaseApiService>(MockPagesWebViewRepository());
   getIt
       .registerSingleton<PagesWebViewNavigator>(PagesWebViewNavigator(getIt()));

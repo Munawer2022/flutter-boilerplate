@@ -1,7 +1,7 @@
+import 'package:flutter_template/data/models/bottom_nav/setting/setting_tabs/faq/faq_model.dart';
 import 'package:fpdart/fpdart.dart';
-import '/domain/entities/faq/mock_faq_model.dart';
 import '../../../../../failures/bottom_nav/setting/setting_tabs/faq/faq_failure.dart';
 
 abstract class FaqBaseApiService {
-  Future<Either<FaqFailure, MockFaqModel>> faq();
+  Future<Either<FaqFailure, FaqModel>> faq();
 }

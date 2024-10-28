@@ -9,8 +9,6 @@ import 'profile_state.dart';
 import 'profile_state.dart';
 import '/core/status_switcher.dart';
 
-import '/domain/entities/profile/mock_profile_model.dart';
-
 class ProfilePage extends StatefulWidget {
   final ProfileCubit cubit;
 

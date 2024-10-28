@@ -9,8 +9,6 @@ import 'faq_state.dart';
 import 'faq_state.dart';
 import '/core/status_switcher.dart';
 
-import '/domain/entities/faq/mock_faq_model.dart';
-
 class FaqPage extends StatefulWidget {
   final FaqCubit cubit;
 
