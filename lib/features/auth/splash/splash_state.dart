@@ -1,5 +1,4 @@
 import 'package:flutter_template/config/response/api_response.dart';
-import 'package:flutter_template/data/models/auth/splash/splash_model.dart';
 
 import 'splash_initial_params.dart';
 

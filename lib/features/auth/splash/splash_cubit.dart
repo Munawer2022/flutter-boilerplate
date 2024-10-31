@@ -21,16 +21,13 @@ class SplashCubit extends Cubit<SplashState> {
       this.checkForExistingUserUseCase, this.getThemeUseCase, this.useCases)
       : super(SplashState.initial(initialParams: initialParams));
 
-  checkUser() {
-    getThemeUseCase.execute();
-    useCases.executePages();
-    checkForExistingUserUseCase.execute2().then(
-          (value) => value.fold((l) {}, (r) {
-            return languageTranslations(r);
-          }),
-        );
+  checkUser() async {
     emit(state.copyWith(isloading: true));
-    checkForExistingUserUseCase.execute().then(
+    await getThemeUseCase.execute();
+    await checkForExistingUserUseCase.executeCheckSelectedLanguage().then(
+          (value) => value.fold((l) {}, (r) => systemSettings(r)),
+        );
+    await checkForExistingUserUseCase.execute().then(
           (value) => value.fold(
             (l) {
               emit(state.copyWith(isloading: false));
@@ -45,26 +42,15 @@ class SplashCubit extends Cubit<SplashState> {
         );
   }
 
-  Future<void> splash() async {
-    emit(state.copyWith(response: ApiResponse.loading()));
-    final splash = await useCases.execute();
-    splash
-        .fold((l) => emit(state.copyWith(response: ApiResponse.error(l.error))),
-            ((r) {
-      emit(state.copyWith(response: ApiResponse.completed(r)));
-      return Future.delayed(const Duration(seconds: 3), () => checkUser());
-    }));
-  }
-
   final List<Map<String, String>> languages = [
     {'code': 'en', 'name': 'English'},
     {'code': 'ar', 'name': 'Arabic'},
   ];
 
-  Future<void> languageTranslations(String lang) async {
+  Future<void> systemSettings(String lang) async {
     emit(state.copyWith(
         response: ApiResponse.loading(), isloadingLanguageChange: true));
-    final splash = await useCases.executeLanguageTranslations(lang: lang);
+    final splash = await useCases.execute(lang: lang);
     splash.fold(
         (l) => emit(state.copyWith(
             response: ApiResponse.error(l.error),

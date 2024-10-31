@@ -1,10 +1,10 @@
 abstract class AppUrl {
   static var baseUrl = 'https://pro.ramzdev.space/api';
 
-  static var languageTranslations = '$baseUrl/translations-and-languages';
+  // static var languageTranslations = '$baseUrl/translations-and-languages';
 
-  static var pages = '$baseUrl/pages';
-  static var splash = '$baseUrl/system-settings';
+  // static var pages = '$baseUrl/pages';
+  static var systemSettings = '$baseUrl/system-settings';
   static var login = '$baseUrl/login';
   static var signUp = '$baseUrl/signUp';
   static var forgotPassword = '$baseUrl/forgotPassword';

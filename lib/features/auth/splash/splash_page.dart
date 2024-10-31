@@ -28,7 +28,7 @@ class _SplashState extends State<SplashPage> {
   void initState() {
     super.initState();
     cubit.navigator.context = context;
-    cubit.splash();
+    cubit.checkUser();
   }
 
   @override

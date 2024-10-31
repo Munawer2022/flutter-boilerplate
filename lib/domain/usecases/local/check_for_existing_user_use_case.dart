@@ -1,4 +1,4 @@
-import 'package:flutter_template/data/datasources/auth/splash/language_translations_data_sources.dart';
+import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'package:flutter_template/data/models/local/local_user_info_store_model.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../data/datasources/auth/login/login_data_sources.dart';
@@ -7,7 +7,7 @@ import '/domain/failures/local/existing_user_failure.dart';
 
 class CheckForExistingUserUseCase {
   final LoginDataSources _loginDataSources;
-  final LanguageTranslationsDataSources dataSources;
+  final SplashDataSources dataSources;
   final LocalStorageRepository _localStorageRepository;
   CheckForExistingUserUseCase(
       this._loginDataSources, this._localStorageRepository, this.dataSources);
@@ -25,7 +25,7 @@ class CheckForExistingUserUseCase {
         }));
   }
 
-  Future<Either<ExistingUserFailure, String>> execute2() {
+  Future<Either<ExistingUserFailure, String>> executeCheckSelectedLanguage() {
     return _localStorageRepository.getSelectedLanguage().then((value) =>
         value.fold((l) => left(ExistingUserFailure(error: l.error)), (lang) {
           if (lang.isNotEmpty) {

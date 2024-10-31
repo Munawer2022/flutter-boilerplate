@@ -1,7 +1,3 @@
-import 'package:flutter_template/data/models/auth/splash/language_translations_model.dart';
-import 'package:flutter_template/data/models/auth/splash/pages_model.dart';
-import 'package:flutter_template/data/models/auth/splash/splash_model.dart';
-
 import 'package:flutter_template/domain/failures/auth/splash/splash_failure.dart';
 import 'package:flutter_template/domain/repositories/auth/splash/splash_base_api_service.dart';
 import 'package:fpdart/fpdart.dart';
@@ -14,24 +10,11 @@ class SplashRepository implements SplashBaseApiService {
   SplashRepository(this._networkRepository);
 
   @override
-  Future<Either<SplashFailure, Map<String, dynamic>>> splash() =>
-      _networkRepository.get<Map<String, dynamic>>(url: AppUrl.splash).then(
-          (value) => value.fold(
-              (l) => left(SplashFailure(error: l.error)), (r) => right(r)));
-
-  @override
-  Future<Either<SplashFailure, PagesModel>> pages() => _networkRepository
-      .get<Map<String, dynamic>>(url: AppUrl.pages)
-      .then((value) => value.fold((l) => left(SplashFailure(error: l.error)),
-          (r) => right(PagesModel.fromJson(r))));
-
-  @override
-  Future<Either<SplashFailure, LanguageTranslationsModel>> languageTranslations(
+  Future<Either<SplashFailure, Map<String, dynamic>>> systemSettings(
           {Map<String, String>? queryParams}) =>
       _networkRepository
           .get<Map<String, dynamic>>(
-              url: AppUrl.languageTranslations, queryParams: queryParams)
+              url: AppUrl.systemSettings, queryParams: queryParams)
           .then((value) => value.fold(
-              (l) => left(SplashFailure(error: l.error)),
-              (r) => right(LanguageTranslationsModel.fromJson(r))));
+              (l) => left(SplashFailure(error: l.error)), (r) => right(r)));
 }

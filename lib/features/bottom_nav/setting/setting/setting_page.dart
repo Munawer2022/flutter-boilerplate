@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
-import 'package:flutter_template/config/theme/theme_data.dart';
-import 'package:flutter_template/core/show/show/show_material_banner.dart';
-import 'package:flutter_template/data/datasources/auth/splash/language_translations_data_sources.dart';
-import 'package:flutter_template/data/datasources/auth/splash/pages_data_sources.dart';
+import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'package:flutter_template/features/auth/splash/splash_cubit.dart';
 import 'package:flutter_template/features/auth/splash/splash_state.dart';
 import 'setting_cubit.dart';
@@ -16,17 +13,14 @@ import '/core/status_switcher.dart';
 
 class SettingPage extends StatefulWidget {
   final SettingCubit cubit;
-  final LanguageTranslationsDataSources dataSources;
+  final SplashDataSources dataSources;
   final SplashCubit splashCubit;
-  final PagesDataSources pagesDataSources;
 
-  const SettingPage({
-    super.key,
-    required this.cubit,
-    required this.dataSources,
-    required this.splashCubit,
-    required this.pagesDataSources,
-  });
+  const SettingPage(
+      {super.key,
+      required this.cubit,
+      required this.dataSources,
+      required this.splashCubit});
 
   @override
   State<SettingPage> createState() => _SettingState();
@@ -50,7 +44,7 @@ class _SettingState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.dataSources.state.data!.fileName!.hello);
+    print(widget.dataSources.state['language']);
     print(widget.dataSources.currentLang);
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
@@ -58,8 +52,9 @@ class _SettingState extends State<SettingPage> {
           title: BlocBuilder(
               bloc: widget.dataSources,
               builder: (context, state) {
-                return Text(
-                    widget.dataSources.state.data!.fileName!.hello ?? '');
+                return Text(widget.dataSources.state['language']['file_name']
+                        ['hello'] ??
+                    '');
               }),
           // title: const Text("Settings"),
           surfaceTintColor: Colors.grey.shade100,
@@ -162,7 +157,7 @@ class _SettingState extends State<SettingPage> {
                     }).toList(),
                     onChanged: (String? newLang) {
                       if (newLang != null) {
-                        widget.splashCubit.languageTranslations(newLang);
+                        widget.splashCubit.systemSettings(newLang);
                         setState(() {
                           widget.dataSources.currentLang =
                               newLang; // Update the local state immediately
@@ -226,31 +221,31 @@ class _SettingState extends State<SettingPage> {
                 //     title: "Tems and Service",
                 //     icon: Icons.content_paste_go_sharp),
                 // Divider(color: Colors.grey.shade100),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: widget.pagesDataSources.state.data.length,
-                  itemBuilder: (context, index) {
-                    final icons = [
-                      Icons.whatshot_rounded,
-                      Icons.policy_outlined,
-                      Icons.content_paste_go_sharp
-                    ];
-                    final info = widget.pagesDataSources.state.data[index];
-                    return Column(
-                      children: [
-                        listTile(
-                            title: info.name,
-                            onTap: () => widget.cubit.goPagesWebViewPage(
-                                url:
-                                    "${info.link}?lang=${widget.dataSources.currentLang}",
-                                title: info.name),
-                            icon: icons[index]),
-                        Divider(color: Colors.grey.shade100),
-                      ],
-                    );
-                  },
-                ),
+                // ListView.builder(
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   itemCount: widget.pagesDataSources.state.data.length,
+                //   itemBuilder: (context, index) {
+                //     final icons = [
+                //       Icons.whatshot_rounded,
+                //       Icons.policy_outlined,
+                //       Icons.content_paste_go_sharp
+                //     ];
+                //     final info = widget.pagesDataSources.state.data[index];
+                //     return Column(
+                //       children: [
+                //         listTile(
+                //             title: info.name,
+                //             onTap: () => widget.cubit.goPagesWebViewPage(
+                //                 url:
+                //                     "${info.link}?lang=${widget.dataSources.currentLang}",
+                //                 title: info.name),
+                //             icon: icons[index]),
+                //         Divider(color: Colors.grey.shade100),
+                //       ],
+                //     );
+                //   },
+                // ),
                 listTile(title: "Rate Us", icon: Icons.rate_review_outlined),
                 Divider(color: Colors.grey.shade100),
                 listTile(title: "Invite Friends", icon: Icons.share_outlined),

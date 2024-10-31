@@ -8,7 +8,6 @@ import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_ini
 /*
 ************************ Faq ************************
 */
-import 'package:flutter_template/data/datasources/auth/splash/pages_data_sources.dart';
 
 import 'features/bottom_nav/setting/setting_tabs/faq/faq_cubit.dart';
 import 'features/bottom_nav/setting/setting_tabs/faq/faq_navigator.dart';
@@ -23,7 +22,7 @@ import 'domain/repositories/bottom_nav/setting/setting_tabs/faq/faq_base_api_ser
 /*
 ************************ NotificationSetting ************************
 */
-import 'package:flutter_template/data/datasources/auth/splash/language_translations_data_sources.dart';
+import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'package:flutter_template/domain/usecases/auth/splash/splash_use_cases.dart';
 
@@ -113,10 +112,7 @@ Future<void> init() async {
   getIt.registerSingleton<AppNavigator>(AppNavigator());
 
   getIt.registerSingleton<LoginDataSources>(LoginDataSources());
-  getIt.registerSingleton<PagesDataSources>(PagesDataSources());
   getIt.registerSingleton<SplashDataSources>(SplashDataSources());
-  getIt.registerSingleton<LanguageTranslationsDataSources>(
-      LanguageTranslationsDataSources());
 
 /*
 ************************ Theme ************************
@@ -141,7 +137,7 @@ Future<void> init() async {
   getIt.registerSingleton<SplashBaseApiService>(SplashRepository(getIt()));
   // getIt.registerSingleton<SplashBaseApiService>(MockSplashRepository());
   getIt.registerSingleton<SplashUseCases>(
-      SplashUseCases(getIt(), getIt(), getIt(), getIt(), getIt()));
+      SplashUseCases(getIt(), getIt(), getIt()));
   getIt.registerSingleton<SplashNavigator>(SplashNavigator(getIt()));
   getIt.registerFactoryParam<SplashCubit, SplashInitialParams, dynamic>(
       (params, _) => SplashCubit(params, getIt(), getIt(), getIt(), getIt()));
