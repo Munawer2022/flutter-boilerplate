@@ -21,25 +21,59 @@ class SplashCubit extends Cubit<SplashState> {
       this.checkForExistingUserUseCase, this.getThemeUseCase, this.useCases)
       : super(SplashState.initial(initialParams: initialParams));
 
+  // checkUser() async {
+  //   emit(state.copyWith(isloading: true));
+  //   await getThemeUseCase.execute();
+  //   await checkForExistingUserUseCase.executeCheckSelectedLanguage().then(
+  //         (value) => value.fold((l) {}, (r) => systemSettings(r)),
+  //       );
+  //   await checkForExistingUserUseCase.execute().then(
+  //         (value) => value.fold(
+  //           (l) {
+  //             emit(state.copyWith(isloading: false));
+  //             // return navigator.openLogin(const LoginInitialParams());
+  //             return navigator.openOnboarding(const OnboardingInitialParams());
+  //           },
+  //           (r) {
+  //             emit(state.copyWith(isloading: false));
+  //             return navigator.openHome(const HomeInitialParams());
+  //           },
+  //         ),
+  //       );
+  // }
   checkUser() async {
     emit(state.copyWith(isloading: true));
-    await getThemeUseCase.execute();
-    await checkForExistingUserUseCase.executeCheckSelectedLanguage().then(
-          (value) => value.fold((l) {}, (r) => systemSettings(r)),
-        );
-    await checkForExistingUserUseCase.execute().then(
-          (value) => value.fold(
-            (l) {
-              emit(state.copyWith(isloading: false));
-              // return navigator.openLogin(const LoginInitialParams());
-              return navigator.openOnboarding(const OnboardingInitialParams());
-            },
-            (r) {
-              emit(state.copyWith(isloading: false));
-              return navigator.openHome(const HomeInitialParams());
-            },
-          ),
-        );
+
+    try {
+      // Execute independent futures in parallel
+      await Future.wait([
+        getThemeUseCase.execute(),
+        checkForExistingUserUseCase.executeCheckSelectedLanguage().then(
+              (value) => value.fold(
+                (error) {
+                  // handle the error or log it if necessary
+                },
+                (languageSettings) => systemSettings(languageSettings),
+              ),
+            ),
+      ]);
+
+      // Check for existing user
+      final userCheckResult = await checkForExistingUserUseCase.execute();
+
+      // Determine navigation based on user existence
+      userCheckResult.fold(
+        (error) {
+          navigator.openOnboarding(const OnboardingInitialParams());
+        },
+        (user) {
+          navigator.openHome(const HomeInitialParams());
+        },
+      );
+    } finally {
+      // Ensure loading state is turned off at the end
+      emit(state.copyWith(isloading: false));
+    }
   }
 
   final List<Map<String, String>> languages = [
@@ -54,7 +88,9 @@ class SplashCubit extends Cubit<SplashState> {
     splash.fold(
         (l) => emit(state.copyWith(
             response: ApiResponse.error(l.error),
-            isloadingLanguageChange: false)),
-        ((r) => emit(state.copyWith(isloadingLanguageChange: false))));
+            isloadingLanguageChange: false)), ((r) {
+      emit(state.copyWith(
+          response: ApiResponse.completed(r), isloadingLanguageChange: false));
+    }));
   }
 }

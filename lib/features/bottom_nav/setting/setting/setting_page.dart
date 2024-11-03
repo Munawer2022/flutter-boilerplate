@@ -47,7 +47,7 @@ class _SettingState extends State<SettingPage> {
     print(widget.dataSources.state['language']);
     print(widget.dataSources.currentLang);
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      // backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
           title: BlocBuilder(
               bloc: widget.dataSources,
@@ -57,8 +57,8 @@ class _SettingState extends State<SettingPage> {
                     '');
               }),
           // title: const Text("Settings"),
-          surfaceTintColor: Colors.grey.shade100,
-          backgroundColor: Colors.grey.shade100,
+          // surfaceTintColor: Colors.grey.shade100,
+          // backgroundColor: Colors.grey.shade100,
           centerTitle: true,
           automaticallyImplyLeading: false),
       body: ListView(
@@ -76,9 +76,9 @@ class _SettingState extends State<SettingPage> {
             // margin: EdgeInsets.zero
             // shape: Border.all(),
             margin: const EdgeInsets.only(bottom: 4),
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8))),
+            decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: listTile(
               title: "Ahmed Ali",
               subtitle: const Text("A professionally Doctor"),
@@ -98,13 +98,14 @@ class _SettingState extends State<SettingPage> {
             // shape: Border.all(),
             padding: EdgeInsets.symmetric(vertical: 10.h),
             margin: const EdgeInsets.only(bottom: 4),
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8))),
+            decoration: BoxDecoration(
+                // color: Colors.white,
+                color: Theme.of(context).cardColor,
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: Column(
               children: [
                 listTile(title: "Payment History", icon: Icons.history),
-                Divider(color: Colors.grey.shade100),
+                const Divider(),
                 listTile(
                   title: "Loyalty Programs",
                   icon: Icons.loyalty_outlined,
@@ -112,7 +113,7 @@ class _SettingState extends State<SettingPage> {
                 ),
                 // Divider(color: Colors.grey.shade100),
                 // listTile(title: "Favorites", icon: CupertinoIcons.heart_fill),
-                Divider(color: Colors.grey.shade100),
+                const Divider(),
 
                 listTile(
                   title: "Billing Information",
@@ -133,9 +134,10 @@ class _SettingState extends State<SettingPage> {
             // shape: Border.all(),
             padding: EdgeInsets.symmetric(vertical: 10.h),
             margin: const EdgeInsets.only(bottom: 4),
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8))),
+            decoration: BoxDecoration(
+                // color: Colors.white,
+                color: Theme.of(context).cardColor,
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: Column(
               children: [
                 ListTile(
@@ -167,7 +169,7 @@ class _SettingState extends State<SettingPage> {
                   )),
                   leading: const Icon(Icons.language_rounded),
                 ),
-                Divider(color: Colors.grey.shade100),
+                const Divider(),
                 listTile(
                   title: "Notifications",
                   icon: CupertinoIcons.chat_bubble,
@@ -175,7 +177,7 @@ class _SettingState extends State<SettingPage> {
                 ),
                 // Divider(color: Colors.grey.shade100),
                 // listTile(title: "Favorites", icon: CupertinoIcons.heart_fill),
-                Divider(color: Colors.grey.shade100),
+                const Divider(),
                 ListTile(
                   title: const Text('Dark Mode'),
                   trailing: BlocBuilder(
@@ -204,19 +206,20 @@ class _SettingState extends State<SettingPage> {
             // shape: Border.all(),
             padding: EdgeInsets.symmetric(vertical: 10.h),
             margin: const EdgeInsets.only(bottom: 4),
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8))),
+            decoration: BoxDecoration(
+                // color: Colors.white,
+                color: Theme.of(context).cardColor,
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: Column(
               children: [
                 listTile(title: "About Us", icon: CupertinoIcons.group),
-                Divider(color: Colors.grey.shade100),
+                const Divider(),
                 listTile(
                   title: "FAQs",
                   icon: CupertinoIcons.question_square,
                   onTap: () => cubit.goFaqPage(),
                 ),
-                Divider(color: Colors.grey.shade100),
+                const Divider(),
                 // listTile(
                 //     title: "Tems and Service",
                 //     icon: Icons.content_paste_go_sharp),
@@ -247,9 +250,9 @@ class _SettingState extends State<SettingPage> {
                 //   },
                 // ),
                 listTile(title: "Rate Us", icon: Icons.rate_review_outlined),
-                Divider(color: Colors.grey.shade100),
+                const Divider(),
                 listTile(title: "Invite Friends", icon: Icons.share_outlined),
-                Divider(color: Colors.grey.shade100),
+                const Divider(),
                 listTile(
                     title: "Feedback & Support", icon: Icons.feedback_outlined),
               ],
@@ -263,9 +266,10 @@ class _SettingState extends State<SettingPage> {
             // shape: Border.all(),
             padding: EdgeInsets.symmetric(vertical: 10.h),
             margin: const EdgeInsets.only(bottom: 4),
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8))),
+            decoration: BoxDecoration(
+                // color: Colors.white,
+                color: Theme.of(context).cardColor,
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
 
             child: Column(
               children: [

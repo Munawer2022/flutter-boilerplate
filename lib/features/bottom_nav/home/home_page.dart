@@ -70,10 +70,10 @@ class _HomeState extends State<HomePage> {
             _currentIndex = index; // Update the tab index when clicked
           });
         },
-        selectedIconTheme: const IconThemeData(color: Colors.black),
-        unselectedIconTheme: const IconThemeData(color: Colors.black),
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
+        // selectedIconTheme: const IconThemeData(color: Colors.black),
+        // unselectedIconTheme: const IconThemeData(color: Colors.black),
+        // selectedItemColor: Colors.black,
+        // unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(

@@ -50,16 +50,6 @@ class _OnboardingState extends State<OnboardingPage> {
         "title": info['app_onboarding_title_3'],
         "text": info['app_onboarding_subtitle_3'],
       },
-      // {
-      //   "illustration": info.appOnboardingImage2,
-      //   "title": info.appOnboardingTitle2,
-      //   "text": info.appOnboardingSubtitle2,
-      // },
-      // {
-      //   "illustration": info.appOnboardingImage3,
-      //   "title": info.appOnboardingTitle3,
-      //   "text": info.appOnboardingSubtitle3,
-      // },
     ];
 
     void nextPage() {
@@ -87,19 +77,7 @@ class _OnboardingState extends State<OnboardingPage> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   backgroundColor: Colors.white,
-      //   actions: [
-      //     TextButton(
-      //       onPressed: () {
-      //         cubit.goHomePage(); // Navigate to Home when Skip is pressed
-      //       },
-      //       child: const Text("Skip"),
-      //     ),
-      //   ],
-      // ),
+      // backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [

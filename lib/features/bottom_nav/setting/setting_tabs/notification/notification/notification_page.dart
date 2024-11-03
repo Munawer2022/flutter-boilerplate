@@ -31,16 +31,16 @@ class _NotificationState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
         // backgroundColor: Colors.transparent,
         elevation: 0,
-        surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
+        // surfaceTintColor: Colors.white,
+        // backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
         title: const Text(
           'Notifications',
-          style: TextStyle(color: Colors.black87, fontSize: 18),
+          style: TextStyle(fontSize: 18),
         ),
         titleSpacing: 0,
         // actions: [
