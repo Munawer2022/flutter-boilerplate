@@ -45,6 +45,8 @@ class MyApp extends StatelessWidget {
                   bloc: getIt<ThemeDataSources>(),
                   builder: (context, state) {
                     state as bool;
+                    final appThemes = getIt<AppThemes>();
+
                     return MaterialApp(
                         locale: Locale(dataSources.currentLang),
                         supportedLocales: const [
@@ -74,12 +76,15 @@ class MyApp extends StatelessWidget {
                             GlobalConstants.scaffoldMessengerKey,
                         navigatorObservers: [CheckerNavigatorObserver()],
                         debugShowCheckedModeBanner: false,
-                        theme: state ? darkTheme : lightTheme,
+                        theme:
+                            state ? appThemes.darkTheme : appThemes.lightTheme,
+
                         // scaffoldMessengerKey: scaffoldMessengerKey,
                         // home: OnboardingPage(cubit: getIt(param1: const OnboardingInitialParams()))
 
                         home: SplashPage(
-                            cubit: getIt(param1: const SplashInitialParams())));
+                            cubit: getIt(param1: const SplashInitialParams()),
+                            dataSources: getIt()));
                   });
             }));
   }

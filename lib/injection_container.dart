@@ -1,6 +1,8 @@
 /*
 ************************ PagesWebView ************************
 */
+import 'package:flutter_template/config/theme/theme_data.dart';
+
 import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_cubit.dart';
 import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_navigator.dart';
 import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_initial_params.dart';
@@ -113,6 +115,7 @@ Future<void> init() async {
 
   getIt.registerSingleton<LoginDataSources>(LoginDataSources());
   getIt.registerSingleton<SplashDataSources>(SplashDataSources());
+  getIt.registerSingleton<AppThemes>(AppThemes(getIt()));
 
 /*
 ************************ Theme ************************

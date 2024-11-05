@@ -19,7 +19,7 @@ mixin SplashRoute {
   openLogin(SplashInitialParams initialParams) {
     navigator.push(
         context: context,
-        routeName: SplashPage(cubit: getIt(param1: initialParams)));
+        routeName: SplashPage(cubit: getIt(param1: initialParams), dataSources: getIt()));
   }
 
   AppNavigator get navigator;

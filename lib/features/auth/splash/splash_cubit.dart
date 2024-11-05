@@ -59,14 +59,18 @@ class SplashCubit extends Cubit<SplashState> {
       ]);
 
       // Check for existing user
+
       final userCheckResult = await checkForExistingUserUseCase.execute();
 
       // Determine navigation based on user existence
       userCheckResult.fold(
-        (error) {
+        (error) async {
+          await Future.delayed(const Duration(seconds: 2));
+
           navigator.openOnboarding(const OnboardingInitialParams());
         },
-        (user) {
+        (user) async {
+          await Future.delayed(const Duration(seconds: 2));
           navigator.openHome(const HomeInitialParams());
         },
       );
