@@ -54,10 +54,10 @@ class _HomeState extends State<HomePage> {
         onPressed: () {
           // Action for the hexagon button
         },
-        backgroundColor: Colors.blue,
+        // backgroundColor: Colors.blue,
         child: const Icon(
           Icons.add,
-          color: Colors.white,
+          // color: Colors.white,
         ),
         // Set color to match your UI
       ),
@@ -142,7 +142,7 @@ class _CarouselExampleState extends State<CarouselExample> {
                   icon: const Badge(
                     isLabelVisible: true,
                     label: Text("5"),
-                    backgroundColor: Colors.red,
+                    // backgroundColor: Colors.red,
                     child: Icon(
                       Icons.notifications,
                       size: 25,

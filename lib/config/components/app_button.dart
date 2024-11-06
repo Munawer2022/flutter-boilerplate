@@ -12,13 +12,14 @@ abstract class AppButton {
           double? radius,
           bool loading = false}) =>
       ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(radius?.r ?? 50.0.r)),
-              padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
-              backgroundColor: color ?? Colors.blue,
-              minimumSize:
-                  Size(width?.w ?? double.infinity.w, height?.h ?? 50.0.h)),
+        
+          // style: ElevatedButton.styleFrom(
+          //     shape: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.circular(radius?.r ?? 50.0.r)),
+          //     padding: padding ?? EdgeInsets.symmetric(horizontal: 16.w),
+          //     backgroundColor: color ?? Colors.blue,
+          //     minimumSize:
+          //         Size(width?.w ?? double.infinity.w, height?.h ?? 50.0.h)),
           onPressed: loading == true ? null : onPressed,
           child: loading
               ? const CircularProgressIndicator.adaptive(
