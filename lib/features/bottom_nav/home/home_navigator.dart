@@ -17,7 +17,7 @@ mixin HomeRoute {
   openHome(HomeInitialParams initialParams) {
     navigator.push(
         context: context,
-        routeName: HomePage(cubit: getIt(param1: initialParams)));
+        routeName: HomePage(cubit: getIt(param1: initialParams), dataSources: getIt()));
     // navigator.pushAndRemoveUntil(
     //     context: context,
     //     routeName: HomePage(cubit: getIt(param1: initialParams)),

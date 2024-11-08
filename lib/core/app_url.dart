@@ -15,6 +15,6 @@ abstract class AppUrl {
   static var profile = 'baseUrl/profile';
   static var notification = 'baseUrl/notification';
   static var refreshToken = baseUrl;
-  static var faq = 'baseUrl/faq';
+  static var faq = '$baseUrl/faqs';
 
 }

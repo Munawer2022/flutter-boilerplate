@@ -1,6 +1,7 @@
 /*
 ************************ PagesWebView ************************
 */
+import 'package:dio/dio.dart';
 import 'package:flutter_template/config/theme/theme_data.dart';
 
 import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_cubit.dart';
@@ -94,7 +95,9 @@ import 'features/auth/splash/splash_navigator.dart';
 import 'data/datasources/auth/login/login_data_sources.dart';
 import 'domain/usecases/auth/login/login_use_cases.dart';
 import 'domain/repositories/auth/login/login_base_api_service.dart';
-import 'data/repositories/auth/login/login_repository.dart';
+import 'data/repositories/login_repository.dart';
+import '/domain/repositories/auth/login/login_base_api_service.dart';
+// import 'package:flutter_template/data/repositories/login_repository.dart';
 import 'features/auth/login/login_navigator.dart';
 import 'features/auth/login/login_cubit.dart';
 import 'features/auth/login/login_initial_params.dart';
@@ -107,6 +110,11 @@ import '/domain/usecases/local/check_for_existing_user_use_case.dart';
 import 'features/auth/onboarding/onboarding_navigator.dart';
 import 'features/auth/onboarding/onboarding_cubit.dart';
 import 'features/auth/onboarding/onboarding_initial_params.dart';
+
+
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:flutter_template/data/repositories/auth/login/login_repository_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -147,15 +155,54 @@ Future<void> init() async {
 /*
 ************************ login ************************
 */
-  getIt.registerSingleton<LoginBaseApiService>(LoginRepository(getIt()));
-//   getIt.registerSingleton<LoginBaseApiService>(MockLoginRepository());
+  // getIt.registerSingleton<LoginBaseApiService>(LoginRepository(dio: getIt()));
+ 
+
+
+  // First register Dio
+  // getIt.registerSingleton<Dio>(Dio());
+
+  // Register NetworkService (if you have one)
+
+ getIt.registerLazySingleton(() => Dio()); // Register Dio
+getIt.registerLazySingleton<LoginRepository>(
+  () => LoginRepositoryImpl(
+    dio: getIt<Dio>(),
+  ),
+);
+  // Register LoginRepository as LoginBaseApiService
+  // getIt.registerSingleton<LoginRepository>(
+  //   LoginRepository(
+  //     dio: getIt<Dio>(),
+  //   ),
+  // );
+
+
+getIt.registerLazySingleton<LoginBaseApiService>(
+  () => LoginRepository(dio: getIt<Dio>()),
+);
+
+  // // Then register the repository
+  // getIt.registerSingleton<LoginRepository>(
+  //   LoginRepository(
+  //     dio: getIt<Dio>(), // explicitly get Dio instance
+  //   ),
+  // );
+  // getIt.registerSingleton<LoginBaseApiService>(MockLoginRepository());
   getIt.registerSingleton<CheckForExistingUserUseCase>(
       CheckForExistingUserUseCase(getIt(), getIt(), getIt()));
+      final sharedPreferences = await SharedPreferences.getInstance();
+  GetIt.instance.registerSingleton<SharedPreferences>(sharedPreferences);
   getIt.registerSingleton<LoginUseCases>(
       LoginUseCases(getIt(), getIt(), getIt()));
   getIt.registerSingleton<LoginNavigator>(LoginNavigator(getIt()));
   getIt.registerFactoryParam<LoginCubit, LoginInitialParams, dynamic>(
-      (params, _) => LoginCubit(params, getIt(), getIt()));
+      (params, _) => LoginCubit(
+        repository: getIt<LoginBaseApiService>(),
+        prefs: getIt<SharedPreferences>(),
+        navigator: getIt<LoginNavigator>(),
+      ),
+  );
 
 /*
 ************************ Onboarding ************************

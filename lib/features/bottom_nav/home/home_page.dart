@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_bar.dart';
+import 'package:flutter_template/core/utils/translation_helper.dart';
+import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'package:flutter_template/features/no_internet_page.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting/setting_initial_params.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting/setting_page.dart';
@@ -13,10 +15,11 @@ import '/core/status_switcher.dart';
 
 class HomePage extends StatefulWidget {
   final HomeCubit cubit;
-
+ final SplashDataSources dataSources;
   const HomePage({
     super.key,
     required this.cubit,
+    required this.dataSources,
   });
 
   @override
@@ -75,16 +78,16 @@ class _HomeState extends State<HomePage> {
         // selectedItemColor: Colors.black,
         // unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
-        items: const [
+        items:  [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
             ),
-            label: 'Home',
+            label: TranslationHelper.tr(widget.dataSources.state, 'home'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Search',
+            label:  TranslationHelper.tr(widget.dataSources.state, 'search'),
           ),
           BottomNavigationBarItem(
             icon: SizedBox(),
@@ -92,11 +95,11 @@ class _HomeState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat),
-            label: 'Chat',
+            label:  TranslationHelper.tr(widget.dataSources.state, 'chat'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Setting',
+            label:  TranslationHelper.tr(widget.dataSources.state, 'settings'),
           ),
         ],
       ),
@@ -158,16 +161,16 @@ class _CarouselExampleState extends State<CarouselExample> {
               subtitle: Text('Discover Our Services !'),
             ),
           ),
-          10.verticalSpace,
-          Container(
-            height: 158.h,
-            margin: EdgeInsets.symmetric(horizontal: 28.w),
-            width: double.infinity.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40.r),
-              color: Colors.grey.shade300,
-            ),
-          ),
+          // 10.verticalSpace,
+          // Container(
+          //   height: 158.h,
+          //   margin: EdgeInsets.symmetric(horizontal: 28.w),
+          //   width: double.infinity.w,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(40.r),
+          //     color: Colors.grey.shade300,
+          //   ),
+          // ),
           10.verticalSpace,
           ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 200),
