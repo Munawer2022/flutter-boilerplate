@@ -1,3 +1,0 @@
-class SignupInitialParams {
-  const SignupInitialParams();
-} 

@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
-import 'package:flutter_template/core/utils/translation_helper.dart';
+import 'package:flutter_template/core/translation_helper.dart';
 import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
-import 'package:flutter_template/features/auth/login/login_initial_params.dart';
 import 'package:flutter_template/features/auth/splash/splash_cubit.dart';
 import 'package:flutter_template/features/auth/splash/splash_state.dart';
 import 'setting_cubit.dart';
@@ -54,8 +53,12 @@ class _SettingState extends State<SettingPage> {
           title: BlocBuilder(
               bloc: widget.dataSources,
               builder: (context, state) {
-                return Text(TranslationHelper.tr(
-                    widget.dataSources.state, 'dark_mode'));
+                return
+                    // Text(widget.dataSources.state['language']['file_name']
+                    //         ['hello'] ??
+                    //     '');
+                    Text(TranslationHelper.tr(
+                        widget.dataSources.state, 'title'));
               }),
           // title: const Text("Settings"),
           // surfaceTintColor: Colors.grey.shade100,
@@ -81,11 +84,9 @@ class _SettingState extends State<SettingPage> {
                 color: Theme.of(context).cardColor,
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: listTile(
-              title: TranslationHelper.tr(widget.dataSources.state, 'user_name'),
-              subtitle: Text(
-                widget.dataSources.state['language']['file_name']['hello'] ??
-                    '',
-              ),
+              title:
+                  TranslationHelper.tr(widget.dataSources.state, 'user_name'),
+              subtitle: const Text("A professionally Doctor"),
               leading: const CircleAvatar(
                 backgroundImage: NetworkImage(
                     "https://images.pexels.com/photos/28098286/pexels-photo-28098286/free-photo-of-playa-puerto-angelito.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
@@ -94,8 +95,9 @@ class _SettingState extends State<SettingPage> {
             ),
           ),
           10.verticalSpace,
-          Text(TranslationHelper.tr(
-                    widget.dataSources.state, 'member_dashboard'),
+          Text(
+              TranslationHelper.tr(
+                  widget.dataSources.state, 'member_dashboard'),
               style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
           10.verticalSpace,
           Container(
@@ -109,11 +111,14 @@ class _SettingState extends State<SettingPage> {
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: Column(
               children: [
-                listTile(title: TranslationHelper.tr(
-                    widget.dataSources.state, 'payment_history'), icon: Icons.history),
+                listTile(
+                    title: TranslationHelper.tr(
+                        widget.dataSources.state, 'payment_history'),
+                    icon: Icons.history),
                 const Divider(),
                 listTile(
-                  title: TranslationHelper.tr(widget.dataSources.state, 'loyalty_programs'),
+                  title: TranslationHelper.tr(
+                      widget.dataSources.state, 'loyalty_programs'),
                   icon: Icons.loyalty_outlined,
                   onTap: () {},
                 ),
@@ -122,7 +127,8 @@ class _SettingState extends State<SettingPage> {
                 const Divider(),
 
                 listTile(
-                  title: TranslationHelper.tr(widget.dataSources.state, 'billing_information'),
+                  title: TranslationHelper.tr(
+                      widget.dataSources.state, 'billing_information'),
                   icon: Icons.info_outline,
                   onTap: () {},
                 ),
@@ -132,8 +138,9 @@ class _SettingState extends State<SettingPage> {
             ),
           ),
           10.verticalSpace,
-          Text(TranslationHelper.tr(
-                    widget.dataSources.state, 'general_settings'),
+          Text(
+              TranslationHelper.tr(
+                  widget.dataSources.state, 'general_settings'),
               style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
           10.verticalSpace,
           Container(
@@ -148,7 +155,7 @@ class _SettingState extends State<SettingPage> {
             child: Column(
               children: [
                 ListTile(
-                  title:  Text(TranslationHelper.tr(
+                  title: Text(TranslationHelper.tr(
                       widget.dataSources.state, 'language')),
                   trailing: SizedBox(
                       // width: 120,
@@ -188,7 +195,7 @@ class _SettingState extends State<SettingPage> {
                 // listTile(title: "Favorites", icon: CupertinoIcons.heart_fill),
                 const Divider(),
                 ListTile(
-                  title:  Text(TranslationHelper.tr(
+                  title: Text(TranslationHelper.tr(
                       widget.dataSources.state, 'dark_mode')),
                   trailing: BlocBuilder(
                       bloc: cubit,
@@ -206,8 +213,7 @@ class _SettingState extends State<SettingPage> {
           ),
 
           10.verticalSpace,
-          Text(TranslationHelper.tr(
-                    widget.dataSources.state, 'resources'),
+          Text(TranslationHelper.tr(widget.dataSources.state, 'resources'),
               style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
           10.verticalSpace,
           // const Text('General'),
@@ -223,12 +229,13 @@ class _SettingState extends State<SettingPage> {
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: Column(
               children: [
-                listTile(title: TranslationHelper.tr(
-                    widget.dataSources.state, 'about_us'), icon: CupertinoIcons.group),
+                listTile(
+                    title: TranslationHelper.tr(
+                        widget.dataSources.state, 'about_us'),
+                    icon: CupertinoIcons.group),
                 const Divider(),
                 listTile(
-                  title: TranslationHelper.tr(
-                      widget.dataSources.state, 'faqs'),
+                  title: TranslationHelper.tr(widget.dataSources.state, 'faqs'),
                   icon: CupertinoIcons.question_square,
                   onTap: () => cubit.goFaqPage(),
                 ),
@@ -262,15 +269,20 @@ class _SettingState extends State<SettingPage> {
                 //     );
                 //   },
                 // ),
-                listTile(title: TranslationHelper.tr(
-                    widget.dataSources.state, 'rate_us'), icon: Icons.rate_review_outlined),
-                const Divider(),
-                listTile(title: TranslationHelper.tr(
-                    widget.dataSources.state, 'invite_friends'), icon: Icons.share_outlined),
+                listTile(
+                    title: TranslationHelper.tr(
+                        widget.dataSources.state, 'rate_us'),
+                    icon: Icons.rate_review_outlined),
                 const Divider(),
                 listTile(
                     title: TranslationHelper.tr(
-                        widget.dataSources.state, 'feedback_support'), icon: Icons.feedback_outlined),
+                        widget.dataSources.state, 'invite_friends'),
+                    icon: Icons.share_outlined),
+                const Divider(),
+                listTile(
+                    title: TranslationHelper.tr(
+                        widget.dataSources.state, 'feedback_support'),
+                    icon: Icons.feedback_outlined),
               ],
             ),
           ),
@@ -289,8 +301,10 @@ class _SettingState extends State<SettingPage> {
 
             child: Column(
               children: [
-                listTile(title: TranslationHelper.tr(
-                    widget.dataSources.state, 'whats_new'), icon: Icons.whatshot_rounded),
+                listTile(
+                    title: TranslationHelper.tr(
+                        widget.dataSources.state, 'whats_new'),
+                    icon: Icons.whatshot_rounded),
               ],
             ),
           ),
@@ -300,14 +314,17 @@ class _SettingState extends State<SettingPage> {
           // Sign Out Button
 
           AppButton.getButton(
-              child:
-                   Text(TranslationHelper.tr(widget.dataSources.state, 'logout'), style: TextStyle(color: Colors.white)),
+              child: Text(
+                  TranslationHelper.tr(widget.dataSources.state, 'logout'),
+                  style: const TextStyle(color: Colors.white)),
               onPressed: () => _showLogoutConfirmationDialog(),
+              // onPressed: () => cubit.goLoginPage(),
               color: Colors.redAccent.shade200),
           20.verticalSpace,
-           Align(
+          Align(
               alignment: Alignment.center,
-              child: Text(TranslationHelper.tr(widget.dataSources.state, 'footer_text'))),
+              child: Text(TranslationHelper.tr(
+                  widget.dataSources.state, 'footer_text'))),
           20.verticalSpace
         ],
       ),
@@ -320,27 +337,23 @@ class _SettingState extends State<SettingPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(TranslationHelper.tr(widget.dataSources.state, 'logout')),
-          content: Text(TranslationHelper.tr(widget.dataSources.state, 'logout_confirmation')),
+          content: Text(TranslationHelper.tr(
+              widget.dataSources.state, 'logout_confirmation')),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text(TranslationHelper.tr(widget.dataSources.state, 'cancel')),
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                  TranslationHelper.tr(widget.dataSources.state, 'cancel')),
             ),
             TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: Text(TranslationHelper.tr(widget.dataSources.state, 'confirm')),
+              onPressed: () => cubit.goLoginPage(),
+              child: Text(
+                  TranslationHelper.tr(widget.dataSources.state, 'confirm')),
             ),
           ],
         );
       },
     );
-
-    if (confirmed == true) {
-      await widget.dataSources.clearUserData();
-      if (mounted) {
-        widget.splashCubit.navigator.openLogin(const LoginInitialParams());
-      }
-    }
   }
 }
 

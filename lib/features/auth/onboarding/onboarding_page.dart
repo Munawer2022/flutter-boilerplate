@@ -117,7 +117,7 @@ class _OnboardingState extends State<OnboardingPage> {
                         color: Colors.green,
                         child: const Text('Get Start',
                             style: TextStyle(color: Colors.white)),
-                        onPressed: () => cubit.goToLogin()),
+                        onPressed: () => cubit.goHomePage()),
                   )
                 : Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40.w),
@@ -145,7 +145,7 @@ class _OnboardingState extends State<OnboardingPage> {
                         // Next Button (disable if last page)
                         ElevatedButton(
                             onPressed: currentPage == demoData.length - 1
-                                ? () => cubit.goToLogin()
+                                ? () => cubit.goHomePage()
                                 : nextPage,
                             style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.symmetric(

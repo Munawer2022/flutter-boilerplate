@@ -1,7 +1,38 @@
 /*
+************************ Otp ************************
+*/
+import 'features/otp/otp_cubit.dart';
+import 'features/otp/otp_navigator.dart';
+import 'features/otp/otp_initial_params.dart';
+
+/*
+************************ WithEmailOrPhone ************************
+*/
+import 'package:flutter_template/features/with/with_email_or_phone_cubit.dart';
+import 'package:flutter_template/features/with/with_email_or_phone_initial_params.dart';
+import 'package:flutter_template/features/with/with_email_or_phone_navigator.dart';
+
+/*
+************************ LoginWithOtp ************************
+*/
+import 'package:flutter_template/data/repositories/login/login_with_otp_repository.dart';
+import 'package:flutter_template/domain/repositories/login/login_with_otp_base_api_service.dart';
+import 'package:flutter_template/features/login_with_phone/login_with_otp_cubit.dart';
+import 'package:flutter_template/features/login_with_phone/login_with_otp_initial_params.dart';
+import 'package:flutter_template/features/login_with_phone/login_with_otp_navigator.dart';
+
+/*
+************************ SignUp ************************
+*/
+import 'package:flutter_template/data/repositories/sign/sign_up_repository.dart';
+import 'package:flutter_template/domain/repositories/sign/sign_up_base_api_service.dart';
+import 'package:flutter_template/features/sign/sign_up_cubit.dart';
+import 'package:flutter_template/features/sign/sign_up_initial_params.dart';
+import 'package:flutter_template/features/sign/sign_up_navigator.dart';
+
+/*
 ************************ PagesWebView ************************
 */
-import 'package:dio/dio.dart';
 import 'package:flutter_template/config/theme/theme_data.dart';
 
 import 'features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_cubit.dart';
@@ -95,9 +126,7 @@ import 'features/auth/splash/splash_navigator.dart';
 import 'data/datasources/auth/login/login_data_sources.dart';
 import 'domain/usecases/auth/login/login_use_cases.dart';
 import 'domain/repositories/auth/login/login_base_api_service.dart';
-import 'data/repositories/login_repository.dart';
-import '/domain/repositories/auth/login/login_base_api_service.dart';
-// import 'package:flutter_template/data/repositories/login_repository.dart';
+import 'data/repositories/auth/login/login_repository.dart';
 import 'features/auth/login/login_navigator.dart';
 import 'features/auth/login/login_cubit.dart';
 import 'features/auth/login/login_initial_params.dart';
@@ -110,11 +139,6 @@ import '/domain/usecases/local/check_for_existing_user_use_case.dart';
 import 'features/auth/onboarding/onboarding_navigator.dart';
 import 'features/auth/onboarding/onboarding_cubit.dart';
 import 'features/auth/onboarding/onboarding_initial_params.dart';
-
-
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:flutter_template/data/repositories/auth/login/login_repository_impl.dart';
 
 final getIt = GetIt.instance;
 
@@ -155,54 +179,15 @@ Future<void> init() async {
 /*
 ************************ login ************************
 */
-  // getIt.registerSingleton<LoginBaseApiService>(LoginRepository(dio: getIt()));
- 
-
-
-  // First register Dio
-  // getIt.registerSingleton<Dio>(Dio());
-
-  // Register NetworkService (if you have one)
-
- getIt.registerLazySingleton(() => Dio()); // Register Dio
-getIt.registerLazySingleton<LoginRepository>(
-  () => LoginRepositoryImpl(
-    dio: getIt<Dio>(),
-  ),
-);
-  // Register LoginRepository as LoginBaseApiService
-  // getIt.registerSingleton<LoginRepository>(
-  //   LoginRepository(
-  //     dio: getIt<Dio>(),
-  //   ),
-  // );
-
-
-getIt.registerLazySingleton<LoginBaseApiService>(
-  () => LoginRepository(dio: getIt<Dio>()),
-);
-
-  // // Then register the repository
-  // getIt.registerSingleton<LoginRepository>(
-  //   LoginRepository(
-  //     dio: getIt<Dio>(), // explicitly get Dio instance
-  //   ),
-  // );
-  // getIt.registerSingleton<LoginBaseApiService>(MockLoginRepository());
+  getIt.registerSingleton<LoginBaseApiService>(LoginRepository(getIt()));
+//   getIt.registerSingleton<LoginBaseApiService>(MockLoginRepository());
   getIt.registerSingleton<CheckForExistingUserUseCase>(
       CheckForExistingUserUseCase(getIt(), getIt(), getIt()));
-      final sharedPreferences = await SharedPreferences.getInstance();
-  GetIt.instance.registerSingleton<SharedPreferences>(sharedPreferences);
   getIt.registerSingleton<LoginUseCases>(
       LoginUseCases(getIt(), getIt(), getIt()));
   getIt.registerSingleton<LoginNavigator>(LoginNavigator(getIt()));
   getIt.registerFactoryParam<LoginCubit, LoginInitialParams, dynamic>(
-      (params, _) => LoginCubit(
-        repository: getIt<LoginBaseApiService>(),
-        prefs: getIt<SharedPreferences>(),
-        navigator: getIt<LoginNavigator>(),
-      ),
-  );
+      (params, _) => LoginCubit(params, getIt(), getIt()));
 
 /*
 ************************ Onboarding ************************
@@ -276,4 +261,38 @@ getIt.registerLazySingleton<LoginBaseApiService>(
       .registerSingleton<PagesWebViewNavigator>(PagesWebViewNavigator(getIt()));
   getIt.registerFactoryParam<PagesWebViewCubit, PagesWebViewInitialParams,
       dynamic>((params, _) => PagesWebViewCubit(params, getIt()));
+/*
+************************ SignUp ************************
+*/
+  getIt.registerSingleton<SignUpBaseApiService>(SignUpRepository(getIt()));
+  // getIt.registerSingleton<SignUpBaseApiService>(MockSignUpRepository());
+  getIt.registerSingleton<SignUpNavigator>(SignUpNavigator(getIt()));
+  getIt.registerFactoryParam<SignUpCubit, SignUpInitialParams, dynamic>(
+      (params, _) => SignUpCubit(params, getIt(), getIt()));
+/*
+************************ LoginWithOtp ************************
+*/
+  getIt.registerSingleton<LoginWithOtpBaseApiService>(
+      LoginWithOtpRepository(getIt()));
+  // getIt.registerSingleton<LoginWithOtpBaseApiService>(MockLoginWithOtpRepository());
+  getIt
+      .registerSingleton<LoginWithOtpNavigator>(LoginWithOtpNavigator(getIt()));
+  getIt.registerFactoryParam<LoginWithOtpCubit, LoginWithOtpInitialParams,
+          dynamic>(
+      (params, _) => LoginWithOtpCubit(params, getIt(), getIt(), getIt()));
+/*
+************************ WithEmailOrPhone ************************
+*/
+  getIt.registerSingleton<WithEmailOrPhoneNavigator>(
+      WithEmailOrPhoneNavigator(getIt()));
+  getIt.registerFactoryParam<
+      WithEmailOrPhoneCubit,
+      WithEmailOrPhoneInitialParams,
+      dynamic>((params, _) => WithEmailOrPhoneCubit(params, getIt()));
+/*
+************************ Otp ************************
+*/
+  getIt.registerSingleton<OtpNavigator>(OtpNavigator(getIt()));
+  getIt.registerFactoryParam<OtpCubit, OtpInitialParams, dynamic>(
+      (params, _) => OtpCubit(params, getIt(), getIt()));
 }

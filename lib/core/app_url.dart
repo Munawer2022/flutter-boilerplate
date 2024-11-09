@@ -6,7 +6,7 @@ abstract class AppUrl {
   // static var pages = '$baseUrl/pages';
   static var systemSettings = '$baseUrl/system-settings';
   static var login = '$baseUrl/login';
-  static var signUp = '$baseUrl/signUp';
+  static var signUp = '$baseUrl/signup';
   static var forgotPassword = '$baseUrl/forgotPassword';
 
   static var onboarding = '$baseUrl/onboarding';
@@ -15,6 +15,8 @@ abstract class AppUrl {
   static var profile = 'baseUrl/profile';
   static var notification = 'baseUrl/notification';
   static var refreshToken = baseUrl;
-  static var faq = '$baseUrl/faqs';
+  static var faq = 'baseUrl/faq';
+  static var loginWithOtp = '$baseUrl/login-otp';
+
 
 }

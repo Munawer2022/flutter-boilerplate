@@ -59,8 +59,8 @@ abstract class AppTextFormField {
                     borderSide: const BorderSide(
                         color: Color(0xffEFE9E9), strokeAlign: 1),
                     borderRadius: BorderRadius.circular(8.0.r)),
-            fillColor: color ?? const Color(0xffE4ECFF).withOpacity(0.30),
-            filled: true,
+            // fillColor: color ?? const Color(0xffE4ECFF).withOpacity(0.30),
+            // filled: true,
             prefixIcon: prefixIcon,
             hintText: hintText,
             hintStyle: context.textTheme.bodyLarge

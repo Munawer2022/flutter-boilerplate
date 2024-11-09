@@ -1,0 +1,3 @@
+class WithEmailOrPhoneInitialParams {
+const WithEmailOrPhoneInitialParams();
+}

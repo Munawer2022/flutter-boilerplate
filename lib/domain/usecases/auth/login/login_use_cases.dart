@@ -12,19 +12,14 @@ class LoginUseCases {
   LoginUseCases(
       this._baseApiService, this._dataSources, this._localStorageRepository);
   Future<Either<LoginFailure, LocalUserInfoStoreModel>> execute(
-          {required Map<String, dynamic> body}) async {
-    try {
-      final loginResult = await _baseApiService.login(body['email'], body['password']);
-      return _localStorageRepository
-          .setUserData(localUserInfoStoreModel: LocalUserInfoStoreModel.fromJson(loginResult))
-          .then((value) => value.fold(
-              (l) => Either.left(LoginFailure(error: l.error)),
-              (r) {
-                _dataSources.setLoginDataSources(loginSuccessModel: LocalUserInfoStoreModel.fromJson(loginResult));
-                return Either.right(LocalUserInfoStoreModel.fromJson(loginResult));
-              }));
-    } catch (e) {
-      return Either.left(LoginFailure(error: e.toString()));
-    }
-  }
+          {required Map<String, dynamic> body}) async =>
+      await _baseApiService.login(body: body).then((value) => value.fold(
+          (l) => left(l),
+          (r) => _localStorageRepository
+              .setUserData(localUserInfoStoreModel: r)
+              .then((value) => value.fold(
+                      (l) => left(LoginFailure(error: l.error)), (tokenRight) {
+                    _dataSources.setLoginDataSources(loginSuccessModel: r);
+                    return right(r);
+                  }))));
 }

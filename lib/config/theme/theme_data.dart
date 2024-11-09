@@ -33,8 +33,8 @@ class AppThemes {
         iconTheme: IconThemeData(
             color: _getColor('app_icon_color', fallbackColor: '#FF4747')),
         appBarTheme: AppBarTheme(
-          backgroundColor:Colors.white,
-              // _getColor('app_primary_color', fallbackColor: '#2F8C1D'),
+          backgroundColor: Colors.white,
+          // _getColor('app_primary_color', fallbackColor: '#2F8C1D'),
           titleTextStyle: TextStyle(
             color: _getColor('app_heading_color', fallbackColor: '#000000'),
             fontWeight: FontWeight.bold,
@@ -98,6 +98,17 @@ class AppThemes {
             fontSize: 24,
           ),
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: _getColor('app_button_active_color',
+                    fallbackColor: '#F5870A'),
+                disabledBackgroundColor: _getColor('app_button_disable_color',
+                    fallbackColor: '#D81818'),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0.r)),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                // backgroundColor: color ?? Colors.blue,
+                minimumSize: Size(double.infinity.w, 50.0.h))),
         buttonTheme: ButtonThemeData(
           buttonColor:
               _getColor('app_button_active_color', fallbackColor: '#F5870A'),

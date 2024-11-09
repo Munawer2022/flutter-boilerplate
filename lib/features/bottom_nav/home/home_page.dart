@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_bar.dart';
-import 'package:flutter_template/core/utils/translation_helper.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
 import 'package:flutter_template/features/no_internet_page.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting/setting_initial_params.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting/setting_page.dart';
@@ -15,7 +14,8 @@ import '/core/status_switcher.dart';
 
 class HomePage extends StatefulWidget {
   final HomeCubit cubit;
- final SplashDataSources dataSources;
+  final LoginDataSources dataSources;
+
   const HomePage({
     super.key,
     required this.cubit,
@@ -28,6 +28,7 @@ class HomePage extends StatefulWidget {
 
 class _HomeState extends State<HomePage> {
   HomeCubit get cubit => widget.cubit;
+  LoginDataSources get dataSources => widget.dataSources;
 
   @override
   void initState() {
@@ -38,8 +39,11 @@ class _HomeState extends State<HomePage> {
   int _currentIndex = 0; // Track the current tab index
 
   // List of pages associated with the tabs
+
+  @override
+  Widget build(BuildContext context) {
   final List<Widget> _pages = [
-    const CarouselExample(),
+    CarouselExample(dataSources: dataSources),
     const NoInternetScreen(),
     const SizedBox(),
     const Center(child: Text("Search Chat")),
@@ -48,9 +52,6 @@ class _HomeState extends State<HomePage> {
         dataSources: getIt(),
         splashCubit: getIt(param1: const SplashInitialParams()))
   ];
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
       floatingActionButton: FloatingActionButton(
@@ -78,16 +79,16 @@ class _HomeState extends State<HomePage> {
         // selectedItemColor: Colors.black,
         // unselectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
-        items:  [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
             ),
-            label: TranslationHelper.tr(widget.dataSources.state, 'home'),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label:  TranslationHelper.tr(widget.dataSources.state, 'search'),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: SizedBox(),
@@ -95,11 +96,11 @@ class _HomeState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat),
-            label:  TranslationHelper.tr(widget.dataSources.state, 'chat'),
+            label: 'Chat',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label:  TranslationHelper.tr(widget.dataSources.state, 'settings'),
+            label: 'Setting',
           ),
         ],
       ),
@@ -108,7 +109,8 @@ class _HomeState extends State<HomePage> {
 }
 
 class CarouselExample extends StatefulWidget {
-  const CarouselExample({super.key});
+  final LoginDataSources dataSources;
+  const CarouselExample({super.key, required this.dataSources});
 
   @override
   State<CarouselExample> createState() => _CarouselExampleState();
@@ -132,6 +134,8 @@ class _CarouselExampleState extends State<CarouselExample> {
 
   @override
   Widget build(BuildContext context) {
+    final info = widget.dataSources.state;
+
     return SafeArea(
       child: Column(
         children: [
@@ -152,25 +156,25 @@ class _CarouselExampleState extends State<CarouselExample> {
                     ),
                   )),
             ],
-            title: const ListTile(
-              leading: CircleAvatar(),
+            title: ListTile(
+              leading: const CircleAvatar(),
               title: Text(
-                'Hi , Noha!',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                'Hi , ${info.name}!',
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: Text('Discover Our Services !'),
+              subtitle: const Text('Discover Our Services !'),
             ),
           ),
-          // 10.verticalSpace,
-          // Container(
-          //   height: 158.h,
-          //   margin: EdgeInsets.symmetric(horizontal: 28.w),
-          //   width: double.infinity.w,
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(40.r),
-          //     color: Colors.grey.shade300,
-          //   ),
-          // ),
+          10.verticalSpace,
+          Container(
+            height: 158.h,
+            margin: EdgeInsets.symmetric(horizontal: 28.w),
+            width: double.infinity.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40.r),
+              color: Colors.grey.shade300,
+            ),
+          ),
           10.verticalSpace,
           ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 200),

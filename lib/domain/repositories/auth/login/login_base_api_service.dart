@@ -3,5 +3,6 @@ import 'package:fpdart/fpdart.dart';
 import '/domain/failures/auth/login/login_failure.dart';
 
 abstract class LoginBaseApiService {
-  Future<Map<String, dynamic>> login(String email, String password);
+  Future<Either<LoginFailure, LocalUserInfoStoreModel>> login(
+      {required Map<String, dynamic> body});
 }

@@ -1,0 +1,3 @@
+class LoginWithOtpInitialParams {
+const LoginWithOtpInitialParams();
+}

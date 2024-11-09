@@ -78,6 +78,7 @@ class MyApp extends StatelessWidget {
                         debugShowCheckedModeBanner: false,
                         theme:
                             state ? appThemes.darkTheme : appThemes.lightTheme,
+                            // state ? appThemes.lightTheme : appThemes.darkTheme,
 
                         // scaffoldMessengerKey: scaffoldMessengerKey,
                         // home: OnboardingPage(cubit: getIt(param1: const OnboardingInitialParams()))

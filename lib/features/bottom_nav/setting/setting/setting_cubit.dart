@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/data/datasources/theme/theme_data_source.dart';
 import 'package:flutter_template/domain/usecases/theme/update_theme_use_case.dart';
+import 'package:flutter_template/features/auth/login/login_initial_params.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting_tabs/faq/faq_initial_params.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting_tabs/notification/notification/notification_initial_params.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting_tabs/widget/pages/pages_web_view_initial_params.dart';
@@ -38,4 +39,6 @@ class SettingCubit extends Cubit<SettingState> {
 
   goPagesWebViewPage({required String url, required String title}) => navigator
       .openPagesWebView(PagesWebViewInitialParams(url: url, title: title));
+
+  goLoginPage() => navigator.openLogin(const LoginInitialParams());
 }
