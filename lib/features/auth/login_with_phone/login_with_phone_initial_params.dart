@@ -1,0 +1,3 @@
+class LoginWithPhoneInitialParams {
+  const LoginWithPhoneInitialParams();
+}

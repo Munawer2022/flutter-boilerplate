@@ -16,7 +16,5 @@ abstract class AppUrl {
   static var notification = 'baseUrl/notification';
   static var refreshToken = baseUrl;
   static var faq = 'baseUrl/faq';
-  static var loginWithOtp = '$baseUrl/login-otp';
-
-
+  static var loginWithPhone = '$baseUrl/login-otp';
 }

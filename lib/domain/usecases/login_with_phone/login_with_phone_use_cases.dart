@@ -1,9 +1,9 @@
 import 'package:flutter_template/data/models/local/local_user_info_store_model.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '/domain/failures/login_with_otp/login_with_otp_failure.dart';
+import '../../failures/auth/login_with_phone/login_with_phone_failure.dart';
 
 class LoginWithOtpUseCases {
-  Future<Either<LoginWithOtpFailure, LocalUserInfoStoreModel>> execute() =>
+  Future<Either<LoginWithPhoneFailure, LocalUserInfoStoreModel>> execute() =>
       throw {};
 }

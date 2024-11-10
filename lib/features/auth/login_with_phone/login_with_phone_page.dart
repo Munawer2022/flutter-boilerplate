@@ -6,28 +6,28 @@ import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
 import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
 import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
-import 'package:flutter_template/data/models/login_with_otp/login_with_otp_model.dart';
-import 'login_with_otp_cubit.dart';
-import 'login_with_otp_state.dart';
-import 'login_with_otp_state.dart';
+import 'package:flutter_template/data/models/auth/login_with_phone/login_with_phone_model.dart';
+import 'login_with_phone_cubit.dart';
+import 'login_with_phone_state.dart';
+import 'login_with_phone_state.dart';
 import '/core/status_switcher.dart';
 
-class LoginWithOtpPage extends StatefulWidget {
-  final LoginWithOtpCubit cubit;
+class LoginWithPhonePage extends StatefulWidget {
+  final LoginWithPhoneCubit cubit;
   final SplashDataSources dataSources;
 
-  const LoginWithOtpPage({
+  const LoginWithPhonePage({
     super.key,
     required this.cubit,
     required this.dataSources,
   });
 
   @override
-  State<LoginWithOtpPage> createState() => _LoginWithOtpState();
+  State<LoginWithPhonePage> createState() => _LoginWithOtpState();
 }
 
-class _LoginWithOtpState extends State<LoginWithOtpPage> {
-  LoginWithOtpCubit get cubit => widget.cubit;
+class _LoginWithOtpState extends State<LoginWithPhonePage> {
+  LoginWithPhoneCubit get cubit => widget.cubit;
 
   @override
   void initState() {
@@ -138,12 +138,12 @@ class _LoginWithOtpState extends State<LoginWithOtpPage> {
                   BlocBuilder(
                       bloc: cubit,
                       builder: (context, state) {
-                        state as LoginWithOtpState;
+                        state as LoginWithPhoneState;
                         return AppButton.getButton(
                             loading: state.isLoading,
                             child: const Text('Login'),
-                            onPressed: () => cubit.loginWithOtp(
-                                body: LoginWithOtpModel(
+                            onPressed: () => cubit.loginWithPhone(
+                                body: LoginWithPhoneModel(
                                         phone: _phoneController.text)
                                     .toJson()));
                       }),

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
 import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
-import 'package:flutter_template/features/otp/otp_initial_params.dart';
+import 'package:flutter_template/features/auth/otp/otp_initial_params.dart';
 import 'otp_cubit.dart';
 import 'otp_state.dart';
 import 'otp_state.dart';

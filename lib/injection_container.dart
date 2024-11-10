@@ -1,34 +1,34 @@
 /*
 ************************ Otp ************************
 */
-import 'features/otp/otp_cubit.dart';
-import 'features/otp/otp_navigator.dart';
-import 'features/otp/otp_initial_params.dart';
+import 'features/auth/otp/otp_cubit.dart';
+import 'features/auth/otp/otp_navigator.dart';
+import 'features/auth/otp/otp_initial_params.dart';
 
 /*
 ************************ WithEmailOrPhone ************************
 */
-import 'package:flutter_template/features/with/with_email_or_phone_cubit.dart';
-import 'package:flutter_template/features/with/with_email_or_phone_initial_params.dart';
-import 'package:flutter_template/features/with/with_email_or_phone_navigator.dart';
+import 'package:flutter_template/features/auth/with_email_or_phone/with_email_or_phone_cubit.dart';
+import 'package:flutter_template/features/auth/with_email_or_phone/with_email_or_phone_initial_params.dart';
+import 'package:flutter_template/features/auth/with_email_or_phone/with_email_or_phone_navigator.dart';
 
 /*
 ************************ LoginWithOtp ************************
 */
-import 'package:flutter_template/data/repositories/login/login_with_otp_repository.dart';
-import 'package:flutter_template/domain/repositories/login/login_with_otp_base_api_service.dart';
-import 'package:flutter_template/features/login_with_phone/login_with_otp_cubit.dart';
-import 'package:flutter_template/features/login_with_phone/login_with_otp_initial_params.dart';
-import 'package:flutter_template/features/login_with_phone/login_with_otp_navigator.dart';
+import 'package:flutter_template/data/repositories/auth/login_with_phone/login_with_phone_repository.dart';
+import 'package:flutter_template/domain/repositories/auth/login_with_phone/login_with_phone_base_api_service.dart';
+import 'package:flutter_template/features/auth/login_with_phone/login_with_phone_cubit.dart';
+import 'package:flutter_template/features/auth/login_with_phone/login_with_phone_initial_params.dart';
+import 'package:flutter_template/features/auth/login_with_phone/login_with_phone_navigator.dart';
 
 /*
 ************************ SignUp ************************
 */
-import 'package:flutter_template/data/repositories/sign/sign_up_repository.dart';
-import 'package:flutter_template/domain/repositories/sign/sign_up_base_api_service.dart';
-import 'package:flutter_template/features/sign/sign_up_cubit.dart';
-import 'package:flutter_template/features/sign/sign_up_initial_params.dart';
-import 'package:flutter_template/features/sign/sign_up_navigator.dart';
+import 'package:flutter_template/data/repositories/auth/sign/sign_up_repository.dart';
+import 'package:flutter_template/domain/repositories/auth/sign/sign_up_base_api_service.dart';
+import 'package:flutter_template/features/auth/sign/sign_up_cubit.dart';
+import 'package:flutter_template/features/auth/sign/sign_up_initial_params.dart';
+import 'package:flutter_template/features/auth/sign/sign_up_navigator.dart';
 
 /*
 ************************ PagesWebView ************************
@@ -272,14 +272,14 @@ Future<void> init() async {
 /*
 ************************ LoginWithOtp ************************
 */
-  getIt.registerSingleton<LoginWithOtpBaseApiService>(
-      LoginWithOtpRepository(getIt()));
+  getIt.registerSingleton<LoginWithPhoneBaseApiService>(
+      LoginWithPhoneRepository(getIt()));
   // getIt.registerSingleton<LoginWithOtpBaseApiService>(MockLoginWithOtpRepository());
-  getIt
-      .registerSingleton<LoginWithOtpNavigator>(LoginWithOtpNavigator(getIt()));
-  getIt.registerFactoryParam<LoginWithOtpCubit, LoginWithOtpInitialParams,
+  getIt.registerSingleton<LoginWithPhoneNavigator>(
+      LoginWithPhoneNavigator(getIt()));
+  getIt.registerFactoryParam<LoginWithPhoneCubit, LoginWithPhoneInitialParams,
           dynamic>(
-      (params, _) => LoginWithOtpCubit(params, getIt(), getIt(), getIt()));
+      (params, _) => LoginWithPhoneCubit(params, getIt(), getIt(), getIt()));
 /*
 ************************ WithEmailOrPhone ************************
 */

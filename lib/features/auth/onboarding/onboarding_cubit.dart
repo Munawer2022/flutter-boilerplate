@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/features/with/with_email_or_phone_initial_params.dart';
+import 'package:flutter_template/features/auth/with_email_or_phone/with_email_or_phone_initial_params.dart';
 import 'onboarding_initial_params.dart';
 import 'onboarding_navigator.dart';
 import 'onboarding_state.dart';

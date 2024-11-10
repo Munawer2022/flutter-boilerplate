@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/features/bottom_nav/home/home_initial_params.dart';
-import 'package:flutter_template/features/sign/sign_up_initial_params.dart';
+import 'package:flutter_template/features/auth/sign/sign_up_initial_params.dart';
 import 'login_initial_params.dart';
 import 'login_navigator.dart';
 import 'login_state.dart';

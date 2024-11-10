@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/domain/repositories/sign/sign_up_base_api_service.dart';
+import 'package:flutter_template/domain/repositories/auth/sign/sign_up_base_api_service.dart';
 import 'package:flutter_template/features/bottom_nav/home/home_initial_params.dart';
 import 'sign_up_initial_params.dart';
 import 'sign_up_navigator.dart';

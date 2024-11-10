@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/config/navigation/transition_type.dart';
 import 'package:flutter_template/features/auth/splash/splash_initial_params.dart';
 import 'package:flutter_template/features/bottom_nav/home/home_navigator.dart';
-import 'package:flutter_template/features/sign/sign_up_navigator.dart';
+import 'package:flutter_template/features/auth/sign/sign_up_navigator.dart';
 import 'login_initial_params.dart';
 import 'login_page.dart';
 import '/config/navigation/app_navigator.dart';

@@ -1,7 +1,7 @@
-class LoginWithOtpModel {
+class LoginWithPhoneModel {
   String phone;
 
-  LoginWithOtpModel({
+  LoginWithPhoneModel({
     required this.phone,
   });
   Map<String, dynamic> toJson() => {"phone": phone};

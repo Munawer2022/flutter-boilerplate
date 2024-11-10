@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/features/auth/login/login_initial_params.dart';
-import 'package:flutter_template/features/login_with_phone/login_with_otp_initial_params.dart';
+import 'package:flutter_template/features/auth/login_with_phone/login_with_phone_initial_params.dart';
 import 'with_email_or_phone_initial_params.dart';
 import 'with_email_or_phone_navigator.dart';
 import 'with_email_or_phone_state.dart';
@@ -14,5 +14,5 @@ class WithEmailOrPhoneCubit extends Cubit<WithEmailOrPhoneState> {
   goLoginWithEmail() => navigator.openLogin(const LoginInitialParams());
 
   goLoginWithPhone() =>
-      navigator.openLoginWithOtp(const LoginWithOtpInitialParams());
+      navigator.openLoginWithPhone(const LoginWithPhoneInitialParams());
 }
