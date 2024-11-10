@@ -4,7 +4,7 @@ import 'package:flutter_template/features/bottom_nav/setting/setting_tabs/widget
 import 'pages_web_view_cubit.dart';
 import 'pages_web_view_state.dart';
 import 'pages_web_view_state.dart';
-import '/core/status_switcher.dart';
+import '../../../../../../config/status_switcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PagesWebViewPage extends StatefulWidget {

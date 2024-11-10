@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import '../../../../../models/bottom_nav/setting/setting_tabs/faq/faq_model.dart';
-import '/core/app_url.dart';
+import '../../../../../../config/app_url.dart';
 import '/domain/repositories/network/network_base_api_service.dart';
 import '../../../../../../domain/failures/bottom_nav/setting/setting_tabs/faq/faq_failure.dart';
 import '../../../../../../domain/repositories/bottom_nav/setting/setting_tabs/faq/faq_base_api_service.dart';

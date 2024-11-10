@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/config/navigation/transition_type.dart';
 import 'home_initial_params.dart';
 import 'home_page.dart';
-import '/config/navigation/app_navigator.dart';
+import '../../../config/navigation/app_navigator.dart';
 import '/injection_container.dart';
 
 class HomeNavigator {

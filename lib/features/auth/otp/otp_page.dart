@@ -8,7 +8,7 @@ import 'package:flutter_template/features/auth/otp/otp_initial_params.dart';
 import 'otp_cubit.dart';
 import 'otp_state.dart';
 import 'otp_state.dart';
-import '/core/status_switcher.dart';
+import '../../../config/status_switcher.dart';
 
 class OtpPage extends StatefulWidget {
   final OtpCubit cubit;

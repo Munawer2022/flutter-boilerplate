@@ -5,7 +5,7 @@ import 'package:flutter_template/features/bottom_nav/home/home_navigator.dart';
 import 'package:flutter_template/features/auth/with_email_or_phone/with_email_or_phone_navigator.dart';
 import 'onboarding_initial_params.dart';
 import 'onboarding_page.dart';
-import '/config/navigation/app_navigator.dart';
+import '../../../config/navigation/app_navigator.dart';
 import '/injection_container.dart';
 
 class OnboardingNavigator with WithEmailOrPhoneRoute {

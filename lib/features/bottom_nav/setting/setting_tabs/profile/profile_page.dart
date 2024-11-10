@@ -7,7 +7,7 @@ import 'package:flutter_template/features/bottom_nav/setting/setting/setting_pag
 import 'profile_cubit.dart';
 import 'profile_state.dart';
 import 'profile_state.dart';
-import '/core/status_switcher.dart';
+import '../../../../../config/status_switcher.dart';
 
 class ProfilePage extends StatefulWidget {
   final ProfileCubit cubit;

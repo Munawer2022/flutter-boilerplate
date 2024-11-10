@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting_tabs/notification/notification_setting/notification_setting_navigator.dart';
 import 'notification_initial_params.dart';
 import 'notification_page.dart';
-import '/config/navigation/app_navigator.dart';
+import '../../../../../../config/navigation/app_navigator.dart';
 import '/injection_container.dart';
 
 class NotificationNavigator with NotificationSettingRoute {

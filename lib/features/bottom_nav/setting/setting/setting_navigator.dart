@@ -7,7 +7,7 @@ import 'package:flutter_template/features/bottom_nav/setting/setting_tabs/profil
 import 'package:flutter_template/features/auth/splash/splash_initial_params.dart';
 import 'setting_initial_params.dart';
 import 'setting_page.dart';
-import '/config/navigation/app_navigator.dart';
+import '../../../../config/navigation/app_navigator.dart';
 import '/injection_container.dart';
 
 class SettingNavigator

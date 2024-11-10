@@ -5,7 +5,7 @@ import 'package:flutter_template/features/bottom_nav/setting/setting/setting_pag
 import 'notification_setting_cubit.dart';
 import 'notification_setting_state.dart';
 import 'notification_setting_state.dart';
-import '/core/status_switcher.dart';
+import '../../../../../../config/status_switcher.dart';
 
 class NotificationSettingPage extends StatefulWidget {
   final NotificationSettingCubit cubit;

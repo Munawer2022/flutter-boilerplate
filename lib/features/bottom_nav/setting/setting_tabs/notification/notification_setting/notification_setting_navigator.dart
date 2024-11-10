@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'notification_setting_initial_params.dart';
 import 'notification_setting_page.dart';
-import '/config/navigation/app_navigator.dart';
+import '../../../../../../config/navigation/app_navigator.dart';
 import '/injection_container.dart';
 
 class NotificationSettingNavigator {

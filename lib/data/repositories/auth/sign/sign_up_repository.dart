@@ -2,7 +2,7 @@ import 'package:flutter_template/data/models/local/local_user_info_store_model.d
 import 'package:flutter_template/domain/failures/auth/sign/sign_up_failure.dart';
 import 'package:flutter_template/domain/repositories/auth/sign/sign_up_base_api_service.dart';
 import 'package:fpdart/fpdart.dart';
-import '/core/app_url.dart';
+import '../../../../config/app_url.dart';
 
 import '/domain/repositories/network/network_base_api_service.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/features/bottom_nav/home/home_navigator.dart';
 import 'otp_initial_params.dart';
 import 'otp_page.dart';
-import '/config/navigation/app_navigator.dart';
+import '../../../config/navigation/app_navigator.dart';
 import '/injection_container.dart';
 
 class OtpNavigator with HomeRoute {

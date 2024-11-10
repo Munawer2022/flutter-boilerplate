@@ -4,7 +4,7 @@ import 'notification_initial_params.dart';
 import 'notification_navigator.dart';
 import 'notification_state.dart';
 import '../../../../../../domain/repositories/bottom_nav/setting/setting_tabs/notification/notification_base_api_service.dart';
-import '/config/response/api_response.dart';
+import '../../../../../../config/response/api_response.dart';
 
 class NotificationCubit extends Cubit<NotificationState> {
   final NotificationBaseApiService baseApiServices;

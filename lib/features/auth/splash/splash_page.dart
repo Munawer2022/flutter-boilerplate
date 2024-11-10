@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/core/app_images.dart';
-import 'package:flutter_template/core/shimmer.dart';
-import 'package:flutter_template/core/status_switcher.dart';
+import 'package:flutter_template/config/app_images.dart';
+import 'package:flutter_template/config/shimmer.dart';
+import 'package:flutter_template/config/status_switcher.dart';
 import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'package:flutter_template/data/models/auth/splash/splash_model.dart';
 import 'package:flutter_template/features/auth/splash/splash_state.dart';

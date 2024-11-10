@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'notification_cubit.dart';
 import 'notification_state.dart';
 import 'notification_state.dart';
-import '/core/status_switcher.dart';
+import '../../../../../../config/status_switcher.dart';
 
 class NotificationPage extends StatefulWidget {
   final NotificationCubit cubit;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'profile_initial_params.dart';
 import 'profile_page.dart';
-import '/config/navigation/app_navigator.dart';
+import '../../../../../config/navigation/app_navigator.dart';
 import '/injection_container.dart';
 
 class ProfileNavigator {

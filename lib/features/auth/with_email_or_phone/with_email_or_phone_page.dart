@@ -7,7 +7,7 @@ import 'package:flutter_template/features/auth/onboarding/onboarding_page.dart';
 import 'with_email_or_phone_cubit.dart';
 import 'with_email_or_phone_state.dart';
 import 'with_email_or_phone_state.dart';
-import '/core/status_switcher.dart';
+import '../../../config/status_switcher.dart';
 
 class WithEmailOrPhonePage extends StatefulWidget {
   final WithEmailOrPhoneCubit cubit;

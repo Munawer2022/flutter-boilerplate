@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'features/auth/onboarding/onboarding_page.dart';
 import 'features/auth/onboarding/onboarding_initial_params.dart';
-import '/config/theme/theme_data.dart';
+import 'config/theme/theme_data.dart';
 import '/injection_container.dart' as di;
 import '/injection_container.dart';
 import '/data/datasources/theme/theme_data_source.dart';
-import '/core/global.dart';
-import '/core/show/checker_navigator_observer.dart';
+import 'config/global.dart';
+import 'config/show/checker_navigator_observer.dart';
 import 'package:device_preview/device_preview.dart';
 
 import 'features/auth/splash/splash_initial_params.dart';

@@ -3,7 +3,7 @@ import 'home_initial_params.dart';
 import 'home_navigator.dart';
 import 'home_state.dart';
 import '../../../domain/repositories/bottom_nav/home/home_base_api_service.dart';
-import '/config/response/api_response.dart';
+import '../../../config/response/api_response.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeBaseApiService baseApiServices;

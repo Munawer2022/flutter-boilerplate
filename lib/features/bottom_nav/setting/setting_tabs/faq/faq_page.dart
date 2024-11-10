@@ -7,7 +7,7 @@ import 'package:flutter_template/features/bottom_nav/setting/setting/setting_pag
 import 'faq_cubit.dart';
 import 'faq_state.dart';
 import 'faq_state.dart';
-import '/core/status_switcher.dart';
+import '../../../../../config/status_switcher.dart';
 
 class FaqPage extends StatefulWidget {
   final FaqCubit cubit;

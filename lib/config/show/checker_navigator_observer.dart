@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/core/global.dart';
+import '../global.dart';
 
 class CheckerNavigatorObserver extends NavigatorObserver {
   void hideCurrentMessages() {

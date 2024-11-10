@@ -1,7 +1,7 @@
 import 'package:flutter_template/data/models/bottom_nav/setting/setting_tabs/faq/faq_model.dart';
 
 import 'faq_initial_params.dart';
-import '/config/response/api_response.dart';
+import '../../../../../config/response/api_response.dart';
 
 class FaqState {
   final ApiResponse<FaqModel> response;

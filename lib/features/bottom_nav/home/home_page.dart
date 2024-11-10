@@ -10,7 +10,7 @@ import 'package:flutter_template/features/auth/splash/splash_initial_params.dart
 import 'package:flutter_template/injection_container.dart';
 import 'home_cubit.dart';
 import 'home_state.dart';
-import '/core/status_switcher.dart';
+import '../../../config/status_switcher.dart';
 
 class HomePage extends StatefulWidget {
   final HomeCubit cubit;

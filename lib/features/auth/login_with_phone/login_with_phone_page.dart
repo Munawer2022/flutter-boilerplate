@@ -10,7 +10,7 @@ import 'package:flutter_template/data/models/auth/login_with_phone/login_with_ph
 import 'login_with_phone_cubit.dart';
 import 'login_with_phone_state.dart';
 import 'login_with_phone_state.dart';
-import '/core/status_switcher.dart';
+import '../../../config/status_switcher.dart';
 
 class LoginWithPhonePage extends StatefulWidget {
   final LoginWithPhoneCubit cubit;

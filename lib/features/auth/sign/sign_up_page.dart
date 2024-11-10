@@ -9,7 +9,7 @@ import 'package:flutter_template/data/models/auth/sign/sign_up_model.dart';
 import 'sign_up_cubit.dart';
 import 'sign_up_state.dart';
 import 'sign_up_state.dart';
-import '/core/status_switcher.dart';
+import '../../../config/status_switcher.dart';
 
 class SignUpPage extends StatefulWidget {
   final SignUpCubit cubit;

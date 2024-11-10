@@ -1,4 +1,4 @@
-import '/config/response/status.dart';
+import 'status.dart';
 
 class ApiResponse<T> {
   late T initial;

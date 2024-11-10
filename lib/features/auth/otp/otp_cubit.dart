@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/core/show/show/show.dart';
+import 'package:flutter_template/config/show/show/show.dart';
 import 'package:flutter_template/features/bottom_nav/home/home_initial_params.dart';
 import 'otp_initial_params.dart';
 import 'otp_navigator.dart';

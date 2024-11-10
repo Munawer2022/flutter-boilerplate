@@ -1,5 +1,5 @@
 import 'setting_initial_params.dart';
-import '/config/response/api_response.dart';
+import '../../../../config/response/api_response.dart';
 
 class SettingState {
   final bool isDarkTheme;

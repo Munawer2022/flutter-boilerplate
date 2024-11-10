@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages_web_view_initial_params.dart';
 import 'pages_web_view_page.dart';
-import '/config/navigation/app_navigator.dart';
+import '../../../../../../config/navigation/app_navigator.dart';
 import '/injection_container.dart';
 
 class PagesWebViewNavigator {

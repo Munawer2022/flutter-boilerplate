@@ -9,7 +9,7 @@ import 'package:flutter_template/features/bottom_nav/setting/setting_tabs/profil
 import 'setting_initial_params.dart';
 import 'setting_navigator.dart';
 import 'setting_state.dart';
-import '/config/response/api_response.dart';
+import '../../../../config/response/api_response.dart';
 
 class SettingCubit extends Cubit<SettingState> {
   final SettingNavigator navigator;

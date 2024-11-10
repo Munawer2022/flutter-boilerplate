@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/core/extensions.dart';
-import '/config/response/api_response.dart';
-import '/config/response/status.dart';
+import 'package:flutter_template/config/extensions.dart';
+import 'response/api_response.dart';
+import 'response/status.dart';
 
 class StatusSwitcher<T> extends StatelessWidget {
   final ApiResponse<T> response;

@@ -4,7 +4,7 @@ import 'package:flutter_template/features/auth/login/login_navigator.dart';
 import 'package:flutter_template/features/auth/login_with_phone/login_with_phone_navigator.dart';
 import 'with_email_or_phone_initial_params.dart';
 import 'with_email_or_phone_page.dart';
-import '/config/navigation/app_navigator.dart';
+import '../../../config/navigation/app_navigator.dart';
 import '/injection_container.dart';
 
 class WithEmailOrPhoneNavigator with LoginRoute, LoginWithPhoneRoute {

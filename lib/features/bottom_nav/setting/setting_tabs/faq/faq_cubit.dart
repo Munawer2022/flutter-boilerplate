@@ -4,7 +4,7 @@ import 'faq_initial_params.dart';
 import 'faq_navigator.dart';
 import 'faq_state.dart';
 import '../../../../../domain/repositories/bottom_nav/setting/setting_tabs/faq/faq_base_api_service.dart';
-import '/config/response/api_response.dart';
+import '../../../../../config/response/api_response.dart';
 
 class FaqCubit extends Cubit<FaqState> {
   final FaqBaseApiService baseApiServices;

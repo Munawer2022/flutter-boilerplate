@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_bar.dart';
 import 'package:flutter_template/config/components/app_button.dart';
-import 'package:flutter_template/core/app_images.dart';
+import 'package:flutter_template/config/app_images.dart';
 import 'package:lottie/lottie.dart';
 
 class NoInternetScreen extends StatelessWidget {
