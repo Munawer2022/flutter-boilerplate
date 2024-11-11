@@ -42,18 +42,19 @@ class _HomeState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-  final List<Widget> _pages = [
-    CarouselExample(dataSources: dataSources),
-    const NoInternetScreen(),
-    const SizedBox(),
-    const Center(child: Text("Search Chat")),
-    SettingPage(
-        cubit: getIt(param1: const SettingInitialParams()),
-        dataSources: getIt(),
-        splashCubit: getIt(param1: const SplashInitialParams()))
-  ];
+    final List<Widget> pages = [
+      CarouselExample(dataSources: dataSources),
+      const NoInternetScreen(),
+      const SizedBox(),
+      const Center(child: Text("Search Chat")),
+      SettingPage(
+          cubit: getIt(param1: const SettingInitialParams()),
+          dataSources: getIt(),
+          splashCubit: getIt(param1: const SplashInitialParams()),
+          loginDataSources: getIt())
+    ];
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: pages[_currentIndex],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Action for the hexagon button
@@ -159,7 +160,7 @@ class _CarouselExampleState extends State<CarouselExample> {
             title: ListTile(
               leading: const CircleAvatar(),
               title: Text(
-                'Hi , ${info.name}!',
+                'Hi , ${info.data.name}!',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Discover Our Services !'),

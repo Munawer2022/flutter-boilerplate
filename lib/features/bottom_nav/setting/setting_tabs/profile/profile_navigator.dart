@@ -14,14 +14,14 @@ class ProfileNavigator {
 }
 
 mixin ProfileRoute {
-openProfile(ProfileInitialParams initialParams) {
-navigator.push(
-context: context,
-        routeName: ProfilePage(cubit: getIt(param1: initialParams))
-);
-}
+  openProfile(ProfileInitialParams initialParams) {
+    navigator.push(
+        context: context,
+        routeName: ProfilePage(
+            cubit: getIt(param1: initialParams), dataSources: getIt()));
+  }
 
-AppNavigator get navigator;
+  AppNavigator get navigator;
 
-BuildContext get context;
+  BuildContext get context;
 }

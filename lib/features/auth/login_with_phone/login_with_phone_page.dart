@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
+import 'package:flutter_template/config/services.dart';
 import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
 import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'package:flutter_template/data/models/auth/login_with_phone/login_with_phone_model.dart';
@@ -79,31 +80,15 @@ class _LoginWithOtpState extends State<LoginWithPhonePage> {
                       8.verticalSpace,
                       Row(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0.r),
-                                border: Border.all(
-                                  strokeAlign: 1,
-                                  color: const Color(0xffEFE9E9),
-                                )),
-                            child: CountryCodePicker(
-                                padding: EdgeInsets.zero,
-                                margin: EdgeInsets.symmetric(horizontal: 5.w),
-                                boxDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0.r)),
-                                textStyle:
-                                    Theme.of(context).textTheme.titleLarge,
-                                onChanged: (countryCode) {
-                                  setState(() {
-                                    _countryCode =
-                                        countryCode.dialCode ?? "+968";
-                                  });
-                                },
-                                initialSelection: 'OM',
-                                favorite: const ['OM'],
-                                showCountryOnly: false,
-                                showOnlyCountryWhenClosed: false),
+                          countryCodePicker(
+                            context: context,
+                            onChanged: (countryCode) {
+                              setState(() {
+                                _countryCode = countryCode.dialCode ?? "+968";
+                              });
+                            },
                           ),
+
                           10.horizontalSpace,
                           // Expanded(
                           //   child: TextField(

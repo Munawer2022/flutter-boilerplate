@@ -16,7 +16,7 @@ class CheckForExistingUserUseCase {
     return _localStorageRepository.getUserData().then((value) => value
             .fold((l) => left(ExistingUserFailure(error: l.error)),
                 (mockLocalUserInfoStoreModel) {
-          if (mockLocalUserInfoStoreModel.token.isNotEmpty) {
+          if (mockLocalUserInfoStoreModel.data.token.isNotEmpty) {
             _loginDataSources.setLoginDataSources(
                 loginSuccessModel: mockLocalUserInfoStoreModel);
             return right(mockLocalUserInfoStoreModel);

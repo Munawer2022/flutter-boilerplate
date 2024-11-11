@@ -40,7 +40,7 @@ class CustomInterceptor implements InterceptorContract {
         final Map<String, dynamic> responses = jsonDecode(response.body);
         NetworkFailure(error: responses['message']);
       }
-      final refreshToken = dataSources.state.token;
+      final refreshToken = dataSources.state.data.token;
       // final refreshToken = dataSources.state.refreshToken;
       if (refreshToken.isNotEmpty) {
         final refreshResponse = await http.post(Uri.parse(AppUrl.refreshToken),
@@ -70,7 +70,7 @@ class CustomInterceptor implements InterceptorContract {
                   }));
 
           // Retry the original request with the new token
-          final newAccessToken = dataSources.state.token;
+          final newAccessToken = dataSources.state.data.token;
           // final newAccessToken = dataSources.state.accessToken;
           if (newAccessToken.isNotEmpty) {
             final originalRequest = response.request;

@@ -32,7 +32,8 @@ mixin SettingRoute {
         routeName: SettingPage(
             cubit: getIt(param1: initialParams),
             dataSources: getIt(),
-            splashCubit: getIt(param1: const SplashInitialParams())));
+            splashCubit: getIt(param1: const SplashInitialParams()),
+            loginDataSources: getIt()));
   }
 
   AppNavigator get navigator;

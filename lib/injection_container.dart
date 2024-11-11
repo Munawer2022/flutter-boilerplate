@@ -210,7 +210,7 @@ Future<void> init() async {
 */
   getIt.registerSingleton<SettingNavigator>(SettingNavigator(getIt()));
   getIt.registerFactoryParam<SettingCubit, SettingInitialParams, dynamic>(
-      (params, _) => SettingCubit(params, getIt(), getIt(), getIt())
+      (params, _) => SettingCubit(params, getIt(), getIt(), getIt(), getIt())
       // ..setting()
       );
 

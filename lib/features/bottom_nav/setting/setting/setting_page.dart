@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/translation_helper.dart';
+import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
 import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'package:flutter_template/features/auth/splash/splash_cubit.dart';
 import 'package:flutter_template/features/auth/splash/splash_state.dart';
@@ -16,12 +17,14 @@ class SettingPage extends StatefulWidget {
   final SettingCubit cubit;
   final SplashDataSources dataSources;
   final SplashCubit splashCubit;
+  final LoginDataSources loginDataSources;
 
   const SettingPage(
       {super.key,
       required this.cubit,
       required this.dataSources,
-      required this.splashCubit});
+      required this.splashCubit,
+      required this.loginDataSources});
 
   @override
   State<SettingPage> createState() => _SettingState();
@@ -84,8 +87,8 @@ class _SettingState extends State<SettingPage> {
                 color: Theme.of(context).cardColor,
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: listTile(
-              title:
-                  TranslationHelper.tr(widget.dataSources.state, 'user_name'),
+              title: TranslationHelper.tr(widget.dataSources.state,
+                  widget.loginDataSources.state.data.name),
               subtitle: const Text("A professionally Doctor"),
               leading: const CircleAvatar(
                 backgroundImage: NetworkImage(
@@ -346,7 +349,7 @@ class _SettingState extends State<SettingPage> {
                   TranslationHelper.tr(widget.dataSources.state, 'cancel')),
             ),
             TextButton(
-              onPressed: () => cubit.goLoginPage(),
+              onPressed: () => cubit.logout(),
               child: Text(
                   TranslationHelper.tr(widget.dataSources.state, 'confirm')),
             ),

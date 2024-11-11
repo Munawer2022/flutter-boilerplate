@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
+import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting/setting_page.dart';
 import 'profile_cubit.dart';
 import 'profile_state.dart';
@@ -11,10 +12,12 @@ import '../../../../../config/status_switcher.dart';
 
 class ProfilePage extends StatefulWidget {
   final ProfileCubit cubit;
+  final LoginDataSources dataSources;
 
   const ProfilePage({
     super.key,
     required this.cubit,
+    required this.dataSources,
   });
 
   @override
@@ -32,6 +35,10 @@ class _ProfileState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final info = widget.dataSources.state.data;
+    final name = TextEditingController(text: info.name);
+    final email = TextEditingController(text: info.email);
+    final phone = TextEditingController(text: info.phone);
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
@@ -79,9 +86,9 @@ class _ProfileState extends State<ProfilePage> {
               const Text('Full Name'),
               10.verticalSpace,
               AppTextFormField.textFormField(
+                controller: name,
                   context: context,
                   titleText: 'Full Nmae',
-                  hintText: 'Ahmed',
                   color: Colors.transparent)
             ],
           ),
@@ -92,9 +99,9 @@ class _ProfileState extends State<ProfilePage> {
               const Text('Email'),
               10.verticalSpace,
               AppTextFormField.textFormField(
+                controller: email,
                   context: context,
                   titleText: 'Full Nmae',
-                  hintText: 'Ahmed@xyz.com',
                   color: Colors.transparent)
             ],
           ),
@@ -105,10 +112,10 @@ class _ProfileState extends State<ProfilePage> {
               const Text('Phone Number'),
               10.verticalSpace,
               AppTextFormField.textFormField(
+                controller: phone,
                   context: context,
                   titleText: 'Full Nmae',
                   keyboardType: TextInputType.number,
-                  hintText: '+983258923',
                   color: Colors.transparent),
               30.verticalSpace,
               AppButton.getButton(
