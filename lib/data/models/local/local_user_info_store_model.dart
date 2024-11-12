@@ -39,7 +39,7 @@ class Data {
   final String token;
   final String password;
   final String profileImage;
-  final String otp;
+  final dynamic otp;
   final String isActive;
   final String createdAt;
   final String updatedAt;
@@ -52,7 +52,7 @@ class Data {
     String? token,
     String? password,
     String? profileImage,
-    String? otp,
+    dynamic otp,
     String? isActive,
     String? createdAt,
     String? updatedAt,

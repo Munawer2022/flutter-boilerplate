@@ -1,6 +1,8 @@
 /*
 ************************ Otp ************************
 */
+import 'package:flutter_template/domain/usecases/auth/login_with_phone/login_with_phone_use_cases.dart';
+
 import 'features/auth/otp/otp_cubit.dart';
 import 'features/auth/otp/otp_navigator.dart';
 import 'features/auth/otp/otp_initial_params.dart';
@@ -270,10 +272,12 @@ Future<void> init() async {
   getIt.registerFactoryParam<SignUpCubit, SignUpInitialParams, dynamic>(
       (params, _) => SignUpCubit(params, getIt(), getIt()));
 /*
-************************ LoginWithOtp ************************
+************************ LoginWithPhone ************************
 */
   getIt.registerSingleton<LoginWithPhoneBaseApiService>(
       LoginWithPhoneRepository(getIt()));
+      getIt.registerSingleton<LoginWithOtpUseCases>(
+      LoginWithOtpUseCases(getIt(), getIt(), getIt()));
   // getIt.registerSingleton<LoginWithOtpBaseApiService>(MockLoginWithOtpRepository());
   getIt.registerSingleton<LoginWithPhoneNavigator>(
       LoginWithPhoneNavigator(getIt()));

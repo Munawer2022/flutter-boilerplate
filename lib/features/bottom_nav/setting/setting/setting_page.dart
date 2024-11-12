@@ -63,6 +63,21 @@ class _SettingState extends State<SettingPage> {
                     Text(TranslationHelper.tr(
                         widget.dataSources.state, 'title'));
               }),
+          bottom: PreferredSize(
+              preferredSize:
+                  const Size.fromHeight(4.0), // Adjust height as needed
+              child: BlocBuilder(
+                bloc: splashCubit,
+                builder: (context, state) {
+                  state as SplashState;
+                  return state.isloadingLanguageChange
+                      ? const LinearProgressIndicator(
+                          backgroundColor: Colors.transparent)
+                      : const SizedBox(
+                          height: 4.0); // Empty space when not loading
+                },
+              )),
+
           // title: const Text("Settings"),
           // surfaceTintColor: Colors.grey.shade100,
           // backgroundColor: Colors.grey.shade100,
@@ -71,14 +86,14 @@ class _SettingState extends State<SettingPage> {
       body: ListView(
         padding: EdgeInsets.all(20.0.r),
         children: [
-          BlocBuilder(
-              bloc: splashCubit,
-              builder: (context, state) {
-                state as SplashState;
-                return state.isloadingLanguageChange
-                    ? const LinearProgressIndicator()
-                    : const SizedBox();
-              }),
+          // BlocBuilder(
+          //     bloc: splashCubit,
+          //     builder: (context, state) {
+          //       state as SplashState;
+          //       return state.isloadingLanguageChange
+          //           ? const LinearProgressIndicator()
+          //           : const SizedBox();
+          //     }),
           Container(
             // margin: EdgeInsets.zero
             // shape: Border.all(),

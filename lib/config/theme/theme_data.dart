@@ -33,7 +33,7 @@ class AppThemes {
         iconTheme: IconThemeData(
             color: _getColor('app_icon_color', fallbackColor: '#FF4747')),
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
+          // backgroundColor: Colors.white,
           // _getColor('app_primary_color', fallbackColor: '#2F8C1D'),
           titleTextStyle: TextStyle(
             color: _getColor('app_heading_color', fallbackColor: '#000000'),
@@ -86,12 +86,12 @@ class AppThemes {
         disabledColor:
             _getColor('app_button_disable_color', fallbackColor: '#D81818'),
         scaffoldBackgroundColor: Colors.black,
-        cardColor: Colors.black,
+        // cardColor: Colors.blueGrey.shade900,
         iconTheme: IconThemeData(
             color: _getColor('app_icon_color', fallbackColor: '#FF4747')),
         appBarTheme: AppBarTheme(
-          backgroundColor:
-              _getColor('app_primary_color', fallbackColor: '#2F8C1D'),
+          // backgroundColor:
+          //     _getColor('app_primary_color', fallbackColor: '#2F8C1D'),
           titleTextStyle: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -127,7 +127,7 @@ class AppThemes {
           ),
           labelLarge: TextStyle(color: Colors.white, fontSize: 18.sp),
         ),
-        dividerTheme: DividerThemeData(color: Colors.grey.shade800),
+        // dividerTheme: DividerThemeData(color: Colors.grey.shade800),
         colorScheme: ColorScheme.fromSeed(
           seedColor: _getColor('app_primary_color', fallbackColor: '#2F8C1D'),
           brightness: Brightness.dark,
