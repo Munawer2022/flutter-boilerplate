@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
 import 'package:flutter_template/config/services.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/data/models/auth/sign/sign_up_model.dart';
 import 'sign_up_cubit.dart';
 import 'sign_up_state.dart';
@@ -14,7 +14,7 @@ import '../../../config/status_switcher.dart';
 
 class SignUpPage extends StatefulWidget {
   final SignUpCubit cubit;
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
   const SignUpPage({
     super.key,
     required this.cubit,

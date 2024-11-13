@@ -58,8 +58,8 @@ import 'domain/repositories/bottom_nav/setting/setting_tabs/faq/faq_base_api_ser
 /*
 ************************ NotificationSetting ************************
 */
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/domain/usecases/auth/splash/splash_use_cases.dart';
 
 import 'features/bottom_nav/setting/setting_tabs/notification/notification_setting/notification_setting_cubit.dart';
@@ -125,7 +125,7 @@ import 'features/auth/splash/splash_navigator.dart';
 /*
  ************************ login ************************
 */
-import 'data/datasources/auth/login/login_data_sources.dart';
+import 'data/datasources/user/user_data_sources.dart';
 import 'domain/usecases/auth/login/login_use_cases.dart';
 import 'domain/repositories/auth/login/login_base_api_service.dart';
 import 'data/repositories/auth/login/login_repository.dart';
@@ -147,8 +147,8 @@ final getIt = GetIt.instance;
 Future<void> init() async {
   getIt.registerSingleton<AppNavigator>(AppNavigator());
 
-  getIt.registerSingleton<LoginDataSources>(LoginDataSources());
-  getIt.registerSingleton<SplashDataSources>(SplashDataSources());
+  getIt.registerSingleton<UserDataSources>(UserDataSources());
+  getIt.registerSingleton<AppDataSources>(AppDataSources());
   getIt.registerSingleton<AppThemes>(AppThemes(getIt()));
 
 /*
@@ -276,7 +276,7 @@ Future<void> init() async {
 */
   getIt.registerSingleton<LoginWithPhoneBaseApiService>(
       LoginWithPhoneRepository(getIt()));
-      getIt.registerSingleton<LoginWithOtpUseCases>(
+  getIt.registerSingleton<LoginWithOtpUseCases>(
       LoginWithOtpUseCases(getIt(), getIt(), getIt()));
   // getIt.registerSingleton<LoginWithOtpBaseApiService>(MockLoginWithOtpRepository());
   getIt.registerSingleton<LoginWithPhoneNavigator>(

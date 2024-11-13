@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_bar.dart';
-import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
+import 'package:flutter_template/data/datasources/user/user_data_sources.dart';
 import 'package:flutter_template/features/no_internet_page.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting/setting_initial_params.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting/setting_page.dart';
@@ -14,7 +14,7 @@ import '../../../config/status_switcher.dart';
 
 class HomePage extends StatefulWidget {
   final HomeCubit cubit;
-  final LoginDataSources dataSources;
+  final UserDataSources dataSources;
 
   const HomePage({
     super.key,
@@ -28,7 +28,7 @@ class HomePage extends StatefulWidget {
 
 class _HomeState extends State<HomePage> {
   HomeCubit get cubit => widget.cubit;
-  LoginDataSources get dataSources => widget.dataSources;
+  UserDataSources get dataSources => widget.dataSources;
 
   @override
   void initState() {
@@ -110,7 +110,7 @@ class _HomeState extends State<HomePage> {
 }
 
 class CarouselExample extends StatefulWidget {
-  final LoginDataSources dataSources;
+  final UserDataSources dataSources;
   const CarouselExample({super.key, required this.dataSources});
 
   @override

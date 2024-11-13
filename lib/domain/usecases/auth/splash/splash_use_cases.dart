@@ -1,4 +1,4 @@
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/domain/repositories/local/local_storage_base_api_service.dart';
 import 'package:flutter_template/domain/repositories/auth/splash/splash_base_api_service.dart';
 import 'package:fpdart/fpdart.dart';
@@ -7,7 +7,7 @@ import '../../../failures/auth/splash/splash_failure.dart';
 
 class SplashUseCases {
   final SplashBaseApiService baseApiService;
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
   final LocalStorageRepository _localStorageRepository;
 
   SplashUseCases(

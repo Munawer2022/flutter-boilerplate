@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SplashDataSources extends Cubit<Map<String, dynamic>> {
+class AppDataSources extends Cubit<Map<String, dynamic>> {
   String currentLang = 'en';
 
-  SplashDataSources() : super({});
+  AppDataSources() : super({});
   setSplashDataSources({required Map<String, dynamic> systemSettings}) =>
       emit(systemSettings);
 }

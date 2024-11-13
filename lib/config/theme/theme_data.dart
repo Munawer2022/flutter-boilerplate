@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 
 class AppThemes {
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
 
   AppThemes(this.dataSources);
 
@@ -33,7 +33,7 @@ class AppThemes {
         iconTheme: IconThemeData(
             color: _getColor('app_icon_color', fallbackColor: '#FF4747')),
         appBarTheme: AppBarTheme(
-          // backgroundColor: Colors.white,
+          backgroundColor: Colors.white,
           // _getColor('app_primary_color', fallbackColor: '#2F8C1D'),
           titleTextStyle: TextStyle(
             color: _getColor('app_heading_color', fallbackColor: '#000000'),
@@ -45,8 +45,8 @@ class AppThemes {
             style: ElevatedButton.styleFrom(
                 backgroundColor: _getColor('app_button_active_color',
                     fallbackColor: '#F5870A'),
-                disabledBackgroundColor: _getColor('app_button_disable_color',
-                    fallbackColor: '#D81818'),
+                // disabledBackgroundColor: _getColor('app_button_disable_color',
+                //     fallbackColor: '#D81818'),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0.r)),
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -89,10 +89,10 @@ class AppThemes {
         // cardColor: Colors.blueGrey.shade900,
         iconTheme: IconThemeData(
             color: _getColor('app_icon_color', fallbackColor: '#FF4747')),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           // backgroundColor:
           //     _getColor('app_primary_color', fallbackColor: '#2F8C1D'),
-          titleTextStyle: const TextStyle(
+          titleTextStyle: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 24,
@@ -100,10 +100,10 @@ class AppThemes {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-                backgroundColor: _getColor('app_button_active_color',
-                    fallbackColor: '#F5870A'),
-                disabledBackgroundColor: _getColor('app_button_disable_color',
-                    fallbackColor: '#D81818'),
+                // backgroundColor: _getColor('app_button_active_color',
+                //     fallbackColor: '#F5870A'),
+                // disabledBackgroundColor: _getColor('app_button_disable_color',
+                //     fallbackColor: '#D81818'),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0.r)),
                 padding: EdgeInsets.symmetric(horizontal: 16.w),

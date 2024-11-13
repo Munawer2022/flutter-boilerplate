@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/features/auth/onboarding/widget/dot_indicator.dart';
 import 'package:flutter_template/features/auth/onboarding/widget/onboard_content.dart';
 import 'onboarding_cubit.dart';
 
 class OnboardingPage extends StatefulWidget {
   final OnboardingCubit cubit;
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
 
   const OnboardingPage({
     super.key,

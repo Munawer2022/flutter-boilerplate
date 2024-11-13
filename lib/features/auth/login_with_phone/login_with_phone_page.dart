@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
 import 'package:flutter_template/config/services.dart';
-import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/user/user_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/data/models/auth/login_with_phone/login_with_phone_model.dart';
 import 'login_with_phone_cubit.dart';
 import 'login_with_phone_state.dart';
@@ -15,7 +15,7 @@ import '../../../config/status_switcher.dart';
 
 class LoginWithPhonePage extends StatefulWidget {
   final LoginWithPhoneCubit cubit;
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
 
   const LoginWithPhonePage({
     super.key,

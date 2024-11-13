@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/translation_helper.dart';
-import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/user/user_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/features/auth/splash/splash_cubit.dart';
 import 'package:flutter_template/features/auth/splash/splash_state.dart';
 import 'setting_cubit.dart';
@@ -15,9 +15,9 @@ import '../../../../config/status_switcher.dart';
 
 class SettingPage extends StatefulWidget {
   final SettingCubit cubit;
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
   final SplashCubit splashCubit;
-  final LoginDataSources loginDataSources;
+  final UserDataSources loginDataSources;
 
   const SettingPage(
       {super.key,

@@ -1,13 +1,13 @@
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/data/models/local/local_user_info_store_model.dart';
 import 'package:fpdart/fpdart.dart';
-import '../../../data/datasources/auth/login/login_data_sources.dart';
+import '../../../data/datasources/user/user_data_sources.dart';
 import '/domain/repositories/local/local_storage_base_api_service.dart';
 import '/domain/failures/local/existing_user_failure.dart';
 
 class CheckForExistingUserUseCase {
-  final LoginDataSources _loginDataSources;
-  final SplashDataSources dataSources;
+  final UserDataSources _loginDataSources;
+  final AppDataSources dataSources;
   final LocalStorageRepository _localStorageRepository;
   CheckForExistingUserUseCase(
       this._loginDataSources, this._localStorageRepository, this.dataSources);

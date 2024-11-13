@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'features/auth/onboarding/onboarding_page.dart';
 import 'features/auth/onboarding/onboarding_initial_params.dart';
 import 'config/theme/theme_data.dart';
@@ -28,7 +28,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
 
   const MyApp({super.key, required this.dataSources});
 
@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
                         debugShowCheckedModeBanner: false,
                         theme:
                             state ? appThemes.darkTheme : appThemes.lightTheme,
-                            // state ? appThemes.lightTheme : appThemes.darkTheme,
+                        // state ? appThemes.lightTheme : appThemes.darkTheme,
 
                         // scaffoldMessengerKey: scaffoldMessengerKey,
                         // home: OnboardingPage(cubit: getIt(param1: const OnboardingInitialParams()))

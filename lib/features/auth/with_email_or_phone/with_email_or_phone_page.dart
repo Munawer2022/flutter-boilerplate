@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/features/auth/onboarding/onboarding_page.dart';
 import 'with_email_or_phone_cubit.dart';
 import 'with_email_or_phone_state.dart';
@@ -11,7 +11,7 @@ import '../../../config/status_switcher.dart';
 
 class WithEmailOrPhonePage extends StatefulWidget {
   final WithEmailOrPhoneCubit cubit;
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
 
   const WithEmailOrPhonePage({
     super.key,

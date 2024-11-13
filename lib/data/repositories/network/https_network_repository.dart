@@ -9,13 +9,13 @@ import 'package:http_interceptor/http_interceptor.dart';
 import '/domain/failures/network/network_failure.dart';
 import 'package:http/http.dart' as http;
 
-import '../../datasources/auth/login/login_data_sources.dart';
+import '../../datasources/user/user_data_sources.dart';
 
 import '/domain/repositories/network/network_base_api_service.dart';
 import 'interceptor.dart';
 
 class HttpsNetworkRepository implements NetworkBaseApiService {
-  final LoginDataSources _loginDataSources;
+  final UserDataSources _loginDataSources;
   final LocalStorageRepository localStorageRepository;
   late Client _client;
 

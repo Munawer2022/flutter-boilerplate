@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
-import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
+import 'package:flutter_template/data/datasources/user/user_data_sources.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting/setting_page.dart';
 import 'profile_cubit.dart';
 import 'profile_state.dart';
@@ -12,7 +12,7 @@ import '../../../../../config/status_switcher.dart';
 
 class ProfilePage extends StatefulWidget {
   final ProfileCubit cubit;
-  final LoginDataSources dataSources;
+  final UserDataSources dataSources;
 
   const ProfilePage({
     super.key,
@@ -86,7 +86,7 @@ class _ProfileState extends State<ProfilePage> {
               const Text('Full Name'),
               10.verticalSpace,
               AppTextFormField.textFormField(
-                controller: name,
+                  controller: name,
                   context: context,
                   titleText: 'Full Nmae',
                   color: Colors.transparent)
@@ -99,7 +99,7 @@ class _ProfileState extends State<ProfilePage> {
               const Text('Email'),
               10.verticalSpace,
               AppTextFormField.textFormField(
-                controller: email,
+                  controller: email,
                   context: context,
                   titleText: 'Full Nmae',
                   color: Colors.transparent)
@@ -112,7 +112,7 @@ class _ProfileState extends State<ProfilePage> {
               const Text('Phone Number'),
               10.verticalSpace,
               AppTextFormField.textFormField(
-                controller: phone,
+                  controller: phone,
                   context: context,
                   titleText: 'Full Nmae',
                   keyboardType: TextInputType.number,

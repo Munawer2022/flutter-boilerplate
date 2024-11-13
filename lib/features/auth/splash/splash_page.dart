@@ -1,10 +1,13 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/app_images.dart';
 import 'package:flutter_template/config/shimmer.dart';
 import 'package:flutter_template/config/status_switcher.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/data/models/auth/splash/splash_model.dart';
 import 'package:flutter_template/features/auth/splash/splash_state.dart';
 import 'splash_cubit.dart';
@@ -12,7 +15,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class SplashPage extends StatefulWidget {
   final SplashCubit cubit;
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
 
   const SplashPage({
     super.key,
@@ -37,6 +40,18 @@ class _SplashState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     final data = widget.dataSources.state;
+    final String logoBase64 =
+        data.isNotEmpty ? data['data']['app_logo_base64'] : '';
+
+    Uint8List? logoBytes;
+    if (logoBase64.isNotEmpty) {
+      try {
+        logoBytes = base64Decode(logoBase64);
+      } catch (e) {
+        logoBytes = null;
+      }
+    }
+
     return Scaffold(
       // backgroundColor: Colors.amber,
       body: Padding(
@@ -48,44 +63,33 @@ class _SplashState extends State<SplashPage> {
             BlocBuilder(
               bloc: widget.dataSources,
               builder: (context, state) {
-                // Extract the logo URL from data or use a default value
-                final String logoUrl = data.isNotEmpty
-                    ? data['data']['app_logo']
-                    : ''; // Default placeholder URL
-
-                return CachedNetworkImage(
-                  imageUrl: logoUrl,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => shimmer(
-                    child: CircleAvatar(radius: 80.r),
-                  ), // Display shimmer while loading
-                  errorWidget: (context, url, error) =>
-                      const CircularProgressIndicator.adaptive(),
-                );
+                if (logoBytes != null) {
+                  return Image.memory(logoBytes, fit: BoxFit.cover);
+                } else {
+                  return shimmer(child: CircleAvatar(radius: 80.r));
+                }
               },
             ),
 
             // BlocBuilder(
-            //     bloc: cubit,
-            //     builder: (context, state) {
-            //       state as SplashState;
-            //       print("data${state.response.status}");
-            //       return StatusSwitcher<Map<String, dynamic>>(
-            //           response: state.response,
-            //           onLoading: (BuildContext context) =>
-            //               shimmer(child: CircleAvatar(radius: 80.r)),
-            //           onCompleted: (BuildContext context, data) {
-            //             return CachedNetworkImage(
-            //               imageUrl: data['data']['app_logo'],
-            //               fit: BoxFit.cover,
-            //               placeholder: (context, url) => shimmer(
-            //                   child: CircleAvatar(
-            //                       radius: 80.r)), // Placeholder while loading
-            //               errorWidget: (context, url, error) =>
-            //                   const Icon(Icons.error), // Handle error
-            //             );
-            //           });
-            //     }),
+            //   bloc: widget.dataSources,
+            //   builder: (context, state) {
+            //     // Extract the logo URL from data or use a default value
+            //     final String logoUrl = data.isNotEmpty
+            //         ? data['data']['app_logo']
+            //         : ''; // Default placeholder URL
+
+            //     return CachedNetworkImage(
+            //       imageUrl: logoUrl,
+            //       fit: BoxFit.cover,
+            //       placeholder: (context, url) => shimmer(
+            //         child: CircleAvatar(radius: 80.r),
+            //       ), // Display shimmer while loading
+            //       errorWidget: (context, url, error) =>
+            //           const CircularProgressIndicator.adaptive(),
+            //     );
+            //   },
+            // ),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Column(

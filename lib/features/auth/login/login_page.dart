@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_bar.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
-import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
-import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
+import 'package:flutter_template/data/datasources/user/user_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/features/auth/splash/splash_cubit.dart';
 import 'login_cubit.dart';
 import 'login_state.dart';
@@ -14,7 +14,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 
 class LoginPage extends StatefulWidget {
   final LoginCubit cubit;
-  final SplashDataSources dataSources;
+  final AppDataSources dataSources;
   final SplashCubit splashCubit;
 
   const LoginPage(

@@ -1,4 +1,4 @@
-import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
+import 'package:flutter_template/data/datasources/user/user_data_sources.dart';
 import 'package:flutter_template/data/models/local/local_user_info_store_model.dart';
 import 'package:flutter_template/domain/repositories/auth/login_with_phone/login_with_phone_base_api_service.dart';
 import 'package:flutter_template/domain/repositories/local/local_storage_base_api_service.dart';
@@ -8,7 +8,7 @@ import '../../../failures/auth/login_with_phone/login_with_phone_failure.dart';
 
 class LoginWithOtpUseCases {
   final LoginWithPhoneBaseApiService _baseApiService;
-  final LoginDataSources _dataSources;
+  final UserDataSources _dataSources;
   final LocalStorageRepository _localStorageRepository;
   LoginWithOtpUseCases(
       this._baseApiService, this._dataSources, this._localStorageRepository);
