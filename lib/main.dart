@@ -85,7 +85,8 @@ class MyApp extends StatelessWidget {
 
                         home: SplashPage(
                             cubit: getIt(param1: const SplashInitialParams()),
-                            dataSources: getIt()));
+                            dataSources: getIt(),
+                            logoDataSources: getIt()));
                   });
             }));
   }

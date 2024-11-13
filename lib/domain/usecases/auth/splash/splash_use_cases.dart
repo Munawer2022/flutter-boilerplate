@@ -16,15 +16,17 @@ class SplashUseCases {
   Future<Either<SplashFailure, Map<String, dynamic>>> execute(
           {required String lang}) async =>
       await baseApiService.systemSettings(queryParams: {"lang": lang}).then(
-          (value) => value.fold(
-              (l) => left(l),
-              (r) => _localStorageRepository
-                  .setSelectedLanguage(lang: lang)
-                  .then((value) => value
-                          .fold((l) => left(SplashFailure(error: l.error)),
-                              (systemSettings) {
-                        dataSources.currentLang = lang;
-                        dataSources.setSplashDataSources(systemSettings: r);
-                        return right(r);
-                      }))));
+          (value) => value.fold((l) => left(l), (r) async {
+                await _localStorageRepository.setLogoBase64(
+                    logoBase64: r['data']['app_logo_base64']);
+                return _localStorageRepository
+                    .setSelectedLanguage(lang: lang)
+                    .then((value) => value
+                            .fold((l) => left(SplashFailure(error: l.error)),
+                                (systemSettings) {
+                          dataSources.currentLang = lang;
+                          dataSources.setSplashDataSources(systemSettings: r);
+                          return right(r);
+                        }));
+              }));
 }

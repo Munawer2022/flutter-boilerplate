@@ -1,6 +1,7 @@
 /*
 ************************ Otp ************************
 */
+import 'package:flutter_template/data/datasources/app/logo_data_sources.dart';
 import 'package:flutter_template/domain/usecases/auth/login_with_phone/login_with_phone_use_cases.dart';
 
 import 'features/auth/otp/otp_cubit.dart';
@@ -149,6 +150,7 @@ Future<void> init() async {
 
   getIt.registerSingleton<UserDataSources>(UserDataSources());
   getIt.registerSingleton<AppDataSources>(AppDataSources());
+  getIt.registerSingleton<LogoDataSources>(LogoDataSources());
   getIt.registerSingleton<AppThemes>(AppThemes(getIt()));
 
 /*
@@ -184,7 +186,7 @@ Future<void> init() async {
   getIt.registerSingleton<LoginBaseApiService>(LoginRepository(getIt()));
 //   getIt.registerSingleton<LoginBaseApiService>(MockLoginRepository());
   getIt.registerSingleton<CheckForExistingUserUseCase>(
-      CheckForExistingUserUseCase(getIt(), getIt(), getIt()));
+      CheckForExistingUserUseCase(getIt(), getIt(), getIt(), getIt()));
   getIt.registerSingleton<LoginUseCases>(
       LoginUseCases(getIt(), getIt(), getIt()));
   getIt.registerSingleton<LoginNavigator>(LoginNavigator(getIt()));

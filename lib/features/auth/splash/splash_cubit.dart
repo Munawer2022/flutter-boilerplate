@@ -26,6 +26,7 @@ class SplashCubit extends Cubit<SplashState> {
 
     try {
       await Future.wait([
+        checkForExistingUserUseCase.executeLogoBase64(),
         getThemeUseCase.execute(),
         checkForExistingUserUseCase.executeCheckSelectedLanguage().then(
             (value) => value.fold((error) {},

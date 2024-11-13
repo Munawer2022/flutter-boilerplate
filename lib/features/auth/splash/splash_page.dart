@@ -8,6 +8,8 @@ import 'package:flutter_template/config/app_images.dart';
 import 'package:flutter_template/config/shimmer.dart';
 import 'package:flutter_template/config/status_switcher.dart';
 import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
+import 'package:flutter_template/data/datasources/app/logo_data_sources.dart';
+import 'package:flutter_template/data/models/auth/splash/language_translations_model.dart';
 import 'package:flutter_template/data/models/auth/splash/splash_model.dart';
 import 'package:flutter_template/features/auth/splash/splash_state.dart';
 import 'splash_cubit.dart';
@@ -16,11 +18,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 class SplashPage extends StatefulWidget {
   final SplashCubit cubit;
   final AppDataSources dataSources;
+  final LogoDataSources logoDataSources;
 
   const SplashPage({
     super.key,
     required this.cubit,
     required this.dataSources,
+    required this.logoDataSources,
   });
 
   @override
@@ -40,10 +44,12 @@ class _SplashState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     final data = widget.dataSources.state;
+    final logo = widget.logoDataSources.state;
     final String logoBase64 =
         data.isNotEmpty ? data['data']['app_logo_base64'] : '';
 
     Uint8List? logoBytes;
+    Uint8List? logoBytes2;
     if (logoBase64.isNotEmpty) {
       try {
         logoBytes = base64Decode(logoBase64);
@@ -51,7 +57,16 @@ class _SplashState extends State<SplashPage> {
         logoBytes = null;
       }
     }
-
+    if (logo.isNotEmpty) {
+      try {
+        // Try to decode the logo data as base64, else use it as URL
+        logoBytes2 = base64Decode(logo);
+      } catch (e) {
+        // If decoding fails, treat logo as a URL and handle it differently (e.g., display a network image)
+        logoBytes2 = null;
+      }
+    }
+    print("applogo $logo");
     return Scaffold(
       // backgroundColor: Colors.amber,
       body: Padding(
@@ -60,16 +75,20 @@ class _SplashState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(),
-            BlocBuilder(
-              bloc: widget.dataSources,
-              builder: (context, state) {
-                if (logoBytes != null) {
-                  return Image.memory(logoBytes, fit: BoxFit.cover);
-                } else {
-                  return shimmer(child: CircleAvatar(radius: 80.r));
-                }
-              },
-            ),
+
+            if (logo.isNotEmpty)
+              Image.memory(logoBytes2!, fit: BoxFit.cover)
+            else
+              BlocBuilder(
+                bloc: widget.dataSources,
+                builder: (context, state) {
+                  if (logoBytes != null) {
+                    return Image.memory(logoBytes, fit: BoxFit.cover);
+                  } else {
+                    return shimmer(child: CircleAvatar(radius: 80.r));
+                  }
+                },
+              ),
 
             // BlocBuilder(
             //   bloc: widget.dataSources,

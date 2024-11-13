@@ -122,4 +122,29 @@ class InsecureLocalStorageRepository implements LocalStorageRepository {
       return left(RemoveLocalStorageFailure(error: ex.toString()));
     }
   }
+
+// App logo
+
+  @override
+  Future<Either<SetLocalStorageFailure, bool>> setLogoBase64(
+      {required String logoBase64}) async {
+    try {
+      final SharedPreferences sp = await SharedPreferences.getInstance();
+      await sp.setString('logoBase64', logoBase64);
+      return right(true);
+    } catch (ex) {
+      return left(SetLocalStorageFailure(error: ex.toString()));
+    }
+  }
+
+  @override
+  Future<Either<GetLocalStorageFailure, String>> getLogoBase64() async {
+    try {
+      final SharedPreferences sp = await SharedPreferences.getInstance();
+      String? logo = sp.getString('logoBase64') ?? '';
+      return right(logo);
+    } catch (ex) {
+      return left(GetLocalStorageFailure(error: ex.toString()));
+    }
+  }
 }
