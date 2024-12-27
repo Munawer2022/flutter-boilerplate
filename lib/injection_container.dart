@@ -3,6 +3,7 @@
 */
 import 'package:flutter_template/data/datasources/app/logo_data_sources.dart';
 import 'package:flutter_template/domain/usecases/auth/login_with_phone/login_with_phone_use_cases.dart';
+import 'package:flutter_template/domain/usecases/auth/sign_up/sign_up_use_cases.dart';
 
 import 'features/auth/otp/otp_cubit.dart';
 import 'features/auth/otp/otp_navigator.dart';
@@ -269,6 +270,8 @@ Future<void> init() async {
 ************************ SignUp ************************
 */
   getIt.registerSingleton<SignUpBaseApiService>(SignUpRepository(getIt()));
+  getIt.registerSingleton<SignUpUseCases>(
+      SignUpUseCases(getIt(), getIt(), getIt()));
   // getIt.registerSingleton<SignUpBaseApiService>(MockSignUpRepository());
   getIt.registerSingleton<SignUpNavigator>(SignUpNavigator(getIt()));
   getIt.registerFactoryParam<SignUpCubit, SignUpInitialParams, dynamic>(
