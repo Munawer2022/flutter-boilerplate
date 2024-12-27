@@ -9,6 +9,10 @@ import 'profile_cubit.dart';
 import 'profile_state.dart';
 import 'profile_state.dart';
 import '../../../../../config/status_switcher.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class ProfilePage extends StatefulWidget {
   final ProfileCubit cubit;
@@ -25,20 +29,180 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfileState extends State<ProfilePage> {
-  ProfileCubit get cubit => widget.cubit;
+  final _formKey = GlobalKey<FormState>();
+  XFile? _selectedImage;
+  bool _isLoading = false;
+
+  late final TextEditingController _nameController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _phoneController;
 
   @override
   void initState() {
     super.initState();
-    cubit.navigator.context = context;
+    final info = widget.dataSources.state.data;
+    _nameController = TextEditingController(text: info.name);
+    _emailController = TextEditingController(text: info.email);
+    _phoneController = TextEditingController(text: info.phone);
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _updateProfile() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+
+    try {
+      final userId = widget.dataSources.state.data.id;
+      final uri = Uri.parse('https://pro.ramzdev.space/api/customers/$userId');
+      
+      // Create multipart request
+      final request = http.MultipartRequest('POST', uri);
+      
+      // Add text fields
+      request.fields['name'] = _nameController.text;
+      request.fields['email'] = _emailController.text;
+      request.fields['phone'] = _phoneController.text;
+
+      // Add image if selected
+      if (_selectedImage != null) {
+        final file = await http.MultipartFile.fromPath(
+          'profile_image',
+          _selectedImage!.path,
+        );
+        request.files.add(file);
+      }
+
+      // Send request
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile updated successfully')),
+        );
+        
+        // Optionally refresh user data here
+        // await widget.dataSources.refreshUserData();
+      } else {
+        if (!mounted) return;
+        final error = jsonDecode(response.body)['message'] ?? 'Update failed';
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error)),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error updating profile: ${e.toString()}')),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    try {
+      final XFile? image = await picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1024,
+        maxHeight: 1024,
+        imageQuality: 85,
+      );
+      if (image != null) {
+        setState(() => _selectedImage = image);
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to pick image')),
+      );
+    }
+  }
+
+  Future<void> _showDeleteConfirmation() async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Account'),
+          content: const Text(
+            'Are you sure you want to delete your account? This action cannot be undone.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _deleteAccount();
+              },
+              child: const Text(
+                'Delete',
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _deleteAccount() async {
+    setState(() => _isLoading = true);
+
+    try {
+      final response = await http.post(
+        Uri.parse('https://pro.ramzdev.space/api/delete-account'),
+        body: {
+          'id': widget.dataSources.state.data.id.toString(),
+        },
+      );
+
+      if (!mounted) return;
+
+      if (response.statusCode == 200) {
+        // Clear user data and navigate to login
+        // You might want to call a logout method from your auth service here
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          '/login', // Replace with your login route name
+          (route) => false,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to delete account. Please try again.'),
+          ),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: ${e.toString()}'),
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final info = widget.dataSources.state.data;
-    final name = TextEditingController(text: info.name);
-    final email = TextEditingController(text: info.email);
-    final phone = TextEditingController(text: info.phone);
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
@@ -49,89 +213,125 @@ class _ProfileState extends State<ProfilePage> {
         elevation: 0,
         // scrolledUnderElevation: 0,
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        children: [
-          20.verticalSpace,
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              const CircleAvatar(radius: 60),
-              Stack(
-                alignment: AlignmentDirectional.bottomEnd,
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          children: [
+            20.verticalSpace,
+            // Profile image section
+            Center(
+              child: Stack(
                 children: [
-                  Container(
-                    height: 160.h,
-                    width: 160.w,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue),
-                        shape: BoxShape.circle),
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: _selectedImage != null 
+                      ? FileImage(File(_selectedImage!.path))
+                      : NetworkImage(widget.dataSources.state.data.profileImage ?? '') as ImageProvider,
                   ),
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.blue, shape: BoxShape.circle),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
                     child: IconButton(
-                        onPressed: () {},
-                        icon:
-                            const Icon(Icons.edit_square, color: Colors.white)),
-                  )
+                      onPressed: _pickImage,
+                      icon: const Icon(Icons.camera_alt),
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        foregroundColor: Colors.white,
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ],
-          ),
-          40.verticalSpace,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Full Name'),
-              10.verticalSpace,
-              AppTextFormField.textFormField(
-                  controller: name,
+            ),
+            40.verticalSpace,
+            // Name field
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Full Name'),
+                10.verticalSpace,
+                AppTextFormField.textFormField(
+                  controller: _nameController,
                   context: context,
-                  titleText: 'Full Nmae',
-                  color: Colors.transparent)
-            ],
-          ),
-          20.verticalSpace,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Email'),
-              10.verticalSpace,
-              AppTextFormField.textFormField(
-                  controller: email,
+                  titleText: 'Full Name',
+                  color: Colors.transparent,
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'Name is required';
+                    }
+                    return null;
+                  },
+                )
+              ],
+            ),
+            20.verticalSpace,
+            // Email field
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Email'),
+                10.verticalSpace,
+                AppTextFormField.textFormField(
+                  controller: _emailController,
                   context: context,
-                  titleText: 'Full Nmae',
-                  color: Colors.transparent)
-            ],
-          ),
-          20.verticalSpace,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Phone Number'),
-              10.verticalSpace,
-              AppTextFormField.textFormField(
-                  controller: phone,
+                  titleText: 'Email',
+                  color: Colors.transparent,
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'Email is required';
+                    }
+                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!)) {
+                      return 'Enter a valid email';
+                    }
+                    return null;
+                  },
+                )
+              ],
+            ),
+            20.verticalSpace,
+            // Phone field
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Phone Number'),
+                10.verticalSpace,
+                AppTextFormField.textFormField(
+                  controller: _phoneController,
                   context: context,
-                  titleText: 'Full Nmae',
-                  keyboardType: TextInputType.number,
-                  color: Colors.transparent),
-              30.verticalSpace,
-              AppButton.getButton(
-                  child: const Text('Edit Profile',
-                      style: TextStyle(color: Colors.white)),
-                  onPressed: () {},
-                  color: Colors.blue),
-              10.verticalSpace,
-              AppButton.getButton(
-                  child: const Text('Delete Account',
-                      style: TextStyle(color: Colors.white)),
-                  onPressed: () {},
-                  color: Colors.redAccent.shade200),
-            ],
-          )
-        ],
+                  titleText: 'Phone Number',
+                  keyboardType: TextInputType.phone,
+                  color: Colors.transparent,
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'Phone number is required';
+                    }
+                    return null;
+                  },
+                ),
+                30.verticalSpace,
+                // Submit button
+                AppButton.getButton(
+                  child: _isLoading 
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Text('Save Changes', style: TextStyle(color: Colors.white)),
+                  onPressed: _isLoading ? null : _updateProfile,
+                  color: Colors.blue,
+                ),
+              ],
+            ),
+            30.verticalSpace,
+            AppButton.getButton(
+              child: const Text(
+                'Delete Account',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: _isLoading ? null : _showDeleteConfirmation,
+              color: Colors.grey,
+            ),
+            30.verticalSpace,
+          ],
+        ),
       ),
     );
   }

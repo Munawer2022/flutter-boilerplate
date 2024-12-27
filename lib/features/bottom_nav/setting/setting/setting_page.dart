@@ -12,6 +12,7 @@ import 'setting_cubit.dart';
 import 'setting_state.dart';
 import 'setting_state.dart';
 import '../../../../config/status_switcher.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SettingPage extends StatefulWidget {
   final SettingCubit cubit;
@@ -250,7 +251,13 @@ class _SettingState extends State<SettingPage> {
                 listTile(
                     title: TranslationHelper.tr(
                         widget.dataSources.state, 'about_us'),
-                    icon: CupertinoIcons.group),
+                    icon: CupertinoIcons.group,
+                    onTap: () => widget.cubit.goPagesWebViewPage(
+                                url:
+                                    "https://pro.ramzdev.space/page/app_about_us?lang=${widget.dataSources.currentLang}",
+                                title: TranslationHelper.tr(
+                        widget.dataSources.state, 'about_us'))
+                    ),
                 const Divider(),
                 listTile(
                   title: TranslationHelper.tr(widget.dataSources.state, 'faqs'),
@@ -277,10 +284,10 @@ class _SettingState extends State<SettingPage> {
                 //       children: [
                 //         listTile(
                 //             title: info.name,
-                //             onTap: () => widget.cubit.goPagesWebViewPage(
-                //                 url:
-                //                     "${info.link}?lang=${widget.dataSources.currentLang}",
-                //                 title: info.name),
+                            // onTap: () => widget.cubit.goPagesWebViewPage(
+                            //     url:
+                            //         "${info.link}?lang=${widget.dataSources.currentLang}",
+                            //     title: info.name),
                 //             icon: icons[index]),
                 //         Divider(color: Colors.grey.shade100),
                 //       ],
@@ -295,7 +302,8 @@ class _SettingState extends State<SettingPage> {
                 listTile(
                     title: TranslationHelper.tr(
                         widget.dataSources.state, 'invite_friends'),
-                    icon: Icons.share_outlined),
+                    icon: Icons.share_outlined,
+                    onTap: () => _shareApp()),
                 const Divider(),
                 listTile(
                     title: TranslationHelper.tr(
@@ -322,7 +330,14 @@ class _SettingState extends State<SettingPage> {
                 listTile(
                     title: TranslationHelper.tr(
                         widget.dataSources.state, 'whats_new'),
-                    icon: Icons.whatshot_rounded),
+                    icon: Icons.whatshot_rounded,
+                      onTap: () => widget.cubit.goPagesWebViewPage(
+                                url:
+                                    "https://pro.ramzdev.space/page/app_whats_new?lang=${widget.dataSources.currentLang}",
+                                title: TranslationHelper.tr(
+                        widget.dataSources.state, 'whats_new'))
+                    ),
+                    
               ],
             ),
           ),
@@ -371,6 +386,23 @@ class _SettingState extends State<SettingPage> {
           ],
         );
       },
+    );
+  }
+
+  void _shareApp() {
+    //  final message = TranslationHelper.tr(widget.dataSources.state, 'share_message');
+    // final subject = TranslationHelper.tr(widget.dataSources.state, 'share_subject');
+    
+    // Share.share(
+    //   message,
+    //   subject: subject,
+    // );
+    Share.share(
+      'Check out this amazing app!\n\n'
+      'Download it from:\n'
+      'Android: [Play Store Link]\n'
+      'iOS: [App Store Link]',
+      subject: 'Check out this app!',
     );
   }
 }
