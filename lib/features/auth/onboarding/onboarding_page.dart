@@ -37,18 +37,18 @@ class _OnboardingState extends State<OnboardingPage> {
     List<Map<String, dynamic>> demoData = [
       {
         "illustration": info['app_onboarding_image_1'],
-        "title": info['app_onboarding_title_1'],
-        "text": info['app_onboarding_subtitle_1'],
+        "title": TranslationHelper.tr(widget.dataSources.state, 'app_onboarding_title_1'),
+        "text": TranslationHelper.tr(widget.dataSources.state, 'app_onboarding_subtitle_1'),
       },
       {
         "illustration": info['app_onboarding_image_2'],
-        "title": info['app_onboarding_title_2'],
-        "text": info['app_onboarding_subtitle_2'],
+        "title": TranslationHelper.tr(widget.dataSources.state, 'app_onboarding_title_2'),
+        "text": TranslationHelper.tr(widget.dataSources.state, 'app_onboarding_subtitle_2'),
       },
       {
         "illustration": info['app_onboarding_image_3'],
-        "title": info['app_onboarding_title_3'],
-        "text": info['app_onboarding_subtitle_3'],
+        "title": TranslationHelper.tr(widget.dataSources.state, 'app_onboarding_title_3'),
+        "text": TranslationHelper.tr(widget.dataSources.state, 'app_onboarding_subtitle_3'),
       },
     ];
 

@@ -6,6 +6,7 @@ import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/features/auth/onboarding/onboarding_page.dart';
 import 'with_email_or_phone_cubit.dart';
 import 'with_email_or_phone_state.dart';
+import 'package:flutter_template/config/translation_helper.dart';
 import 'with_email_or_phone_state.dart';
 import '../../../config/status_switcher.dart';
 
@@ -52,11 +53,11 @@ class _WithEmailOrPhoneState extends State<WithEmailOrPhonePage> {
               Column(
                 children: [
                   AppButton.getButton(
-                      child: const Text('Login With Email'),
+                      child: Text(TranslationHelper.tr(widget.dataSources.state, 'login_with_email')),
                       onPressed: () => cubit.goLoginWithEmail()),
                   20.verticalSpace,
                   AppButton.getButton(
-                      child: const Text('Login With Phone'),
+                      child: Text(TranslationHelper.tr(widget.dataSources.state, 'login_with_phone')),
                       onPressed: () => cubit.goLoginWithPhone())
                 ],
               ),

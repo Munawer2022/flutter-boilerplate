@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
 import 'package:flutter_template/config/services.dart';
+import 'package:flutter_template/config/translation_helper.dart'; 
 import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
 import 'package:flutter_template/data/models/auth/sign/sign_up_model.dart';
 import 'sign_up_cubit.dart';
@@ -73,9 +74,9 @@ class _SignUpState extends State<SignUpPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Name',
-                        style: TextStyle(
+                      Text(
+                        TranslationHelper.tr(widget.dataSources.state, 'name'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -84,8 +85,8 @@ class _SignUpState extends State<SignUpPage> {
                       AppTextFormField.textFormField(
                         controller: _phoneController,
                         context: context,
-                        titleText: "Enter your name",
-                        hintText: "Enter your name",
+                        titleText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_name'),
+                        hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_name'),
                       ),
                     ],
                   ),
@@ -94,9 +95,9 @@ class _SignUpState extends State<SignUpPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Email',
-                        style: TextStyle(
+                      Text(
+                        TranslationHelper.tr(widget.dataSources.state, 'email'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -105,8 +106,8 @@ class _SignUpState extends State<SignUpPage> {
                       AppTextFormField.textFormField(
                         controller: _phoneController,
                         context: context,
-                        titleText: "Enter your email",
-                        hintText: "Enter your email",
+                        titleText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_email'),
+                        hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_email'),
                       ),
                     ],
                   ),
@@ -115,9 +116,9 @@ class _SignUpState extends State<SignUpPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Phone Number',
-                        style: TextStyle(
+                      Text(
+                        TranslationHelper.tr(widget.dataSources.state, 'phone_number'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -154,8 +155,8 @@ class _SignUpState extends State<SignUpPage> {
                               child: AppTextFormField.textFormField(
                             controller: _phoneController,
                             context: context,
-                            titleText: "Enter your phone number",
-                            hintText: "Enter your phone number",
+                            titleText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_phone_number'),
+                            hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_phone_number'),
                           ))
                         ],
                       ),
@@ -166,9 +167,9 @@ class _SignUpState extends State<SignUpPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Password',
-                        style: TextStyle(
+                       Text(
+                        TranslationHelper.tr(widget.dataSources.state, 'password'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -178,8 +179,8 @@ class _SignUpState extends State<SignUpPage> {
                         controller: _passwordController,
                         obscureText: _obscurePassword,
                         context: context,
-                        titleText: "Enter your password",
-                        hintText: "Enter your password",
+                        titleText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_password'),
+                        hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_password'),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscurePassword
@@ -220,7 +221,7 @@ class _SignUpState extends State<SignUpPage> {
                         state as SignUpState;
                         return AppButton.getButton(
                             loading: state.isLoading,
-                            child: const Text('Sign Up'),
+                            child: Text(TranslationHelper.tr(widget.dataSources.state, 'sign_up')),
                             onPressed: () => cubit.signUp(
                                 body: SignUpModel(
                                         name: _nameController.text,
@@ -234,12 +235,12 @@ class _SignUpState extends State<SignUpPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Have an account?"),
+                      Text(TranslationHelper.tr(widget.dataSources.state, 'have_an_account')),
                       TextButton(
                         onPressed: () => Navigator.pop(context),
                         child: Text(
-                          'Login',
-                          style: TextStyle(
+                          TranslationHelper.tr(widget.dataSources.state, 'login'),
+                          style:  TextStyle(
                             color: Colors.orange[700],
                             fontWeight: FontWeight.w500,
                           ),

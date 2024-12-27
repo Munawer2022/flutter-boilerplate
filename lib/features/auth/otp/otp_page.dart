@@ -66,9 +66,9 @@ class _OtpState extends State<OtpPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Enter OTP',
-                        style: TextStyle(
+                      Text(
+                        TranslationHelper.tr(widget.dataSources.state, 'enter_otp'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -83,8 +83,8 @@ class _OtpState extends State<OtpPage> {
                             maxLength: 6,
                             keyboardType: TextInputType.number,
                             context: context,
-                            titleText: "Enter OTP",
-                            hintText: "Enter OTP",
+                            titleText: TranslationHelper.tr(widget.dataSources.state, 'enter_otp'),
+                            hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_otp'),
                           ))
                         ],
                       ),
@@ -93,7 +93,7 @@ class _OtpState extends State<OtpPage> {
 
                   50.verticalSpace,
                   AppButton.getButton(
-                      child: const Text("Home"),
+                      child: Text(TranslationHelper.tr(widget.dataSources.state, 'home')),
                       onPressed: () => cubit.verifyOtp())
                 ],
               )),

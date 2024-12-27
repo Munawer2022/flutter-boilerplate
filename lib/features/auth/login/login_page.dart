@@ -6,6 +6,10 @@ import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
 import 'package:flutter_template/data/datasources/user/user_data_sources.dart';
 import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
+// import 'package:flutter_template/core/translation_helper.dart';
+import 'package:flutter_template/config/translation_helper.dart';
+// import 'package:flutter_template/data/datasources/auth/login/login_data_sources.dart';
+// import 'package:flutter_template/data/datasources/auth/splash/splash_data_sources.dart';
 import 'package:flutter_template/features/auth/splash/splash_cubit.dart';
 import 'login_cubit.dart';
 import 'login_state.dart';
@@ -100,9 +104,9 @@ class _LoginState extends State<LoginPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Email',
-                        style: TextStyle(
+                      Text(
+                        TranslationHelper.tr(widget.dataSources.state, 'email'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -111,8 +115,8 @@ class _LoginState extends State<LoginPage> {
                       AppTextFormField.textFormField(
                         controller: _phoneController,
                         context: context,
-                        titleText: "Enter your email",
-                        hintText: "Enter your email",
+                        titleText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_email'),
+                        hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_email'),
                       ),
                     ],
                   ),
@@ -121,9 +125,9 @@ class _LoginState extends State<LoginPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Password',
-                        style: TextStyle(
+                      Text(
+                        TranslationHelper.tr(widget.dataSources.state, 'password'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -161,8 +165,8 @@ class _LoginState extends State<LoginPage> {
                         controller: _passwordController,
                         obscureText: _obscurePassword,
                         context: context,
-                        titleText: "Enter your password",
-                        hintText: "Enter your password",
+                        titleText: TranslationHelper.tr(widget.dataSources.state, 'password'),
+                        hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_password'),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscurePassword
@@ -203,7 +207,7 @@ class _LoginState extends State<LoginPage> {
                         state as LoginState;
                         return AppButton.getButton(
                             loading: state.isLoading,
-                            child: const Text('Login'),
+                            child: Text(TranslationHelper.tr(widget.dataSources.state, 'login')),
                             onPressed: () => cubit.login(
                                 body: LoginModel(
                                         email: _phoneController.text,
@@ -215,11 +219,11 @@ class _LoginState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Don't have an account?"),
+                      Text(TranslationHelper.tr(widget.dataSources.state, 'dont_have_an_account')),
                       TextButton(
                         onPressed: () => cubit.goSignUpPage(),
                         child: Text(
-                          'Sign Up',
+                          TranslationHelper.tr(widget.dataSources.state, 'sign_up'),
                           style: TextStyle(
                             color: Colors.orange[700],
                             fontWeight: FontWeight.w500,

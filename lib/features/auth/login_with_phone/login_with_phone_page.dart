@@ -7,6 +7,7 @@ import 'package:flutter_template/config/components/app_text_form_field.dart';
 import 'package:flutter_template/config/services.dart';
 import 'package:flutter_template/data/datasources/user/user_data_sources.dart';
 import 'package:flutter_template/data/datasources/app/app_data_sources.dart';
+import 'package:flutter_template/config/translation_helper.dart';
 import 'package:flutter_template/data/models/auth/login_with_phone/login_with_phone_model.dart';
 import 'login_with_phone_cubit.dart';
 import 'login_with_phone_state.dart';
@@ -70,9 +71,9 @@ class _LoginWithOtpState extends State<LoginWithPhonePage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Phone Number',
-                        style: TextStyle(
+                      Text(
+                        TranslationHelper.tr(widget.dataSources.state, 'phone_number'),
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -111,8 +112,8 @@ class _LoginWithOtpState extends State<LoginWithPhonePage> {
                               child: AppTextFormField.textFormField(
                             controller: _phoneController,
                             context: context,
-                            titleText: "Enter your phone number",
-                            hintText: "Enter your phone number",
+                            titleText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_phone_number'),
+                            hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_phone_number'),
                           ))
                         ],
                       ),
@@ -126,11 +127,13 @@ class _LoginWithOtpState extends State<LoginWithPhonePage> {
                         state as LoginWithPhoneState;
                         return AppButton.getButton(
                             loading: state.isLoading,
-                            child: const Text('Login'),
-                            onPressed: () => cubit.loginWithPhone(
-                                body: LoginWithPhoneModel(
-                                        phone: _phoneController.text)
-                                    .toJson()));
+                            child: Text(TranslationHelper.tr(widget.dataSources.state, 'login')),
+                          onPressed: ()  => print("login with phone")
+                        );
+                           // onPressed: () => cubit.loginWithOtp(
+                            //     body: LoginWithOtpModel(
+                            //             phone: _phoneController.text)
+                            //         .toJson()));
                       }),
                 ],
               )),
