@@ -4,7 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/config/components/app_button.dart';
 import 'package:flutter_template/config/components/app_text_form_field.dart';
 import 'package:flutter_template/data/datasources/user/user_data_sources.dart';
+import 'package:flutter_template/data/models/local/local_user_info_store_model.dart';
+import 'package:flutter_template/domain/repositories/local/local_storage_base_api_service.dart';
+import 'package:flutter_template/features/auth/login/login_initial_params.dart';
+import 'package:flutter_template/features/auth/login/login_page.dart';
+import 'package:flutter_template/features/auth/splash/splash_initial_params.dart';
 import 'package:flutter_template/features/bottom_nav/setting/setting/setting_page.dart';
+import 'package:flutter_template/injection_container.dart';
 import 'profile_cubit.dart';
 import 'profile_state.dart';
 import 'profile_state.dart';
@@ -62,10 +68,10 @@ class _ProfileState extends State<ProfilePage> {
     try {
       final userId = widget.dataSources.state.data.id;
       final uri = Uri.parse('https://pro.ramzdev.space/api/customers/$userId');
-      
+
       // Create multipart request
       final request = http.MultipartRequest('POST', uri);
-      
+
       // Add text fields
       request.fields['name'] = _nameController.text;
       request.fields['email'] = _emailController.text;
@@ -85,13 +91,23 @@ class _ProfileState extends State<ProfilePage> {
       final response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile updated successfully')),
-        );
+        final Map<String, dynamic> jsonData = jsonDecode(response.body);
+        LocalUserInfoStoreModel data = LocalUserInfoStoreModel.fromJson(jsonData);
         
-        // Optionally refresh user data here
-        // await widget.dataSources.refreshUserData();
+        // Update local storage and data sources
+        await getIt<LocalStorageRepository>()
+            .setUserData(localUserInfoStoreModel: data)
+            .then((value) => value.fold(
+                  (l) => ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Error saving data: ${l.error}')),
+                  ),
+                  (r) {
+                    widget.dataSources.setLoginDataSources(loginSuccessModel: data);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Profile updated successfully')),
+                    );
+                  },
+                ));
       } else {
         if (!mounted) return;
         final error = jsonDecode(response.body)['message'] ?? 'Update failed';
@@ -176,10 +192,18 @@ class _ProfileState extends State<ProfilePage> {
       if (response.statusCode == 200) {
         // Clear user data and navigate to login
         // You might want to call a logout method from your auth service here
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          '/login', // Replace with your login route name
-          (route) => false,
-        );
+        // Navigator.of(context).pushNamedAndRemoveUntil(
+        //   '/login', // Replace with your login route name
+        //   (route) => false,
+        // );
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => LoginPage(
+                    cubit: getIt(param1: const LoginInitialParams()),
+                    dataSources: getIt(),
+                    splashCubit: getIt(param1: const SplashInitialParams()))),
+            (route) => false);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -225,9 +249,11 @@ class _ProfileState extends State<ProfilePage> {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: _selectedImage != null 
-                      ? FileImage(File(_selectedImage!.path))
-                      : NetworkImage(widget.dataSources.state.data.profileImage ?? '') as ImageProvider,
+                    backgroundImage: _selectedImage != null
+                        ? FileImage(File(_selectedImage!.path))
+                        : NetworkImage(
+                            widget.dataSources.state.data.profileImage ??
+                                '') as ImageProvider,
                   ),
                   Positioned(
                     bottom: 0,
@@ -281,7 +307,8 @@ class _ProfileState extends State<ProfilePage> {
                     if (value?.isEmpty ?? true) {
                       return 'Email is required';
                     }
-                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!)) {
+                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                        .hasMatch(value!)) {
                       return 'Enter a valid email';
                     }
                     return null;
@@ -312,9 +339,10 @@ class _ProfileState extends State<ProfilePage> {
                 30.verticalSpace,
                 // Submit button
                 AppButton.getButton(
-                  child: _isLoading 
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text('Save Changes', style: TextStyle(color: Colors.white)),
+                  child: _isLoading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text('Save Changes',
+                          style: TextStyle(color: Colors.white)),
                   onPressed: _isLoading ? null : _updateProfile,
                   color: Colors.blue,
                 ),

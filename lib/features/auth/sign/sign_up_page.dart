@@ -83,7 +83,7 @@ class _SignUpState extends State<SignUpPage> {
                       ),
                       8.verticalSpace,
                       AppTextFormField.textFormField(
-                        controller: _phoneController,
+                        controller: _nameController,
                         context: context,
                         titleText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_name'),
                         hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_name'),
@@ -104,7 +104,7 @@ class _SignUpState extends State<SignUpPage> {
                       ),
                       8.verticalSpace,
                       AppTextFormField.textFormField(
-                        controller: _phoneController,
+                        controller: _emailController,
                         context: context,
                         titleText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_email'),
                         hintText: TranslationHelper.tr(widget.dataSources.state, 'enter_your_email'),
