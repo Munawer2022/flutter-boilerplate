@@ -15,8 +15,12 @@ import 'package:device_preview/device_preview.dart';
 import 'features/auth/splash/splash_initial_params.dart';
 import 'features/auth/splash/splash_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 //  setCustomSystemUIOverlayStyle();
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();

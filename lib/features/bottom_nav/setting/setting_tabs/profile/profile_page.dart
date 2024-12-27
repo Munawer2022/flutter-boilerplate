@@ -92,8 +92,9 @@ class _ProfileState extends State<ProfilePage> {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonData = jsonDecode(response.body);
-        LocalUserInfoStoreModel data = LocalUserInfoStoreModel.fromJson(jsonData);
-        
+        LocalUserInfoStoreModel data =
+            LocalUserInfoStoreModel.fromJson(jsonData);
+
         // Update local storage and data sources
         await getIt<LocalStorageRepository>()
             .setUserData(localUserInfoStoreModel: data)
@@ -102,9 +103,11 @@ class _ProfileState extends State<ProfilePage> {
                     SnackBar(content: Text('Error saving data: ${l.error}')),
                   ),
                   (r) {
-                    widget.dataSources.setLoginDataSources(loginSuccessModel: data);
+                    widget.dataSources
+                        .setLoginDataSources(loginSuccessModel: data);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Profile updated successfully')),
+                      const SnackBar(
+                          content: Text('Profile updated successfully')),
                     );
                   },
                 ));

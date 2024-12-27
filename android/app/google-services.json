@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "535509315412",
+    "project_id": "flutter-template-cabae",
+    "storage_bucket": "flutter-template-cabae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535509315412:android:2331de7bc75aac6272a2c1",
+        "android_client_info": {
+          "package_name": "com.boilerplate.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArolLIdglyzSnUX21h7gr8v5EVf3vUngo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535509315412:android:784a25a3762182a872a2c1",
+        "android_client_info": {
+          "package_name": "com.ramz.fluttertemp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArolLIdglyzSnUX21h7gr8v5EVf3vUngo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

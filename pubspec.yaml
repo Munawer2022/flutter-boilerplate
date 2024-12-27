@@ -53,6 +53,7 @@ dependencies:
   webview_flutter: ^4.10.0
   cached_network_image: ^3.4.1
   country_code_picker: ^3.1.0
+  firebase_core: ^3.9.0
 
 dev_dependencies:
   flutter_test:
